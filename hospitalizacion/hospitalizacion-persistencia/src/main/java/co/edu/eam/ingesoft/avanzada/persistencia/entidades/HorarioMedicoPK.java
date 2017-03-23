@@ -1,5 +1,7 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
-public class HorarioMedicoPK {
+import java.io.Serializable;
+
+public class HorarioMedicoPK implements Serializable{
 
 }

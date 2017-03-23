@@ -15,16 +15,16 @@ import javax.persistence.Table;
 public class Paciente implements Serializable{
 	
 	@Id
-	@Column(name="num_identificacion")
+	@Column(name="num_identificacion", length=50)
 	private String numIdentificacion;
 	
-	@Column(name="nombre", nullable=false)
+	@Column(name="nombre", nullable=false, length=50)
 	private String nombre;
 	
-	@Column(name="direccion", nullable=false)
+	@Column(name="direccion", nullable=false, length=50)
 	private String direccion;
 	
-	@Column(name="telefono", nullable=false)
+	@Column(name="telefono", nullable=false, length=50)
 	private String telefono;
 	
 	@JoinColumn(name="eps")
