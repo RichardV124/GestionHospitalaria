@@ -23,6 +23,28 @@ public class PatologiaTratamiento implements Serializable{
 	@JoinColumn(name="ID_TRATAMIENTO")
 	@ManyToOne
 	private Tratamiento tratamiento;
+
+	public PatologiaTratamiento() {
+		super();
+	}
+
+	public Patologia getPatologia() {
+		return patologia;
+	}
+
+	public void setPatologia(Patologia patologia) {
+		this.patologia = patologia;
+	}
+
+	public Tratamiento getTratamiento() {
+		return tratamiento;
+	}
+
+	public void setTratamiento(Tratamiento tratamiento) {
+		this.tratamiento = tratamiento;
+	}
+	
+	
 	
 	
 }
