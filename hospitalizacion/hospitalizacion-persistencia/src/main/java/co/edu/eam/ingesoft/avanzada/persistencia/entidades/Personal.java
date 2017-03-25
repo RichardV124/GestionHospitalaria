@@ -22,7 +22,7 @@ public class Personal {
 	private Farmacia farmacia;
 	
 	@OneToOne
-	@JoinColumn(name="usuario")
+	@JoinColumn(name="usuario",unique=true)
 	private Usuario usuario;
 
 	public Personal() {

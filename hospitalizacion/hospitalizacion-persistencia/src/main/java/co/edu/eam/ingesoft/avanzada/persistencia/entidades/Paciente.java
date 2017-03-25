@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -35,8 +36,8 @@ public class Paciente implements Serializable{
 	@ManyToOne(cascade={})
 	private Municipio municipio;
 	
-	@JoinColumn(name="usuario", unique=true)
-	@ManyToOne(cascade={})
+	@OneToOne
+	@JoinColumn(name="usuario",unique=true)
 	private Usuario usuario;
 
 	public Paciente() {
