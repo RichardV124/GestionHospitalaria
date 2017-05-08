@@ -1,6 +1,8 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
-public class CitaCirugiaPK {
+import java.io.Serializable;
+
+public class CitaCirugiaPK implements Serializable{
 
 	int cita;
 	

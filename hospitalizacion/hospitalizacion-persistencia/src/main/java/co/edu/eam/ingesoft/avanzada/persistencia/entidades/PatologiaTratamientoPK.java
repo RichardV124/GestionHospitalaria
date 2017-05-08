@@ -1,6 +1,8 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
-public class PatologiaTratamientoPK {
+import java.io.Serializable;
+
+public class PatologiaTratamientoPK implements Serializable{
 
 	
 	int patologia;

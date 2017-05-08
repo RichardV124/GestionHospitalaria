@@ -7,27 +7,28 @@
   </parent>
   <artifactId>hospitalizacion-empresarial</artifactId>
   <packaging>ear</packaging>
+  
   <dependencies>
   	<dependency>
-  		<groupId>co.edu.eam.ingesoft.avanzada</groupId>
-  		<artifactId>banco-negocio</artifactId>
+  		<groupId>co.eam.ingesoft.avanzada</groupId>
+  		<artifactId>hospitalizacion-negocio</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   		<type>ejb</type>
   	</dependency>
   	<dependency>
-  		<groupId>co.edu.eam.ingesoft.avanzada</groupId>
-  		<artifactId>banco-persistencia</artifactId>
+  		<groupId>co.eam.ingesoft.avanzada</groupId>
+  		<artifactId>hospitalizacion-persistencia</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
-  		<groupId>co.edu.eam.ingesoft.avanzada</groupId>
-  		<artifactId>banco-web</artifactId>
+  		<groupId>co.eam.ingesoft.avanzada</groupId>
+  		<artifactId>hospitalizacion-web</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   		<type>war</type>
   	</dependency>
   </dependencies>
   
-  <build>
+   <build>
 	<finalName>${project.artifactId}</finalName>
 	<plugins>
 		<plugin>
@@ -54,5 +55,4 @@
 		</plugin>
 	</plugins>
 </build>
-  
 </project>

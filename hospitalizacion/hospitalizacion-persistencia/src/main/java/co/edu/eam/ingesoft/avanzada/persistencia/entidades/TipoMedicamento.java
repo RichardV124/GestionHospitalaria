@@ -1,5 +1,7 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="T_TIPO_MEDICAMENTO")
-public class TipoMedicamento {
+public class TipoMedicamento implements Serializable{
 	
 	@Id
 	@Column(name="id")

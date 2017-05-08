@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,27 +32,35 @@ public class Cita implements Serializable{
 	@ManyToOne(cascade={})
 	private CaracterCita caracter;
 	
+	
+	
 	@JoinColumn(name="cita",nullable=true)
 	@ManyToOne
 	private Cita cita;
 	
-	@JoinColumn(name="cita_pedida")
-	@OneToOne
-	private PedirCita citaPedida;
+	@JoinColumn(name = "cedula_paciente")
+	@ManyToOne(cascade = {})
+	private Paciente paciente;
+	
+	@ManyToOne(cascade = {})
+	@JoinColumns({
+		    @JoinColumn(name = "HORARIO_MEDICO_HORARIO_ID", referencedColumnName = "id_horario"),
+			@JoinColumn(name = "HORARIO_MEDICO_MEDICO_CEDULA", referencedColumnName = "ced_medico")
+	})
+	private HorarioMedico horarioMedico;
 
 	public Cita() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cita(int id, boolean atendido, String anotaciones, CaracterCita caracter, Cita cita, PedirCita citaPedida) {
+	public Cita(int id, boolean atendido, String anotaciones, CaracterCita caracter, Cita cita) {
 		super();
 		this.id = id;
 		this.atendido = atendido;
 		this.anotaciones = anotaciones;
 		this.caracter = caracter;
 		this.cita = cita;
-		this.citaPedida = citaPedida;
 	}
 
 	public int getId() {
@@ -93,15 +102,5 @@ public class Cita implements Serializable{
 	public void setCita(Cita cita) {
 		this.cita = cita;
 	}
-
-	public PedirCita getCitaPedida() {
-		return citaPedida;
-	}
-
-	public void setCitaPedida(PedirCita citaPedida) {
-		this.citaPedida = citaPedida;
-	}
-	
-	
 
 }

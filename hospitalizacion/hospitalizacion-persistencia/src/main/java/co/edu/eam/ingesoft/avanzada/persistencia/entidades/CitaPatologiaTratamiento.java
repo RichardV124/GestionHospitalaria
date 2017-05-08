@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,7 +21,8 @@ public class CitaPatologiaTratamiento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JoinColumn(name="ID_PATOLOGIA_TRATAMIENTO")
+	@JoinColumns({ @JoinColumn(name = "PATOLOGIA_TRATAMIENTO_PATOLOGIA_ID", referencedColumnName = "ID_PATOLOGIA"),
+		@JoinColumn(name = "PATOLOGIA_TRATAMIENTO_TRATAMIENTO_ID", referencedColumnName = "ID_TRATAMIENTO") })
 	@ManyToOne
 	private PatologiaTratamiento patologiaTratamiento;
 	

@@ -27,7 +27,7 @@ public class Medico implements Serializable{
 	@Column(name="telefono")
 	private String telefono;
 	
-	@Column(name="id_tipomedico")
+	@JoinColumn(name="id_tipomedico")
 	@ManyToOne
 	private TipoMedico tipoMedico;
 	

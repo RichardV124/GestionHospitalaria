@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @IdClass(CitaCirugiaPK.class)
-@Table(name = "CITA_CIRUGIA")
+@Table(name = "T_CITA_CIRUGIA")
 public class CitaCirugia implements Serializable {
 
 	@Id

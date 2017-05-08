@@ -17,14 +17,15 @@ import javax.persistence.Table;
 public class HorarioMedico implements Serializable{
 	
 	@Id
+	@JoinColumn(name="id_horario")
+	@ManyToOne(cascade = {})
+	private Horario horario;
+	
+	@Id
 	@JoinColumn(name="ced_medico")
 	@ManyToOne(cascade = {})
 	private Medico medico;
 	
-	@Id
-	@JoinColumn(name="id_horario")
-	@ManyToOne(cascade = {})
-	private Horario horario;
 	
 	@Column(name="disponible")
 	private boolean disponible;

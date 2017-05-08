@@ -1,6 +1,8 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
-public class MedicamentosRecetadosPK {
+import java.io.Serializable;
+
+public class MedicamentosRecetadosPK implements Serializable{
 
 	int medicamento;
 	

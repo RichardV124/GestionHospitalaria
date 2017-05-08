@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.GeneroEnum;
 
 
 @Entity
@@ -39,6 +42,15 @@ public class Paciente implements Serializable{
 	@OneToOne
 	@JoinColumn(name="usuario",unique=true)
 	private Usuario usuario;
+	
+	@Column(name="fecha_nacimiento")
+	private Date fechaNacimiento;
+	
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="genero")
+	private GeneroEnum genero;
 
 	public Paciente() {
 		super();
@@ -46,7 +58,7 @@ public class Paciente implements Serializable{
 	}
 
 	public Paciente(String numIdentificacion, String nombre, String direccion, String telefono, Eps eps,
-			Municipio municipio, Usuario usuario) {
+			Municipio municipio, Usuario usuario, Date fechaNacimiento, String email, GeneroEnum genero) {
 		super();
 		this.numIdentificacion = numIdentificacion;
 		this.nombre = nombre;
@@ -55,6 +67,9 @@ public class Paciente implements Serializable{
 		this.eps = eps;
 		this.municipio = municipio;
 		this.usuario = usuario;
+		this.fechaNacimiento = fechaNacimiento;
+		this.email = email;
+		this.genero = genero;
 	}
 
 	public String getNumIdentificacion() {
@@ -112,6 +127,29 @@ public class Paciente implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public GeneroEnum getGenero() {
+		return genero;
+	}
+
+	public void setGenero(GeneroEnum genero) {
+		this.genero = genero;
+	}
 	
 }
