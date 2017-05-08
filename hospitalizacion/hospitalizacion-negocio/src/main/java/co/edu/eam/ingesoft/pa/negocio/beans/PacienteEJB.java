@@ -11,5 +11,7 @@ public class PacienteEJB {
 	
 	@PersistenceContext
 	private EntityManager em;
+	
+	
 
 }
