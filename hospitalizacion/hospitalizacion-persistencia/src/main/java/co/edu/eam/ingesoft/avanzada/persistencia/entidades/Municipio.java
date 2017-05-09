@@ -9,13 +9,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="T_MUNICIPIO")
+@NamedQueries({ 
+	@NamedQuery(name = Municipio.CONSULTA_LISTAR_MUNICIPIOS, query = "SELECT m FROM Municipio m") 
+	})
 public class Municipio implements Serializable{
 
+	public static final String CONSULTA_LISTAR_MUNICIPIOS = "Municipio.ListarMunicipios";
+	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
