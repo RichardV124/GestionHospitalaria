@@ -16,6 +16,7 @@ public class PacienteEJB {
 	
 	@PersistenceContext
 	private EntityManager em;
+<<<<<<< HEAD
 	
 	/**
 	 * metodo para buscar un paciente
@@ -70,5 +71,7 @@ public class PacienteEJB {
 		}
 	}
 	
+=======
+>>>>>>> branch 'master' of https://github.com/RichardV124/GestionHospitalaria.git
 
 }
