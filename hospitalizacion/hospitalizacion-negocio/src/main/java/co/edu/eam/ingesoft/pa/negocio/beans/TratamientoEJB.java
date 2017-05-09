@@ -58,8 +58,9 @@ public class TratamientoEJB {
 	/**
 	 * metodo para listar los tipo de medicos
 	 */
-	public List<Tratamiento> listarTratamientos(){	
+	public List<Tratamiento> listarTratamientosPatologia(int patologia){	
 		Query query = em.createNamedQuery(Tratamiento.CONSULTA_LISTAR_TRATAMIENTOS);
+		query.setParameter(1, patologia);
 		List<Tratamiento> lista = query.getResultList();
 		return lista;
 	}

@@ -7,12 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="T_PATOLOGIA")
+@NamedQueries({ 
+	@NamedQuery(name = Patologia.CONSULTA_LISTAR_PATOLOGIAS, query = "SELECT p FROM Patologia p") 
+	})
 public class Patologia implements Serializable{
 
+
+	public static final String CONSULTA_LISTAR_PATOLOGIAS = "Patologia.ListarPatologias";
+	
+	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
