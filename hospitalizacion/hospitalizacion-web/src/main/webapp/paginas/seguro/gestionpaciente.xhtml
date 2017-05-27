@@ -1,0 +1,132 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+	
+		<ui:define name="cuerpo">
+		<h:form prependId="false">
+		
+		<p:fieldset legend="Busqueda" style="margin-top:100px">
+			<h:panelGrid id="buspa" columns="3">
+				<p:inputText id="tfbuspa" class="form-control" placeholder="Documento" value="#{pacienteAjaxController.busNumeroDocumento}" />
+				<p:message for="tfbuspa" />
+				<p:commandButton styleClass="ui-priority-primary" value="Buscar"
+			 		action="#{pacienteAjaxController.buscar}" process="@this tfbuspa" update="tfbuspa datospa"/>
+			</h:panelGrid>
+		</p:fieldset>
+		
+		<p:fieldset legend="Datos paciente" style="margin-top:10px">
+			<h:panelGrid id="datospa" columns="3">
+			
+				<p:outputLabel for="tfnompa" id="nom" value="Nombre"  />
+				<p:inputText id="tfnompa" class="form-control" placeholder="Nombre" value="#{pacienteAjaxController.nombre}" />
+				<p:message for="tfnompa" />
+				
+				<p:outputLabel for="tfapepa" id="ape" value="Apellido"  />
+				<p:inputText id="tfapepa" class="form-control" placeholder="Apellido" value="#{pacienteAjaxController.apellido}" />
+				<p:message for="tfapepa" />
+				
+				<p:outputLabel for="tfnumpa" id="nunD" value="Numero documento"  />
+				<p:inputText id="tfnumpa" class="form-control" placeholder="Documento" value="#{pacienteAjaxController.numeroDocumento}" />
+				<p:message for="tfnumpa" />
+				
+				<p:outputLabel for="tfgenpa" id="gen" value="Genero"  />
+				<h:selectOneMenu id="cbtipogenero"
+					value="#{pacienteAjaxController.tipoSeleccionado}">
+
+					<f:selectItems value="#{pacienteAjaxController.tipos}" var="t"
+						itemValue="#{t}" />
+				</h:selectOneMenu>
+				<p:message for="tfgenpa" />
+				
+				<p:outputLabel for="tfepspasss" id="eps" value="Eps"  />
+				<h:selectOneMenu id="tfepspasss" class="form-control" value="#{pacienteAjaxController.epsSeleccionada}">
+					<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+					<f:selectItems value="#{pacienteAjaxController.listaEps}" var="eps"
+					itemValue="#{eps.idEps}" itemLabel="#{eps.nombre}"/>
+				</h:selectOneMenu>
+				<p:message for="tfepspasss" />
+				
+				<p:outputLabel for="tffechpa" id="fech" value="Fecha nacimiento"  />
+				<p:inputText id="tffechpa" class="form-control" placeholder="DD-MM-YYYY"  value="#{pacienteAjaxController.fecha}" />
+				<p:message for="tffechpa" />
+				
+				<p:outputLabel for="tftelpa" id="tel" value="Telefono"  />
+				<p:inputText id="tftelpa" class="form-control" placeholder="Telefono"  value="#{pacienteAjaxController.telefono}" />
+				<p:message for="tftelpa" />
+				
+				<p:outputLabel for="tfemapa" id="ema" value="Email"  />
+				<p:inputText type="Email" id="tfemapa" class="form-control" placeholder="Email" value="#{pacienteAjaxController.email}" />
+				<p:message for="tfemapa" />
+				
+				<h:panelGrid columns="2">
+				<p:commandButton styleClass="ui-priority-primary" value="Registrar"  action="#{pacienteAjaxController.registrar}"
+					 process="@this datospa" update="datospa panellista"/>
+				
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:fieldset>
+		
+		 <p:accordionPanel id="panellista">
+        <p:tab title="Pacientes" id="pes">
+			<p:dataTable id="panelTabla" value="#{pacienteAjaxController.pacientes}" var="pa"
+				border="1">
+				<p:column>
+					<f:facet name="header">
+							Nombre
+						</f:facet>
+					<p:outputLabel value="#{pa.nombre}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Apellido
+						</f:facet>
+					<p:outputLabel value="#{pa.apellido}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Documento
+						</f:facet>
+					<p:outputLabel value="#{pa.identificacion}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Genero
+						</f:facet>
+					<p:outputLabel value="#{pa.genero}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Fecha Nacimiento
+						</f:facet>
+					<p:outputLabel value="#{pa.fechaNacimiento}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Telefono
+						</f:facet>
+					<p:outputLabel value="#{pa.telefono}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Email
+						</f:facet>
+					<p:outputLabel value="#{pa.email}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Borrar
+						</f:facet>
+						<p:commandButton action="#{pacienteAjaxController.borrar(pa)}" value="Borrar"
+							process="@this" update="panellista" />
+					<p:outputLabel value="" />
+				</p:column>
+			</p:dataTable>
+			</p:tab>
+    </p:accordionPanel>
+			
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

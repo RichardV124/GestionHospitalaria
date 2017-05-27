@@ -33,4 +33,14 @@ public class EpsEJB {
 			return eps;
 		}
 	}
+	
+	/**
+	 * Metodo para buscar una eps
+	 * @param id que recibe el metodo
+	 * @return la eps 
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public Eps buscarEps(int id){
+		return em.find(Eps.class,id);
+	}
 }
