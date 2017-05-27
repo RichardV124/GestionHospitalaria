@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form preprpenId="false">
+		<p:fieldset legend="Datos basicos">
+
+<h:panelGrid id="panelsito" columns="2">
+
+
+
+					<p:outputLabel id="lbltipodocumento" value="Tipo de documento" />
+					<h:selectOneMenu id="cbtipo"
+						value="#{customerController.tipodocumento}">
+						<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
+						<f:selectItem itemValue="CEDULA" itemLabel="CEDULA" />
+						<f:selectItem itemValue="tarjeta de identidad"
+							itemLabel="TARJETA DE IDENTIDAD" />
+						<f:selectItem itemValue="registro civil"
+							itemLabel="REGISTRO CIVIL" />
+					</h:selectOneMenu>
+					
+					<p:outputLabel id="lblnumerodocumento"
+						value="Numero de identificacion:" />
+					<p:inputText id="tfnumerodocumento"
+						value="#{customerController.numerodocumento}" />
+
+					<p:outputLabel id="lblnombre" value="Nombre:" />
+					<p:inputText id="tfnombre" value="#{customerController.nombre}"/>
+					
+					<p:outputLabel id="lblapellido" value="Apellido::" />
+					<p:inputText id="tfapellido" value="#{customerController.apellido}"/>
+			</h:panelGrid>
+			</p:fieldset>
+			<p:panel id="panelbtns" columns="2">
+				<p:commandButton id="btncrear" value="Crear"
+					action="#{customerController.crear}" />
+				<p:commandButton id="btnBuscar" value="Buscar"
+					action="#{customerController.buscar}"/>
+			</p:panel>
+
+			<!-- value="customers" la lista con que se va a lleanr tabla y su get -->
+			<p:dataTable id="tablaClientes"
+				value="#{customerController.customers}" var="cus" border="1">
+				<p:column>
+					<f:facet name="header">
+					Tipo
+				</f:facet>
+					<!-- El label es el valor del atributo -->
+					<h:outputLabel value="#{cus.idType}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+					Identificacion
+				</f:facet>
+					<h:outputLabel value="#{cus.idNum}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+					Nombre
+				</f:facet>
+					<h:outputLabel value="#{cus.name}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+					Apellido
+				</f:facet>
+					<h:outputLabel value="#{cus.lastName}" />
+				</p:column>
+				
+				<p:column headerText="Ver cita">
+						<p:commandButton action=""
+							process="@this" value="#{msj['asociacioncuenta.verificar']}"
+							update="tablaCuentasAsociadas" />
+					</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

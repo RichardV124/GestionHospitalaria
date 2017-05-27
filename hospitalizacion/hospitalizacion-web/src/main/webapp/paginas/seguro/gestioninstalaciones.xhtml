@@ -1,0 +1,221 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form preprpenId="false">
+
+			<p:accordionPanel>
+				<p:tab title="Gestion de quirofanos">
+					<p:panel id="quibuspanel" header="Busqueda"
+						style="margin-bottom:20px">
+
+						<h:panelGrid id="busquirofano" columns="3">
+
+							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
+								process="@this tfbusquirofano " update="datosquirofano"
+								action="#" />
+							<p:inputText id="tfbusquirofano" value="" />
+							<p:message for="tfbusquirofano" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+					<p:panel id="quicrearpanel" header="Crear Quirofano">
+
+						<h:panelGrid id="datosquirofano" columns="2">
+
+							<p:outputLabel id="lblnombrequirofanocrear" value="Descripcion:" />
+							<p:inputText id="tfnombrequirofanocrear"
+								value="#{customerController.numerodocumento}" />
+
+							<p:outputLabel id="lbldescripcionquirofanocrear"
+								value="Descripcion:" />
+							<p:inputText id="tfdescripcionquirofanocrear"
+								value="#{customerController.numerodocumento}" />
+
+							<p:outputLabel id="lblpisoquirofano" value="Piso:" />
+							<h:selectOneMenu id="cbpisoquirofano"
+								value="#{customerController.tipodocumento}">
+								<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
+								<f:selectItem itemValue="Piso 1" itemLabel="Piso 1" />
+								<f:selectItem itemValue="Piso 2" itemLabel="Piso 2" />
+								<f:selectItem itemValue="Piso 3" itemLabel="Piso 3" />
+								<f:selectItem itemValue="Piso 4" itemLabel="Piso 4" />
+							</h:selectOneMenu>
+
+
+						</h:panelGrid>
+
+						<br />
+						<br />
+
+						<h:panelGrid columns="2">
+							<p:commandButton styleClass="ui-priority-primary" value="Crear"
+								ajax="false" action="#" />
+							<p:commandButton styleClass="ui-priority-primary" value="Editar"
+								ajax="false" action="#" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+
+					<br />
+					<br />
+
+					<!-- value="customers" la lista con que se va a lleanr tabla y su get -->
+					<p:dataTable id="tablaQuirofanos"
+						value="#{customerController.customers}" var="cus" border="1">
+						<p:column>
+							<f:facet name="header">
+					Id
+				</f:facet>
+							<!-- El label es el valor del atributo -->
+							<h:outputLabel value="#{cus.idType}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+					Descripcion
+				</f:facet>
+							<h:outputLabel value="#{cus.idNum}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+					Piso
+				</f:facet>
+							<h:outputLabel value="#{cus.name}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+					Disponible
+				</f:facet>
+							<h:outputLabel value="#{cus.name}" />
+						</p:column>
+
+					</p:dataTable>
+
+				</p:tab>
+
+			</p:accordionPanel>
+
+
+			<p:accordionPanel>
+				<p:tab title="Gestion de camas">
+					<p:panel id="camabuspanel" header="Busqueda"
+						style="margin-bottom:20px">
+
+						<h:panelGrid id="buscama" columns="3">
+
+							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
+								process="@this tfbuscama " update="datoscama" action="#" />
+							<p:inputText id="tfbuscama" value="" />
+							<p:message for="tfbuscama" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+					<p:panel id="camabuspanel" header="Crear Cama">
+
+						<h:panelGrid id="datoscama" columns="2">
+
+							<p:outputLabel id="lbldescripcioncama" value="Descripcion:" />
+							<p:inputText id="tfdescripcioncama"
+								value="#{customerController.numerodocumento}" />
+
+							<p:outputLabel id="lblpisocama" value="Piso:" />
+							<h:selectOneMenu id="cbpisocama"
+								value="#{customerController.tipodocumento}">
+								<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
+								<f:selectItem itemValue="Piso 1" itemLabel="Piso 1" />
+								<f:selectItem itemValue="Piso 2" itemLabel="Piso 2" />
+								<f:selectItem itemValue="Piso 3" itemLabel="Piso 3" />
+								<f:selectItem itemValue="Piso 4" itemLabel="Piso 4" />
+							</h:selectOneMenu>
+
+							<p:outputLabel id="lblhabitacioncama" value="Habitacion:" />
+							<h:selectOneMenu id="cbhabitacioncama"
+								value="#{customerController.tipodocumento}">
+								<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
+								<f:selectItem itemValue="Habitacion 1" itemLabel="Habitacion 1" />
+								<f:selectItem itemValue="Habitacion 2" itemLabel="Habitacion 2" />
+								<f:selectItem itemValue="Habitacion 3" itemLabel="Habitacion 3" />
+								<f:selectItem itemValue="Habitacion 4" itemLabel="Habitacion 4" />
+								<f:selectItem itemValue="Habitacion 5" itemLabel="Habitacion 5" />
+								<f:selectItem itemValue="Habitacion 6" itemLabel="Habitacion 6" />
+							</h:selectOneMenu>
+
+						</h:panelGrid>
+
+						<br />
+						<br />
+
+						<h:panelGrid columns="2">
+							<p:commandButton styleClass="ui-priority-primary" value="Crear"
+								ajax="false" action="#" />
+							<p:commandButton styleClass="ui-priority-primary" value="Editar"
+								ajax="false" action="#" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+
+					<br />
+					<br />
+
+					<!-- value="customers" la lista con que se va a lleanr tabla y su get -->
+					<p:dataTable id="tablaCamas"
+						value="#{customerController.customers}" var="cus" border="1">
+						<p:column>
+							<f:facet name="header">
+					Id
+				</f:facet>
+							<!-- El label es el valor del atributo -->
+							<h:outputLabel value="#{cus.idType}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+					Descripcion
+				</f:facet>
+							<h:outputLabel value="#{cus.idNum}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+					Piso
+				</f:facet>
+							<h:outputLabel value="#{cus.name}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+					Habitacion
+				</f:facet>
+							<h:outputLabel value="#{cus.name}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+					Ocupado por
+				</f:facet>
+							<h:outputLabel value="#{cus.name}" />
+						</p:column>
+
+					</p:dataTable>
+
+				</p:tab>
+
+			</p:accordionPanel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

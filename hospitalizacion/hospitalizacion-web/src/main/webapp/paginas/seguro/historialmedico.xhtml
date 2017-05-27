@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form preprpenId="false">
+
+			<p:panel id="quibuspanel" header="Historia clinica"
+				style="margin-bottom:20px">
+
+				<h:panelGrid id="buscarhistorial" columns="3">
+					<p:outputLabel id="lblcedulahistorial" value="Cedula del paciente:" />
+					<p:inputText id="tfcedulahistorial"
+						value="#{customerController.numerodocumento}" />
+					<p:commandButton styleClass="ui-priority-primary" value="Buscar"
+						process="@this tfcedulahistorial " update="" action="#" />
+
+					<p:outputLabel id="lblnombrehistorial" value="Nombre del paciente:" />
+					<p:outputLabel id="lblnombremostrarhistorial"
+						value="#{customerController.numerodocumento}:" />
+
+
+				</h:panelGrid>
+
+				<br />
+				<br />
+
+				<p:accordionPanel>
+
+					<p:tab title="Citas">
+
+						<h:panelGrid id="citashistorial" columns="4">
+
+							<p:dataTable id="tablaClientes"
+								value="#{customerController.customers}" var="cus" border="1">
+								<p:column>
+									<f:facet name="header">
+					Fecha
+				</f:facet>
+									<!-- El label es el valor del atributo -->
+									<h:outputLabel value="#{cus.idType}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+					Hora
+				</f:facet>
+									<h:outputLabel value="#{cus.idNum}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+					Medico
+				</f:facet>
+									<h:outputLabel value="#{cus.name}" />
+								</p:column>
+
+								<p:column headerText="Ver cita">
+									<p:commandButton action="#" process="@this"
+										value="#{msj['asociacioncuenta.verificar']}"
+										update="tablaCuentasAsociadas" />
+								</p:column>
+							</p:dataTable>
+
+								<p:outputLabel id="lbltipodocumento" value="Tipo de documento" />
+
+								<p:inputTextarea />
+
+
+
+							<p:outputLabel id="lblcedulahistorial"
+								value="Cedula del paciente:" />
+							<p:panel id="quibuspanel" header="Busqueda"
+								style="margin-bottom:20px">
+
+								<h:panelGrid id="busquirofano" columns="3">
+
+									<p:commandButton styleClass="ui-priority-primary"
+										value="Buscar" process="@this tfbusquirofano " update=""
+										action="#" />
+									<p:inputText id="tfbusquirofano" value="" />
+									<p:message for="tfbusquirofano" />
+
+								</h:panelGrid>
+
+							</p:panel>
+
+						</h:panelGrid>
+					</p:tab>
+
+				</p:accordionPanel>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

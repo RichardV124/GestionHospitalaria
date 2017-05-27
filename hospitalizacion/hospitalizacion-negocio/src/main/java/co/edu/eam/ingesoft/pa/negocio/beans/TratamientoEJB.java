@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pa.negocio.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -10,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoMedico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
@@ -62,6 +64,17 @@ public class TratamientoEJB {
 		Query query = em.createNamedQuery(Tratamiento.CONSULTA_LISTAR_TRATAMIENTOS);
 		query.setParameter(1, patologia);
 		List<Tratamiento> lista = query.getResultList();
+		return lista;
+	}
+	
+	
+	/**
+	 * metodo para listar los tipo de medicos
+	 */
+	public List<Cama> listarCamas(){	
+		Query q = em.createNativeQuery("SELECT c.id,c.disponible,c.descripcion FROM CAMA c");
+		List<Cama> lista = q.getResultList();
+		
 		return lista;
 	}
 }
