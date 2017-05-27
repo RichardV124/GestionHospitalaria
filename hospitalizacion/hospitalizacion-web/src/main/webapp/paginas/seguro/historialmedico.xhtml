@@ -18,8 +18,9 @@
 						process="@this tfcedulahistorial " update="" action="#" />
 
 					<p:outputLabel id="lblnombrehistorial" value="Nombre del paciente:" />
+					<br />
 					<p:outputLabel id="lblnombremostrarhistorial"
-						value="#{customerController.numerodocumento}:" />
+						value="    #{customerController.numerodocumento}" />
 
 
 				</h:panelGrid>
@@ -64,9 +65,65 @@
 								</p:column>
 							</p:dataTable>
 
-								<p:outputLabel id="lbltipodocumento" value="Tipo de documento" />
+							<p:panel id="quibuspanel" header="Anotaciones de la cita"
+								style="margin-left:20px">
 
 								<p:inputTextarea />
+
+							</p:panel>
+							
+							<p:panel id="quibuspanel" header="Anotaciones de la cita"
+								style="margin-left:20px">
+
+								<p:inputTextarea />
+
+							</p:panel>
+
+						</h:panelGrid>
+					</p:tab>
+
+				</p:accordionPanel>
+
+				<p:accordionPanel>
+
+					<p:tab title="Procedimientos medicos realizados">
+
+						<h:panelGrid id="citashistorial" columns="4">
+
+							<p:dataTable id="tablaClientes"
+								value="#{customerController.customers}" var="cus" border="1">
+								<p:column>
+									<f:facet name="header">
+					Fecha
+				</f:facet>
+									<!-- El label es el valor del atributo -->
+									<h:outputLabel value="#{cus.idType}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+					Hora
+				</f:facet>
+									<h:outputLabel value="#{cus.idNum}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">
+					Medico
+				</f:facet>
+									<h:outputLabel value="#{cus.name}" />
+								</p:column>
+
+								<p:column headerText="Ver cita">
+									<p:commandButton action="#" process="@this"
+										value="#{msj['asociacioncuenta.verificar']}"
+										update="tablaCuentasAsociadas" />
+								</p:column>
+							</p:dataTable>
+
+							<p:outputLabel id="lbltipodocumento" value="Tipo de documento" />
+
+							<p:inputTextarea />
 
 
 
@@ -91,6 +148,7 @@
 					</p:tab>
 
 				</p:accordionPanel>
+
 
 			</p:panel>
 		</h:form>
