@@ -20,7 +20,7 @@ public class Paciente implements Serializable{
 	
 	@Id
 	@Column(name="num_identificacion", length=50)
-	private String numIdentificacion;
+	private int numIdentificacion;
 	
 	@Column(name="nombre", nullable=false, length=50)
 	private String nombre;
@@ -57,7 +57,7 @@ public class Paciente implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(String numIdentificacion, String nombre, String direccion, String telefono, Eps eps,
+	public Paciente(int numIdentificacion, String nombre, String direccion, String telefono, Eps eps,
 			Municipio municipio, Usuario usuario, Date fechaNacimiento, String email, GeneroEnum genero) {
 		super();
 		this.numIdentificacion = numIdentificacion;
@@ -72,11 +72,11 @@ public class Paciente implements Serializable{
 		this.genero = genero;
 	}
 
-	public String getNumIdentificacion() {
+	public int getNumIdentificacion() {
 		return numIdentificacion;
 	}
 
-	public void setNumIdentificacion(String numIdentificacion) {
+	public void setNumIdentificacion(int numIdentificacion) {
 		this.numIdentificacion = numIdentificacion;
 	}
 

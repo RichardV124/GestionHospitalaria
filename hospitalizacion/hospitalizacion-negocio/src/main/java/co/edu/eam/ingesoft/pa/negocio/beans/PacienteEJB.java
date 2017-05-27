@@ -23,7 +23,7 @@ public class PacienteEJB {
 	 * @return el paciente con el respectivo id, o null si no se encuenra un paciente
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public Paciente buscar(String numId){
+	public Paciente buscar(int numId){
 		return em.find(Paciente.class, numId);
 	}
 	
@@ -37,7 +37,7 @@ public class PacienteEJB {
 		if(pa==null){
 			em.persist(p);
 		} else{
-			throw new ExcepcionNegocio("El usuario ya está registrado");
+			throw new ExcepcionNegocio("El paciente ya está registrado");
 		}	
 	}
 	
@@ -46,12 +46,12 @@ public class PacienteEJB {
 	 * @param numId, numero de identificacion del paciente a eliminar
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void eliminar(String numId) {
+	public void eliminar(int numId) {
 		Paciente p = buscar(numId);
 		if(p!=null){
 			em.remove(p);
 		} else{
-			throw new ExcepcionNegocio("El usuario no está registrado");
+			throw new ExcepcionNegocio("El paciente no está registrado");
 		}	
 	}
 	
@@ -69,5 +69,7 @@ public class PacienteEJB {
 			throw new ExcepcionNegocio("No existe el paciente a editar");
 		}
 	}
+
+	
 
 }
