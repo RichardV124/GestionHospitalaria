@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Departamento;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @LocalBean
@@ -33,5 +32,15 @@ public class DepartamentoEJB {
 		} else {
 			return dep;
 		}
+	}
+	
+	/**
+	 * metodo para buscar un departamento
+	 * @param numId, numero de identificacion del departamento a buscar
+	 * @return el departamento con el respectivo id, o null si no se encuentra el departamento
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public Departamento buscar(int numId){
+		return em.find(Departamento.class, numId);
 	}
 }

@@ -1,13 +1,17 @@
 package co.edu.eam.ingesoft.pa.negocio.beans;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Horario;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @LocalBean
@@ -68,6 +72,20 @@ public class HorarioEJB {
 			em.merge(h);
 		} else {
 			throw new ExcepcionNegocio("No existe el horario a editar");
+		}
+	}
+	
+	/**
+	 * metodo para listar los horarios registrados
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<Horario> listarHorarios() {
+		Query query = em.createNamedQuery(Horario.CONSULTA_LISTAR_HORARIOS);
+		List<Horario> hor = query.getResultList();
+		if (hor.isEmpty()) {
+			throw new ExcepcionNegocio("No hay horarios registrados en la base de datos");
+		} else {
+			return hor;
 		}
 	}
 }

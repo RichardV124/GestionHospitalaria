@@ -5,6 +5,9 @@
 	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
 	
 		<ui:define name="cuerpo">
+		
+		<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+			closable="true" />
 		<h:form prependId="false">
 		
 		<p:fieldset legend="Busqueda" style="margin-top:100px">
@@ -23,20 +26,15 @@
 				<p:inputText id="tfnompa" class="form-control" placeholder="Nombre" value="#{pacienteAjaxController.nombre}" />
 				<p:message for="tfnompa" />
 				
-				<p:outputLabel for="tfapepa" id="ape" value="Apellido"  />
-				<p:inputText id="tfapepa" class="form-control" placeholder="Apellido" value="#{pacienteAjaxController.apellido}" />
-				<p:message for="tfapepa" />
-				
 				<p:outputLabel for="tfnumpa" id="nunD" value="Numero documento"  />
 				<p:inputText id="tfnumpa" class="form-control" placeholder="Documento" value="#{pacienteAjaxController.numeroDocumento}" />
 				<p:message for="tfnumpa" />
 				
-				<p:outputLabel for="tfgenpa" id="gen" value="Genero"  />
-				<h:selectOneMenu id="cbtipogenero"
-					value="#{pacienteAjaxController.tipoSeleccionado}">
-
-					<f:selectItems value="#{pacienteAjaxController.tipos}" var="t"
-						itemValue="#{t}" />
+				<p:outputLabel for="tfgenpa" id="gen" value="Generoo"  />
+				<h:selectOneMenu id="tfgenpa" class="form-control" value="#{pacienteAjaxController.generoSeleccionado}">
+					<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+					<f:selectItem itemValue="Femenino" itemLabel="Femenino" />
+					<f:selectItem itemValue="Otro" itemLabel="Otro" />
 				</h:selectOneMenu>
 				<p:message for="tfgenpa" />
 				
@@ -47,6 +45,21 @@
 					itemValue="#{eps.idEps}" itemLabel="#{eps.nombre}"/>
 				</h:selectOneMenu>
 				<p:message for="tfepspasss" />
+				
+				<p:outputLabel for="cbdpto" id="lbdpto" value="Departamento"  />
+				<h:selectOneMenu id="cbdpto" class="form-control" value="#{pacienteAjaxController.dptoSeleccionado}">
+					<f:selectItems value="#{pacienteAjaxController.listaDptos}" var="dpto"
+					itemValue="#{dpto.id}" itemLabel="#{dpto.descripcion}"/>
+					<f:ajax event="change" execute="@this" render="cbmunicipio" listener="#{pacienteAjaxController.listarMunicipios}"/>
+				</h:selectOneMenu>
+				<p:message for="lbdpto" />
+				
+				<p:outputLabel for="cbmunicipio" id="lbmunicipio" value="Municipio"  />
+				<h:selectOneMenu id="cbmunicipio" class="form-control" value="#{pacienteAjaxController.municipioSeleccionado}">
+					<f:selectItems value="#{pacienteAjaxController.listaMunicipios}" var="mun"
+					itemValue="#{mun.id}" itemLabel="#{mun.descripcion}"/>
+				</h:selectOneMenu>
+				<p:message for="lbmunicipio" />
 				
 				<p:outputLabel for="tffechpa" id="fech" value="Fecha nacimiento"  />
 				<p:inputText id="tffechpa" class="form-control" placeholder="DD-MM-YYYY"  value="#{pacienteAjaxController.fecha}" />
@@ -59,6 +72,14 @@
 				<p:outputLabel for="tfemapa" id="ema" value="Email"  />
 				<p:inputText type="Email" id="tfemapa" class="form-control" placeholder="Email" value="#{pacienteAjaxController.email}" />
 				<p:message for="tfemapa" />
+				
+				<p:outputLabel for="tfusuario" id="lbusuario" value="Usuario"  />
+				<p:inputText id="tfusuario" class="form-control" placeholder="Usuario" value="#{pacienteAjaxController.usuario}" />
+				<p:message for="tfusuario" />
+				
+				<p:outputLabel for="tfpassword" id="lbpassword" value="Contraseña"  />
+				<p:inputText type="Password" id="tfpassword" class="form-control" placeholder="Contraseña" value="#{pacienteAjaxController.password}" />
+				<p:message for="tfpassword" />
 				
 				<h:panelGrid columns="2">
 				<p:commandButton styleClass="ui-priority-primary" value="Registrar"  action="#{pacienteAjaxController.registrar}"

@@ -8,19 +8,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="T_HORARIO")
+@NamedQueries({ 
+	@NamedQuery(name = Horario.CONSULTA_LISTAR_HORARIOS, query = "SELECT h FROM Horario h") 
+	})
 public class Horario implements Serializable{
+	
+	public static final String CONSULTA_LISTAR_HORARIOS = "Horario.ListarHorarios";
 	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="dia")
-	private int dia;
+	@Column(name="fecha")
+	private Date fecha;
 	
 	@Column(name="hora_inicial")
 	private int horaInicial;
@@ -33,10 +40,10 @@ public class Horario implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Horario(int id, int dia, int horaInicial, int horaFinal) {
+	public Horario(int id, Date fecha, int horaInicial, int horaFinal) {
 		super();
 		this.id = id;
-		this.dia = dia;
+		this.fecha = fecha;
 		this.horaInicial = horaInicial;
 		this.horaFinal = horaFinal;
 	}
@@ -49,12 +56,12 @@ public class Horario implements Serializable{
 		this.id = id;
 	}
 
-	public int getDia() {
-		return dia;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setDia(int dia) {
-		this.dia = dia;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public int getHoraInicial() {

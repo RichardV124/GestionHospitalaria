@@ -50,7 +50,7 @@ public class Paciente implements Serializable{
 	private String email;
 	
 	@Column(name="genero")
-	private GeneroEnum genero;
+	private String genero;
 
 	public Paciente() {
 		super();
@@ -58,7 +58,7 @@ public class Paciente implements Serializable{
 	}
 
 	public Paciente(int numIdentificacion, String nombre, String direccion, String telefono, Eps eps,
-			Municipio municipio, Usuario usuario, Date fechaNacimiento, String email, GeneroEnum genero) {
+			Municipio municipio, Usuario usuario, Date fechaNacimiento, String email, String genero) {
 		super();
 		this.numIdentificacion = numIdentificacion;
 		this.nombre = nombre;
@@ -144,11 +144,11 @@ public class Paciente implements Serializable{
 		this.email = email;
 	}
 
-	public GeneroEnum getGenero() {
+	public String getGenero() {
 		return genero;
 	}
 
-	public void setGenero(GeneroEnum genero) {
+	public void setGenero(String genero) {
 		this.genero = genero;
 	}
 	

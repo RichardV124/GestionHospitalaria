@@ -13,16 +13,20 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Departamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Municipio;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
-import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.GeneroEnum;
+import co.edu.eam.ingesoft.pa.negocio.beans.DepartamentoEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.EpsEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.MunicipioEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.RolEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.UsuarioEJB;
 
 
-@ViewScoped
 @Named("pacienteAjaxController")
+@ViewScoped
 public class PacienteAjaxController implements Serializable {
 	
 	@EJB
@@ -34,23 +38,34 @@ public class PacienteAjaxController implements Serializable {
 	@EJB
 	private EpsEJB epsEJB;
 	
-	public GeneroEnum[] getTipos() {
-		return GeneroEnum.values();
-	}
+	@EJB
+	private MunicipioEJB municipioEJB;
 	
-	private GeneroEnum generoSeleccionado;
+	@EJB
+	private DepartamentoEJB departamentoEJB;
+	
+	@EJB
+	private UsuarioEJB usuarioEJB;
+	
+	private String generoSeleccionado;
 	
 	private String nombre;
-	
-	private String apellido;
 	
 	private String busNumeroDocumento;
 	
 	private String numeroDocumento;
 	
-	private int epsSeleccionada;
+	private Eps epsSeleccionada;
 	
 	private List<Eps> listaEps;
+	
+	private Municipio municipioSeleccionado;
+	
+	private List<Municipio> listaMunicipios;
+	
+	private Departamento dptoSeleccionado;
+	
+	private List<Departamento> listaDptos;
 	
 	private String fecha;
 	
@@ -62,20 +77,30 @@ public class PacienteAjaxController implements Serializable {
 	
 	private Date fechaNacimiento;
 	
+	private String usuario;
+	
+	private String password;
+	
 	@PostConstruct
 	public void inicializar(){
-	
-//		listarCombos();
+		System.out.print("yoloooooooooooooooo");
+		listarCombos();
 //		pacientes = pacienteEJB.listarPacietes();
-		
-		
+				
 	}
 	
 	public void listarCombos(){
 		listaEps = epsEJB.listarEps();
-		
+		listaDptos = departamentoEJB.listarDepartamento();	
 	}
-	//registrar
+	
+	public void listarMunicipios(){
+		if(dptoSeleccionado!=null){
+				listaMunicipios = municipioEJB.listarMunicipio(dptoSeleccionado);	
+		}
+	}
+	
+	
 	public void registrar() throws ParseException{
 		
 //		if(!(fecha.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty() ||
@@ -119,7 +144,7 @@ public class PacienteAjaxController implements Serializable {
 	}
 	
 	public void buscar(){
-		
+		System.out.print("QUE PEDOOOOOOOOOOOOOOOOOOOOO");
 //		if(!busNumeroDocumento.isEmpty()){
 //
 //		Paciente pa = pacienteEJB.buscarPaciente(Integer.parseInt(busNumeroDocumento));
@@ -151,13 +176,14 @@ public class PacienteAjaxController implements Serializable {
 	
 	public void limpiar(){
 		nombre = "";
-		apellido = "";
 		numeroDocumento = "";
 		telefono = "";
 		fecha = "";
 		email = "";
 		generoSeleccionado = null;
-		epsSeleccionada = 111;
+		epsSeleccionada = null;
+		dptoSeleccionado = null;
+		municipioSeleccionado = null;
 		numeroDocumento = "";
 	}
 
@@ -173,20 +199,6 @@ public class PacienteAjaxController implements Serializable {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	/**
-	 * @return the apellido
-	 */
-	public String getApellido() {
-		return apellido;
-	}
-
-	/**
-	 * @param apellido the apellido to set
-	 */
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
 	}
 
 	/**
@@ -220,23 +232,23 @@ public class PacienteAjaxController implements Serializable {
 	/**
 	 * @return the generoSeleccionado
 	 */
-	public GeneroEnum getGeneroSeleccionado() {
+	public String getGeneroSeleccionado() {
 		return generoSeleccionado;
 	}
 
 	/**
 	 * @param generoSeleccionado the generoSeleccionado to set
 	 */
-	public void setGeneroSeleccionado(GeneroEnum generoSeleccionado) {
+	public void setGeneroSeleccionado(String generoSeleccionado) {
 		this.generoSeleccionado = generoSeleccionado;
 	}
 
 
-	public int getEpsSeleccionada() {
+	public Eps getEpsSeleccionada() {
 		return epsSeleccionada;
 	}
 
-	public void setEpsSeleccionada(int epsSeleccionada) {
+	public void setEpsSeleccionada(Eps epsSeleccionada) {
 		this.epsSeleccionada = epsSeleccionada;
 	}
 
@@ -322,6 +334,55 @@ public class PacienteAjaxController implements Serializable {
 	 */
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Municipio getMunicipioSeleccionado() {
+		return municipioSeleccionado;
+	}
+
+	public void setMunicipioSeleccionado(Municipio municipioSeleccionado) {
+		this.municipioSeleccionado = municipioSeleccionado;
+	}
+
+	public List<Municipio> getListaMunicipios() {
+		return listaMunicipios;
+	}
+
+	public void setListaMunicipios(List<Municipio> listaMunicipios) {
+		this.listaMunicipios = listaMunicipios;
+	}
+
+	public Departamento getDptoSeleccionado() {
+		return dptoSeleccionado;
+	}
+
+	public void setDptoSeleccionado(Departamento dptoSeleccionado) {
+		this.dptoSeleccionado = dptoSeleccionado;
+	}
+
+	public List<Departamento> getListaDptos() {
+		return listaDptos;
+	}
+
+	public void setListaDptos(List<Departamento> listaDptos) {
+		this.listaDptos = listaDptos;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}	
+	
 	
 }

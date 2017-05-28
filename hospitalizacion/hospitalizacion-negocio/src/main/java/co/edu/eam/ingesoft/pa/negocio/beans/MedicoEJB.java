@@ -1,12 +1,16 @@
 package co.edu.eam.ingesoft.pa.negocio.beans;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Departamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -76,6 +80,20 @@ public class MedicoEJB {
 			em.merge(m);
 		} else {
 			throw new ExcepcionNegocio("No existe el paciente a editar");
+		}
+	}
+	
+	/**
+	 * metodo para listar los medicos registrados
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<Medico> listarMedicos() {
+		Query query = em.createNamedQuery(Medico.CONSULTA_LISTAR_MEDICOS);
+		List<Medico> med = query.getResultList();
+		if (med.isEmpty()) {
+			throw new ExcepcionNegocio("No hay medicos registrados en la base de datos");
+		} else {
+			return med;
 		}
 	}
 

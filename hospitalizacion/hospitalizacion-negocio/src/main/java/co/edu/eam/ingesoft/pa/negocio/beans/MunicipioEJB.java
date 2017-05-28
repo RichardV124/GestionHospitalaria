@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Departamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Municipio;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
@@ -25,8 +26,9 @@ public class MunicipioEJB {
 	 * metodo para listar los municipios registrados
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public List<Municipio> listarMunicipio() {
+	public List<Municipio> listarMunicipio(Departamento d) {
 		Query query = em.createNamedQuery(Municipio.CONSULTA_LISTAR_MUNICIPIOS);
+		query.setParameter(1, d);
 		List<Municipio> mun = query.getResultList();
 		if (mun.isEmpty()) {
 			throw new ExcepcionNegocio("No hay municipios registrados en la base de datos");
@@ -34,4 +36,18 @@ public class MunicipioEJB {
 			return mun;
 		}
 	}
+	
+//	/**
+//	 * metodo para listar los municipios registrados
+//	 */
+//	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+//	public List<Municipio> listarMunicipio() {
+//		Query query = em.createNativeQuery("SELECT M.ID, M.DESCRIPCION FROM MUNICIPIO M;");
+//		List<Municipio> mun = query.getResultList();
+//		if (mun.isEmpty()) {
+//			throw new ExcepcionNegocio("No hay municipios registrados en la base de datos");
+//		} else {
+//			return mun;
+//		}
+//	}
 }
