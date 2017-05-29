@@ -38,8 +38,8 @@ public class CitaCirugia implements Serializable {
 	private Quirofano quirofano;
 
 	@ManyToOne
-	@JoinColumns({ @JoinColumn(name = "HORARIO_MEDICO_HORARIO_ID", referencedColumnName = "ced_medico"),
-			@JoinColumn(name = "HORARIO_MEDICO_MEDICO_CEDULA", referencedColumnName = "id_horario") })
+	@JoinColumns({ @JoinColumn(name = "HORARIO_MEDICO_HORARIO_ID", referencedColumnName = "MEDICO_CEDULA"),
+			@JoinColumn(name = "HORARIO_MEDICO_MEDICO_CEDULA", referencedColumnName = "HORARIO_ID") })
 	private HorarioMedico horarioMedico;
 
 	public CitaCirugia() {
