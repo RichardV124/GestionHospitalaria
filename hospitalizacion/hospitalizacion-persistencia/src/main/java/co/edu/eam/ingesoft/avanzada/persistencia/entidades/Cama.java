@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "T_CAMA")
+@Table(name = "CAMA")
 @NamedQueries({ 
 	@NamedQuery(name = Cama.CONSULTA_LISTAR_CAMAS, query = "SELECT c FROM Cama c") 
 	})
@@ -21,20 +21,20 @@ public class Cama implements Serializable {
 	public static final String CONSULTA_LISTAR_CAMAS = "Cama.ListarCamas";
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="piso",nullable=false,length=50)
+	@Column(name="PISO",nullable=false,length=50)
 	private String piso;
 	
-	@Column(name="habitacion",nullable=false,length=50)
+	@Column(name="HABITACION",nullable=false,length=50)
 	private String habitacion;
 	
-	@Column(name="disponible",nullable=false)
+	@Column(name="DISPONIBLE",nullable=false)
 	private boolean disponible;
 	
-	@Column(name="descripcion",nullable=false,length=50)
+	@Column(name="DESCRIPCION",nullable=false,length=50)
 	private String descripcion;
 	
 	public Cama() {

@@ -17,11 +17,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="T_HOSPITALIZACION")
+@Table(name="HOSPITALIZACION")
 public class Hospitalizacion implements Serializable{
 
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	

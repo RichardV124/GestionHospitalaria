@@ -10,24 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_QUIROFANO")
+@Table(name="QUIROFANO")
 public class Quirofano implements Serializable{
 
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="nombre",nullable=false,length=50)
+	@Column(name="NOMBRE",nullable=false,length=50)
 	private String nombre;
 	
-	@Column(name="piso",nullable=false,length=50)
+	@Column(name="PISO",nullable=false,length=50)
 	private String piso;
 	
-	@Column(name="descripcion",nullable=false,length=50)
+	@Column(name="DESCRIPCION",nullable=false,length=50)
 	private String descripcion;
 	
-	@Column(name="disponible",nullable=false)
+	@Column(name="DISPONIBLE",nullable=false)
 	private boolean disponible;
 
 	public Quirofano() {

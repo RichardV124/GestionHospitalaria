@@ -11,16 +11,16 @@ import javax.persistence.Table;
 
 @Entity
 @IdClass(PatologiaTratamientoPK.class)
-@Table(name="T_PATOLOGIA_TRATAMIENTO")
+@Table(name="PATOLOGIA_TRATAMIENTO")
 public class PatologiaTratamiento implements Serializable{
 
 	@Id
-	@JoinColumn(name="ID_PATOLOGIA")
+	@JoinColumn(name="PATOLOGIA_ID")
 	@ManyToOne
 	private Patologia patologia;
 	
 	@Id
-	@JoinColumn(name="ID_TRATAMIENTO")
+	@JoinColumn(name="TRATAMIENTO_ID")
 	@ManyToOne
 	private Tratamiento tratamiento;
 

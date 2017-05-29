@@ -15,15 +15,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="T_EXAMENES_CITA")
+@Table(name="EXAMENES_CITA")
 public class ExamenesCita implements Serializable{
 
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JoinColumn(name="ID_CITA")
+	@JoinColumn(name="CITA_ID")
 	@ManyToOne
 	private Cita cita;
 	

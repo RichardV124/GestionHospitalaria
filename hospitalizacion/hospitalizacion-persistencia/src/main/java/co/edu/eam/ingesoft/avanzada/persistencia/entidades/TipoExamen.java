@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_TIPO_EXAMEN")
+@Table(name="TIPO_EXAMEN")
 @NamedQueries({ 
 	@NamedQuery(name = TipoExamen.CONSULTA_LISTAR_TIPO_EXAMEN, query = "SELECT te FROM TipoExamen te") 
 	})

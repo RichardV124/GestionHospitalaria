@@ -1,0 +1,153 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+	
+		<ui:define name="cuerpo">
+		
+		<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+			closable="true" />
+		<h:form prependId="false">
+		
+		<p:fieldset legend="Busqueda" style="margin-top:100px">
+			<h:panelGrid id="buspa" columns="3">
+				<p:inputText id="tfbusmed" class="form-control" placeholder="Documento" value="#{medicoAjaxController.busNumeroDocumento}" />
+				<p:message for="tfbusmed" />
+				<p:commandButton styleClass="ui-priority-primary" value="Buscar"
+			 		action="#{medicoAjaxController.buscar}" process="@this tfbusmed" update="tfbusmed datosmed"/>
+			</h:panelGrid>
+		</p:fieldset>
+		
+		<p:fieldset legend="Datos medico" style="margin-top:10px">
+			<h:panelGrid id="datosmed" columns="3">
+			
+				<p:outputLabel for="tfnommed" id="nommed" value="Nombre"  />
+				<p:inputText id="tfnommed" class="form-control" placeholder="Nombre" value="#{medicoAjaxController.nombre}" />
+				<p:message for="tfnommed" />
+				
+				<p:outputLabel for="tfnummed" id="nunDmed" value="Numero documento"  />
+				<p:inputText id="tfnummed" class="form-control" placeholder="Documento" value="#{medicoAjaxController.numeroDocumento}" />
+				<p:message for="tfnummed" />
+				
+				<p:outputLabel for="tfgenmed" id="genmed" value="Genero"  />
+				<h:selectOneMenu id="tfgenmed" class="form-control" value="#{medicoAjaxController.generoSeleccionado}">
+					<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+					<f:selectItem itemValue="Femenino" itemLabel="Femenino" />
+					<f:selectItem itemValue="Otro" itemLabel="Otro" />
+				</h:selectOneMenu>
+				<p:message for="tfgenmed" />
+				
+				<p:outputLabel for=tftipomedico id="tipomed" value="Eps"  />
+				<h:selectOneMenu id="tftipomedico" class="form-control" value="#{medicoAjaxController.tipoMedicoSeleccionado}">
+					<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+					<f:selectItems value="#{medicoAjaxController.listaTipoMedico}" var="tipo"
+					itemValue="#{tipo.id}" itemLabel="#{tipo.descripcion}"/>
+				</h:selectOneMenu>
+				<p:message for="tftipomedico" />
+				
+				<p:outputLabel for="cbdptomed" id="lbdptomed" value="Departamento"  />
+				<h:selectOneMenu id="cbdpto" class="form-control" value="#{medicoAjaxController.dptoSeleccionado}">
+					<f:selectItems value="#{medicoAjaxController.listaDptos}" var="dpto"
+					itemValue="#{dpto.id}" itemLabel="#{dpto.descripcion}"/>
+					<f:ajax event="change" execute="@this" render="cbmunicipio" listener="#{medicoAjaxController.listarMunicipios}"/>
+				</h:selectOneMenu>
+				<p:message for="lbdpto" />
+				
+				<p:outputLabel for="cbmunicipiomed" id="lbmunicipiomed" value="Municipio"  />
+				<h:selectOneMenu id="cbmunicipiomed" class="form-control" value="#{medicoAjaxController.municipioSeleccionado}">
+					<f:selectItems value="#{medicoAjaxController.listaMunicipios}" var="mun"
+					itemValue="#{mun.id}" itemLabel="#{mun.descripcion}"/>
+				</h:selectOneMenu>
+				<p:message for="lbmunicipiomed" />
+				
+				<p:outputLabel for="tffechmed" id="fechmed" value="Fecha nacimiento"  />
+				<p:inputText id="tffechmed" class="form-control" placeholder="DD-MM-YYYY"  value="#{medicoAjaxController.fecha}" />
+				<p:message for="tffechmed" />
+				
+				<p:outputLabel for="tftelmed" id="telmed" value="Telefono"  />
+				<p:inputText id="tftelmed" class="form-control" placeholder="Telefono"  value="#{medicoAjaxController.telefono}" />
+				<p:message for="tftelmed" />
+				
+				<p:outputLabel for="tfemamed" id="emamed" value="Email"  />
+				<p:inputText type="Email" id="tfemamed" class="form-control" placeholder="Email" value="#{medicoAjaxController.email}" />
+				<p:message for="tfemamed" />
+				
+				<p:outputLabel for="tfusuariomed" id="lbusuariomed" value="Usuario"  />
+				<p:inputText id="tfusuariomed" class="form-control" placeholder="Usuario" value="#{medicoAjaxController.usuario}" />
+				<p:message for="tfusuariomed" />
+				
+				<p:outputLabel for="tfpasswordmed" id="lbpasswordmed" value="Contraseña"  />
+				<p:inputText type="Password" id="tfpasswordmed" class="form-control" placeholder="Contraseña" value="#{medicoAjaxController.password}" />
+				<p:message for="tfpasswordmed" />
+				
+				<h:panelGrid columns="2">
+				<p:commandButton styleClass="ui-priority-primary" value="Registrar"  action="#{medicoAjaxController.registrar}"
+					 process="@this datosmed" update="datosmed panellistamed"/>
+				
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:fieldset>
+		
+		 <p:accordionPanel id="panellistamed">
+        <p:tab title="Medicos" id="meds">
+			<p:dataTable id="panelTabla" value="#{medicoAjaxController.medicos}" var="med"
+				border="1">
+				<p:column>
+					<f:facet name="header">
+							Nombre
+						</f:facet>
+					<p:outputLabel value="#{med.nombre}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Apellido
+						</f:facet>
+					<p:outputLabel value="#{med.apellido}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Documento
+						</f:facet>
+					<p:outputLabel value="#{med.identificacion}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Genero
+						</f:facet>
+					<p:outputLabel value="#{med.genero}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Fecha Nacimiento
+						</f:facet>
+					<p:outputLabel value="#{med.fechaNacimiento}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Telefono
+						</f:facet>
+					<p:outputLabel value="#{med.telefono}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Email
+						</f:facet>
+					<p:outputLabel value="#{med.email}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+							Borrar
+						</f:facet>
+						<p:commandButton action="#{medicoAjaxController.borrar(pa)}" value="Borrar"
+							process="@this" update="panellistamed" />
+					<p:outputLabel value="" />
+				</p:column>
+			</p:dataTable>
+			</p:tab>
+    </p:accordionPanel>
+			
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

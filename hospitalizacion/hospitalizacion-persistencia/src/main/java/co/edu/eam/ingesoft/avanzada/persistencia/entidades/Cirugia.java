@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_CIRUGIA")
+@Table(name="CIRUGIA")
 @NamedQueries({ 
 	@NamedQuery(name = Cirugia.CONSULTA_LISTAR_CIRUGIAS, query = "SELECT c FROM Cirugia c") 
 	})
@@ -23,18 +23,18 @@ public class Cirugia implements Serializable{
 	public static final String CONSULTA_LISTAR_CIRUGIAS = "Cirugia.ListarCirugias";
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion",nullable=false,length=50)
+	@Column(name="DESCRIPCION",nullable=false,length=50)
 	private String descripcion;
 
-	@JoinColumn(name="id_tipocirugia")
+	@JoinColumn(name="TIPO_CIRUGIA_ID")
 	@ManyToOne
 	private TipoCirugia tipoCirugia;
 	
-	@Column(name="tiempo_estimado")
+	@Column(name="TIEMPO_ESTIMADO")
 	private int tiempoEstimado;
 
 	public Cirugia() {

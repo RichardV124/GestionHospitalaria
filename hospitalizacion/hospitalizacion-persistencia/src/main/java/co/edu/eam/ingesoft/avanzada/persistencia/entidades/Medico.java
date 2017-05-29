@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.avanzada.persistencia.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_MEDICO")
+@Table(name="MEDICO")
 @NamedQueries({ 
 	@NamedQuery(name = Medico.CONSULTA_LISTAR_MEDICOS, query = "SELECT m FROM Medico m") 
 	})
@@ -22,30 +23,39 @@ public class Medico implements Serializable{
 	public static final String CONSULTA_LISTAR_MEDICOS = "Medico.ListarMedicos";
 	
 	@Id
-	@Column(name="cedula")
+	@Column(name="CEDULA")
 	private String cedula;
 	
-	@Column(name="nombre")
+	@Column(name="NOMBRE")
 	private	String nombre;
 	
-	@Column(name="direccion")
+	@Column(name="DIRECCION")
 	private String direccion;
 	
-	@Column(name="telefono")
+	@Column(name="TELEFONO")
 	private String telefono;
 	
-	@JoinColumn(name="id_tipomedico")
+	@JoinColumn(name="TIPO_MEDICO_ID")
 	@ManyToOne
 	private TipoMedico tipoMedico;
 	
 	
-	@JoinColumn(name="id_municipio")
+	@JoinColumn(name="MUNICIPIO_ID")
 	@ManyToOne
 	private Municipio municipio;
 
 	@OneToOne
-	@JoinColumn(name="usuario")
+	@JoinColumn(name="USUARIO_USUARIO")
 	private Usuario usuario;
+	
+	@Column(name="EMAIL")
+	private String email;
+	
+	@Column(name="GENERO")
+	private String genero;
+	
+	@Column(name="FECHA_NACIMIENTO")
+	private Date fechaNacimiento;
 	
 	public Medico() {
 		super();
@@ -106,5 +116,31 @@ public class Medico implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	
+	
 	
 }
