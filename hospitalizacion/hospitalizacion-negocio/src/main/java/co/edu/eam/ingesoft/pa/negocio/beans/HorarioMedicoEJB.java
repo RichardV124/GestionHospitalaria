@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HorarioMedico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HorarioMedicoPK;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
+import co.edu.eam.ingesoft.pa.negocio.dtos.HorarioMedicoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @LocalBean
@@ -94,11 +95,11 @@ public class HorarioMedicoEJB {
 	 * metodo para listar los medicos registrados
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public List<HorarioMedico> listarMedicos() {
+	public List<HorarioMedicoDTO> listarHorariosMedico() {
 		Query query = em.createNativeQuery("SELECT HM.MEDICO_CEDULA, HM.HORARIO_ID, M.NOMBRE, H.FECHA, H.HORA_INICIAL, H.HORA_FINAL "
 				+ "FROM HORARIO_MEDICO HM INNER JOIN HORARIO H ON H.ID=HM.HORARIO_ID"
 				+ "INNER JOIN MEDICO M ON M.CEDULA=HM.MEDICO_CEDULA;");
-		List<HorarioMedico> hms = query.getResultList();
+		List<HorarioMedicoDTO> hms = query.getResultList();
 		if (hms.isEmpty()) {
 			throw new ExcepcionNegocio("No hay ningun horario asignado en la base de datos");
 		} else {

@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_HORARIO")
+@Table(name="HORARIO")
 @NamedQueries({ 
 	@NamedQuery(name = Horario.CONSULTA_LISTAR_HORARIOS, query = "SELECT h FROM Horario h") 
 	})
@@ -22,17 +22,17 @@ public class Horario implements Serializable{
 	public static final String CONSULTA_LISTAR_HORARIOS = "Horario.ListarHorarios";
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="fecha")
+	@Column(name="FECHA")
 	private Date fecha;
 	
-	@Column(name="hora_inicial")
+	@Column(name="HORA_INICIAL")
 	private int horaInicial;
 	
-	@Column(name="horaFinal")
+	@Column(name="HORA_FINAL")
 	private int horaFinal;
 
 	public Horario() {

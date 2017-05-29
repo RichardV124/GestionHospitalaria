@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Table(name="T_MEDICAMENTOS_RECETADOS")
+@Table(name="MEDICAMENTO_RECETADOS")
 @IdClass(MedicamentosRecetadosPK.class)
 @Entity
 public class MedicamentosRecetados implements Serializable{
@@ -41,7 +41,7 @@ public class MedicamentosRecetados implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date fechaReclamo;
 	
-	@Column(name="RECLAMADO")
+	@Column(name="ESTADO_RECLAMADO")
 	private boolean reclamado;
 	
 	@JoinColumn(name="MEDI_ENTREGADOS_ID")

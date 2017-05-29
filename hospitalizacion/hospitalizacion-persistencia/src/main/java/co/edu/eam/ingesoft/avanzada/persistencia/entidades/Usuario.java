@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_USUARIO")
+@Table(name="USUARIO")
 @NamedQueries({
 @NamedQuery(name="Usuario.buscarXUser",query="SELECT u FROM Usuario u WHERE u.user=?1")
 })
@@ -21,14 +21,14 @@ public class Usuario implements Serializable {
 	public static final String BUSCAR_POR_USUARIO = "Usuario.buscarXUser";
 	
 	@Id
-	@Column(unique=true,name="usuario")
+	@Column(unique=true,name="USUARIO")
 	private String user;
 	
-	@Column(name="password")
+	@Column(name="PASSWORD")
 	private String password;
 	
 	@ManyToOne
-	@JoinColumn(name="id_rol")
+	@JoinColumn(name="ROL_ID")
 	private Rol rol;
 	
 	public Usuario() {

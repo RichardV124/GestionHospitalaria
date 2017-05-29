@@ -10,15 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_MEDICAMENTO_ENTREGADO")
+@Table(name="MEDICAMENTOS_ENTREGADOS")
 public class MedicamentosEntregados implements Serializable{
 
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="cantidad_entregada", nullable=false)
+	@Column(name="CANTIDAD_ENTREGADA", nullable=false)
 	private String cantidadEntregada;
 
 	public MedicamentosEntregados() {

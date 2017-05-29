@@ -14,14 +14,14 @@ import javax.persistence.Table;
 public class Farmacia implements Serializable{
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion",nullable=false,length=50)
+	@Column(name="DESCRIPCION",nullable=false,length=50)
 	private String descripcion;
 	
-	@Column(name="direccion",nullable=false,length=50)
+	@Column(name="DIRECCION",nullable=false,length=50)
 	private String direccion;
 
 	public Farmacia() {

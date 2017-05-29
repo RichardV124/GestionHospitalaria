@@ -11,47 +11,49 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="T_MEDICAMENTO")
+@Table(name="MEDICAMENTO")
+@NamedQueries({ 
+	@NamedQuery(name = Medicamento.CONSULTA_LISTAR_MEDICAMENTOS, query = "SELECT m FROM Medicamento m") 
+	})
 public class Medicamento implements Serializable{
 
+	public static final String CONSULTA_LISTAR_MEDICAMENTOS = "Medicamento.ListarMedicamentos";
+	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion", nullable=false, length=50)
+	@Column(name="DESCRIPCION", nullable=false, length=50)
 	private String descripcion;
 	
-	@Column(name="fecha_vencimiento", nullable=false)
+	@Column(name="FECHA_VENCIMIENTO", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date fechaVencimiento;
 	
-	@JoinColumn(name="tipo_medicamento")
+	@JoinColumn(name="TIPO_MEDICAMENTO_ID")
 	@ManyToOne(cascade={})
 	private TipoMedicamento tipoMedicamento;
 	
-	@JoinColumn(name="farmacia")
-	@ManyToOne(cascade={})
-	private Farmacia farmacia;
 
 	public Medicamento() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Medicamento(int id, String descripcion, Date fechaVencimiento, TipoMedicamento tipoMedicamento,
-			Farmacia farmacia) {
+	public Medicamento(int id, String descripcion, Date fechaVencimiento, TipoMedicamento tipoMedicamento) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.fechaVencimiento = fechaVencimiento;
 		this.tipoMedicamento = tipoMedicamento;
-		this.farmacia = farmacia;
 	}
 
 	public int getId() {
@@ -84,14 +86,6 @@ public class Medicamento implements Serializable{
 
 	public void setTipoMedicamento(TipoMedicamento tipoMedicamento) {
 		this.tipoMedicamento = tipoMedicamento;
-	}
-
-	public Farmacia getFarmacia() {
-		return farmacia;
-	}
-
-	public void setFarmacia(Farmacia farmacia) {
-		this.farmacia = farmacia;
 	}
 	
 	

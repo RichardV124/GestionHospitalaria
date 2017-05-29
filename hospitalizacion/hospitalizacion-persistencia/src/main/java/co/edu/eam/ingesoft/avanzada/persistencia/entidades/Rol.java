@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_ROL")
+@Table(name="ROL")
 @NamedQueries({ 
 	@NamedQuery(name = Rol.CONSULTA_LISTAR_ROLES, query = "SELECT r FROM Rol r") 
 	})
@@ -22,12 +22,10 @@ public class Rol implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID")
 	private long id;
 	
-	@Column(name="nombre")
-	private String nombre;
-	
-	@Column(name="descripcion")
+	@Column(name="DESCRIPCION")
 	private String descripcion;
 
 	
@@ -41,14 +39,6 @@ public class Rol implements Serializable{
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getDescripcion() {

@@ -24,14 +24,14 @@ public class Municipio implements Serializable{
 	public static final String CONSULTA_LISTAR_MUNICIPIOS = "Municipio.ListarMunicipios";
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion", nullable=false, length=50)
+	@Column(name="DESCRIPCION", nullable=false, length=50)
 	private String descripcion;
 	
-	@JoinColumn(name="departamento")
+	@JoinColumn(name="DEPARTAMENTO_ID")
 	@ManyToOne(cascade = {})
 	private Departamento departamento;
 

@@ -14,31 +14,31 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_CITA")
+@Table(name="CITA")
 public class Cita implements Serializable{
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="atendido", nullable=false)
+	@Column(name="ATENDIDO", nullable=false)
 	private boolean atendido;
 	
-	@Column(name="anotaciones")
+	@Column(name="ANOTACIONES")
 	private String anotaciones;
 	
-	@JoinColumn(name="caracter_cita", nullable=false)
+	@JoinColumn(name="CARACTER_ID", nullable=false)
 	@ManyToOne(cascade={})
 	private CaracterCita caracter;
 	
 	
 	
-	@JoinColumn(name="cita",nullable=true)
+	@JoinColumn(name="CITA_ID",nullable=true)
 	@ManyToOne
 	private Cita cita;
 	
-	@JoinColumn(name = "cedula_paciente")
+	@JoinColumn(name = "PACIENTE_CEDULA")
 	@ManyToOne(cascade = {})
 	private Paciente paciente;
 	

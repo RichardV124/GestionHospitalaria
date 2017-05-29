@@ -13,20 +13,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_CITA_PATOLOGIA_TRATAMIENTO")
+@Table(name="CITA_PATOLOGIA_TRATAMIENTO")
 public class CitaPatologiaTratamiento implements Serializable{
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JoinColumns({ @JoinColumn(name = "PATOLOGIA_TRATAMIENTO_PATOLOGIA_ID", referencedColumnName = "ID_PATOLOGIA"),
-		@JoinColumn(name = "PATOLOGIA_TRATAMIENTO_TRATAMIENTO_ID", referencedColumnName = "ID_TRATAMIENTO") })
+	@JoinColumns({ @JoinColumn(name = "PATO_TRATA_PATO_ID", referencedColumnName = "PATOLOGIA_ID"),
+		@JoinColumn(name = "PATO_TRATA_TRATA_ID", referencedColumnName = "TRATAMIENTO_ID") })
 	@ManyToOne
 	private PatologiaTratamiento patologiaTratamiento;
 	
-	@JoinColumn(name="ID_CITA")
+	@JoinColumn(name="CITA_ID")
 	@ManyToOne
 	private Cita cita;
 

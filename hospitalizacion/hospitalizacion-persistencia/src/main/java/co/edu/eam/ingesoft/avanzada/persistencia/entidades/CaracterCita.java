@@ -10,15 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_CARACTER_CIRA")
+@Table(name="CARACTER")
 public class CaracterCita implements Serializable{
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion", nullable=false, length=50)
+	@Column(name="DESCRIPCION", nullable=false, length=50)
 	private String descripcion;
 
 	public CaracterCita() {

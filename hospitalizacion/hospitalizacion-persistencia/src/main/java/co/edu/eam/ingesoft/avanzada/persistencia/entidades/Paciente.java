@@ -15,41 +15,41 @@ import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.GeneroEnum;
 
 
 @Entity
-@Table(name="T_PACIENTE")
+@Table(name="PACIENTE")
 public class Paciente implements Serializable{
 	
 	@Id
-	@Column(name="num_identificacion", length=50)
+	@Column(name="CEDULA", length=50)
 	private int numIdentificacion;
 	
-	@Column(name="nombre", nullable=false, length=50)
+	@Column(name="NOMBRE", nullable=false, length=50)
 	private String nombre;
 	
-	@Column(name="direccion", nullable=false, length=50)
+	@Column(name="DIRECCION", nullable=false, length=50)
 	private String direccion;
 	
-	@Column(name="telefono", nullable=false, length=50)
+	@Column(name="TELEFONO", nullable=false, length=50)
 	private String telefono;
 	
-	@JoinColumn(name="eps")
+	@JoinColumn(name="EPS_ID")
 	@ManyToOne(cascade={})
 	private Eps eps;
 	
-	@JoinColumn(name="municipio")
+	@JoinColumn(name="MUNICIPIO_ID")
 	@ManyToOne(cascade={})
 	private Municipio municipio;
 	
 	@OneToOne
-	@JoinColumn(name="usuario",unique=true)
+	@JoinColumn(name="USUARIO_USUARIO",unique=true)
 	private Usuario usuario;
 	
-	@Column(name="fecha_nacimiento")
+	@Column(name="FECHA_NACIMIENTO")
 	private Date fechaNacimiento;
 	
-	@Column(name="email")
+	@Column(name="EMAIL")
 	private String email;
 	
-	@Column(name="genero")
+	@Column(name="GENERO")
 	private String genero;
 
 	public Paciente() {

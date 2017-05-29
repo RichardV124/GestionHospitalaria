@@ -13,21 +13,21 @@ import javax.persistence.Table;
 
 @Entity
 @IdClass(HorarioMedicoPK.class)
-@Table(name="T_HORARIO_MEDICO")
+@Table(name="HORARIO_MEDICO")
 public class HorarioMedico implements Serializable{
 	
 	@Id
-	@JoinColumn(name="id_horario")
+	@JoinColumn(name="HORARIO_ID")
 	@ManyToOne(cascade = {})
 	private Horario horario;
 	
 	@Id
-	@JoinColumn(name="ced_medico")
+	@JoinColumn(name="MEDICO_CEDULA")
 	@ManyToOne(cascade = {})
 	private Medico medico;
 	
 	
-	@Column(name="disponible")
+	@Column(name="DISPONIBLE")
 	private boolean disponible;
 
 	public HorarioMedico() {

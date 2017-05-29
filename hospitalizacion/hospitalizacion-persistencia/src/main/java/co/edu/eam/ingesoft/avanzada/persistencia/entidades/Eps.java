@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_EPS")
+@Table(name="EPS")
 @NamedQueries({ 
 	@NamedQuery(name = Eps.CONSULTA_LISTAR_EPS, query = "SELECT e FROM Eps e") 
 	})
@@ -24,11 +24,11 @@ public class Eps implements Serializable{
 	 * id autoincrementable de la eps
 	 */
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion", nullable=false, length=50)
+	@Column(name="DESCRIPCION", nullable=false, length=50)
 	private String descripcion;
 
 	public Eps() {

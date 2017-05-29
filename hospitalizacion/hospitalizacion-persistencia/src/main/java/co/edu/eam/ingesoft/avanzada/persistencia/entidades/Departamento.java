@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="T_DEPARTAMENTO")
+@Table(name="DEPARTAMENTO")
 @NamedQueries({ 
 	@NamedQuery(name = Departamento.CONSULTA_LISTAR_DEPARTAMENTOS, query = "SELECT d FROM Departamento d") 
 	})
@@ -22,11 +22,11 @@ public class Departamento implements Serializable{
 	public static final String CONSULTA_LISTAR_DEPARTAMENTOS = "Departamento.ListarDepartamentos";
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion", nullable=false, length=50)
+	@Column(name="DESCRIPCION", nullable=false, length=50)
 	private String descripcion;
 
 	public Departamento() {

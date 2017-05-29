@@ -11,30 +11,39 @@
 
 		<h:form prependId="false">
 
-			<p:fieldset legend="Registro de horario medico" style="margin-top:100px">
-				<h:panelGrid columns="3" id="phorario">
+			<p:fieldset legend="Registro de medicamentos" style="margin-top:100px">
+				<h:panelGrid columns="3" id="pmedicamento">
 
-					<p:outputLabel id="lblfecha" for="tffecha"
-						value="Fecha" />
-					<p:inputText id="tffecha" class="form-control" placeholder="DD-MM-AAAA"
-						value="#{horarioAjaxController.fecha}" />
-					<p:message for="tffecha" />
+					<p:outputLabel id="lblnumref" for="tfnumref"
+						value="Numero de Referencia" />
+					<p:inputText id="tfnumref" class="form-control" placeholder="Numero de Referencia"
+						value="" />
+					<p:message for="tfnumref" />
 
-					<p:outputLabel id="lblhorainicial" for="tfhorainicial"
-						value="Hora Inicial" />
-					<p:inputText id="tfhorainicial" class="form-control" placeholder="Hora inicial"
-						value="#{horarioAjaxController.horaInicial}" />
-					<p:message for="tfhorainicial" />
+					<p:outputLabel id="lblnombre" for="tfnombre"
+						value="Nombre" />
+					<p:inputText id="tfnombre" class="form-control" placeholder="Nombre"
+						value="" />
+					<p:message for="tfnombre" />
 
-					<p:outputLabel id="lblhoraifinal" for="tfhoraifinal"
-						value="Hora final" /> 
-					<p:inputText id="tfhoraifinal" class="form-control" placeholder="Hora final"
-						value="#{horarioAjaxController.horaFinal}" />
-					<p:message for="tfhoraifinal" />			
+					<p:outputLabel id="lblfechavencimiento" for="tffechavencimiento"
+						value="Fecha de Vencimiento" /> 
+					<p:inputText id="tffechavencimiento" class="form-control" placeholder="DD-MM-AAAAl"
+						value="" />
+					<p:message for="tffechavencimiento" />
+					
+					<p:outputLabel for="cbtipo" id="lbltipo"
+						value="Tipo Medicamento" />
+					<h:selectOneMenu id="cbtipo" class="form-control" value="#{inventarioAjaxController.tipoSeleccionado}">
+						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+						<f:selectItems value="#{inventarioAjaxController.tipos}" var="tipo"
+							itemValue="#{tipo}" itemLabel="#{tipo.descripcion}" />
+					</h:selectOneMenu>
+					<p:message for="cbtipo" />			
 					
 					<p:commandButton styleClass="ui-priority-primary" value="Registrar"
-					 action="#{horarioAjaxController.registrar}" process="@this"
-					 update="pasigh phorario"/>
+					 action="#{inventarioAjaxController.registrarMedicamento}" process="@this"
+					 update="pmedicamento phorario"/>
 				</h:panelGrid>
 			</p:fieldset>	
 			

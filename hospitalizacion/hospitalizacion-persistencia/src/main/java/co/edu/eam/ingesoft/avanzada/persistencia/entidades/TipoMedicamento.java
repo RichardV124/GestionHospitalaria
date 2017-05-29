@@ -7,18 +7,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_TIPO_MEDICAMENTO")
+@Table(name="TIPO_MEDICAMENTO")
+@NamedQueries({ 
+	@NamedQuery(name = TipoMedicamento.CONSULTA_LISTAR_TIPO_MEDICAMENTO, query = "SELECT tm FROM TipoMedicamento tm") 
+	})
 public class TipoMedicamento implements Serializable{
 	
+	public static final String CONSULTA_LISTAR_TIPO_MEDICAMENTO = "TipoMedicamento.ListarTipoMedicamento";
+	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion", nullable=false, length=50)
+	@Column(name="DESCRIPCION", nullable=false, length=50)
 	private String descripcion;
 
 	public TipoMedicamento() {
