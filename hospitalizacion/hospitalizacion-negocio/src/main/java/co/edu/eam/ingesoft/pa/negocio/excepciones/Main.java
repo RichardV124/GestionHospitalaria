@@ -18,7 +18,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		ejb.listarCamas();
+	//	ejb.listarCamas();
 		
 //			
 //			Query q = em.createNativeQuery("SELECT c.id,c.disponible,c.descripcion FROM CAMA c");

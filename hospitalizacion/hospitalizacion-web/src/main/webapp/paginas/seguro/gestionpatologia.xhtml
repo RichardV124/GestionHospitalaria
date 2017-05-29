@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form preprpenId="false">
+
+			<p:accordionPanel>
+				<p:tab title="Gestion de patologias">
+					<p:panel id="patbuspanel" header="Busqueda"
+						style="margin-bottom:20px">
+
+						<h:panelGrid id="buspatologia" columns="3">
+
+							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
+								process="@this tfbuspatologia " update="datospatologia"
+								action="#{patotratacontroller.buscarPatologia}" />
+							<p:inputText id="tfbuspatologia"
+								value="#{patotratacontroller.patologiaBuscar}" />
+							<p:message for="tfbuspatologia" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+					<p:panel id="patcrearpatopanel" header="Crear Patologia">
+
+						<h:panelGrid id="datospatologia" columns="2">
+
+							<p:outputLabel id="lbldescripcionpatologiacrear"
+								value="Descripcion:" />
+							<p:inputText id="tfdescripcionpatologiacrear"
+								value="#{patotratacontroller.descripcionPatologia}" />
+							<p:outputLabel id="lbltipopatologia" value="Tipo:" />
+							<h:selectOneMenu id="cbtipopatologia"
+								value="#{patotratacontroller.tipoPatologia}">
+								<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
+								<f:selectItem itemValue="Mental" itemLabel="Mental" />
+								<f:selectItem itemValue="Venerea" itemLabel="Venerea" />
+								<f:selectItem itemValue="Respiratoria" itemLabel="Respiratoria" />
+								<f:selectItem itemValue="Renal" itemLabel="Renal" />
+							</h:selectOneMenu>
+							<p:outputLabel id="lblsintomaspatologia" value="Sintomas:" />
+							<p:inputTextarea id="tfsintomaspatologia"
+								value="#{customerController.sintomasPatologia}" />
+
+						</h:panelGrid>
+
+						<br />
+						<br />
+
+						<h:panelGrid columns="2">
+							<p:commandButton value="Crear" ajax="false"
+								action="#{patotratacontroller.crearPatologia}" />
+							<p:commandButton value="Editar" ajax="false"
+								action="#{patotratacontroller.editarPatologia}" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+				</p:tab>
+
+			</p:accordionPanel>
+
+
+			<p:accordionPanel>
+				<p:tab title="Gestion de tratamiento">
+					<p:panel id="tratamientopanel" header="Busqueda"
+						style="margin-bottom:20px">
+
+						<h:panelGrid id="bustratamiento" columns="3">
+
+							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
+								process="@this tfbustratamiento " update="datostratamiento"
+								action="#{patotratacontroller.buscarTratamiento}" />
+							<p:inputText id="tfbustratamiento" value="" />
+							<p:message for="tfbustratamiento" />
+
+						</h:panelGrid>
+
+					</p:panel>
+
+					<h:panelGrid columns="2">
+
+						<p:panel id="tratamientocrearpanel" header="Crear tratamiento">
+
+							<h:panelGrid id="datostratamiento" columns="2">
+
+								<p:outputLabel id="lblnombretratamiento" value="Nombre:" />
+								<p:inputText id="tfnombretratamiento"
+									value="#{patotratacontroller.nombreTratamiento}" />
+
+								<p:outputLabel id="lbldescripciontratamiento"
+									value="Descripcion:" />
+								<p:inputText id="tfdescripciontratamiento"
+									value="#{patotratacontroller.descripcionTratamiento}" />
+
+							</h:panelGrid>
+
+							<h:panelGrid columns="2">
+								<p:commandButton styleClass="ui-priority-primary" value="Crear"
+									ajax="false" action="#{patotratacontroller.crearPatologia}" />
+								<p:commandButton styleClass="ui-priority-primary" value="Editar"
+									ajax="false" action="#{patotratacontroller.editarPatologia}" />
+
+							</h:panelGrid>
+
+						</p:panel>
+
+						<p:panel id="asignartratamiento"
+							header="Asignar tratamiento a patologia" 
+							style="margin-left:20px">
+
+							<h:panelGrid id="datosasignacion" columns="2">
+
+								<h:outputLabel id="lblpatologiaasignar" value="Patologia" />
+								<h:selectOneMenu id="cbpatologiaasignar"
+									value="#{patotratacontroller.patologiaSeleccionada}">
+									<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
+									<f:selectItems value="#{controladorTransferirAjax.patologias}"
+										var="patologia" itemValue="#{patologia.id}"
+										itemLabel="#{patologia.descripcion}" />
+								</h:selectOneMenu>
+								<h:outputLabel id="lbltratamientoasignar" value="Tratamiento" />
+								<h:selectOneMenu id="cbtratamientoasignar"
+									value="#{patotratacontroller.tratamientoSeleccionada}">
+									<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
+									<f:selectItems value="#{patotratacontroller.tratamientos}"
+										var="tratamiento" itemValue="#{tratamiento.id}"
+										itemLabel="#{tratamiento.nombre}" />
+								</h:selectOneMenu>
+
+								<br />
+
+							</h:panelGrid>
+
+							<h:panelGrid columns="2">
+								<p:commandButton styleClass="ui-priority-primary" value="Asignar tratamiento"
+									ajax="false" action="#{patotratacontroller.asignarTratamiento}" />
+							</h:panelGrid>
+						</p:panel>
+
+					</h:panelGrid>
+
+				</p:tab>
+
+			</p:accordionPanel>
+
+			<!-- value="customers" la lista con que se va a lleanr tabla y su get -->
+			<p:dataTable id="tablaTratamientosPatologia"
+				value="#{patotratacontroller.patologiasTratamientos}" var="trapat" border="1">
+				
+				<p:column headerText="Patologia">
+					<h:outputLabel value="#{trapat.patologia}" />
+				</p:column>
+
+				<p:column headerText="Tratamiento">
+					<h:outputLabel value="#{trapat.tratamiento}" />
+				</p:column>
+
+				<p:column headerText="Eliminar">
+					<p:commandButton
+						action="#{patotratacontroller.eliminartratamientopatologia(trapat)}"
+						process="@this" value="Quitar"
+						update="tablaTratamientosPatologia" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

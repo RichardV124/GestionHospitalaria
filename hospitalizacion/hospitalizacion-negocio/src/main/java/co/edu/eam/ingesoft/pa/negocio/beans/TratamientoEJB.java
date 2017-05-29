@@ -12,8 +12,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoMedico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -58,23 +56,28 @@ public class TratamientoEJB {
 	
 	
 	/**
-	 * metodo para listar los tipo de medicos
+	 * metodo para listar los tratamientos
 	 */
-	public List<Tratamiento> listarTratamientosPatologia(int patologia){	
+	public List<Tratamiento> listarTratamientosPatologia(){	
 		Query query = em.createNamedQuery(Tratamiento.CONSULTA_LISTAR_TRATAMIENTOS);
-		query.setParameter(1, patologia);
 		List<Tratamiento> lista = query.getResultList();
 		return lista;
 	}
 	
-	
 	/**
-	 * metodo para listar los tipo de medicos
+	 * metodo para la edicion de un tratamiento registrada
+	 * 
+	 * @param t
+	 *            tratamiento a editar
 	 */
-	public List<Cama> listarCamas(){	
-		Query q = em.createNativeQuery("SELECT c.id,c.disponible,c.descripcion FROM CAMA c");
-		List<Cama> lista = q.getResultList();
-		
-		return lista;
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void editar(Tratamiento t) {
+		Tratamiento tra = buscarTratamiento(t.getId());
+		// no existe,no se puede editar...
+		if (tra != null) {
+			em.merge(t);
+		} else {
+			throw new ExcepcionNegocio("No existe el tratamiento a editar");
+		}
 	}
 }

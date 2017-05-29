@@ -16,8 +16,9 @@
 
 							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
 								process="@this tfbusquirofano " update="datosquirofano"
-								action="#" />
-							<p:inputText id="tfbusquirofano" value="" />
+								action="#{instalacontroller.buscarQuirofano}" />
+							<p:inputText id="tfbusquirofano"
+								value="#{instalacontroller.quirofanoBuscar}" />
 							<p:message for="tfbusquirofano" />
 
 						</h:panelGrid>
@@ -28,25 +29,27 @@
 
 						<h:panelGrid id="datosquirofano" columns="2">
 
-							<p:outputLabel id="lblnombrequirofanocrear" value="Descripcion:" />
+							<p:outputLabel id="lblnombrequirofanocrear" value="Nombre" />
 							<p:inputText id="tfnombrequirofanocrear"
-								value="#{customerController.numerodocumento}" />
+								value="#{instalacontroller.nombreQuirofano}" />
 
 							<p:outputLabel id="lbldescripcionquirofanocrear"
 								value="Descripcion:" />
 							<p:inputText id="tfdescripcionquirofanocrear"
-								value="#{customerController.numerodocumento}" />
+								value="#{instalacontroller.descripcionQuirofano}" />
+
+							<br />
 
 							<p:outputLabel id="lblpisoquirofano" value="Piso:" />
 							<h:selectOneMenu id="cbpisoquirofano"
-								value="#{customerController.tipodocumento}">
+								value="#{instalacontroller.pisoQuirofano}">
 								<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
 								<f:selectItem itemValue="Piso 1" itemLabel="Piso 1" />
 								<f:selectItem itemValue="Piso 2" itemLabel="Piso 2" />
 								<f:selectItem itemValue="Piso 3" itemLabel="Piso 3" />
 								<f:selectItem itemValue="Piso 4" itemLabel="Piso 4" />
 							</h:selectOneMenu>
-
+							<br />
 
 						</h:panelGrid>
 
@@ -54,10 +57,10 @@
 						<br />
 
 						<h:panelGrid columns="2">
-							<p:commandButton styleClass="ui-priority-primary" value="Crear"
-								ajax="false" action="#" />
-							<p:commandButton styleClass="ui-priority-primary" value="Editar"
-								ajax="false" action="#" />
+							<p:commandButton value="Crear" ajax="false"
+								action="#{instalacontroller.crearQuirofano}" />
+							<p:commandButton value="Editar" ajax="false"
+								action="#{instalacontroller.editarQuirofano}" />
 
 						</h:panelGrid>
 
@@ -69,34 +72,34 @@
 
 					<!-- value="customers" la lista con que se va a lleanr tabla y su get -->
 					<p:dataTable id="tablaQuirofanos"
-						value="#{customerController.customers}" var="cus" border="1">
-						<p:column>
-							<f:facet name="header">
-					Id
-				</f:facet>
+						value="#{instalacontroller.quirofanos}" var="qui" border="1">
+						<p:column headerText="Id">
 							<!-- El label es el valor del atributo -->
-							<h:outputLabel value="#{cus.idType}" />
+							<h:outputLabel value="#{qui.idType}" />
 						</p:column>
 
-						<p:column>
-							<f:facet name="header">
-					Descripcion
-				</f:facet>
-							<h:outputLabel value="#{cus.idNum}" />
+						<p:column headerText="Nombre">
+							<h:outputLabel value="#{qui.nombre}" />
 						</p:column>
 
-						<p:column>
-							<f:facet name="header">
-					Piso
-				</f:facet>
-							<h:outputLabel value="#{cus.name}" />
+						<p:column headerText="Descripcion">
+							<h:outputLabel value="#{qui.descripcion}" />
 						</p:column>
 
-						<p:column>
-							<f:facet name="header">
-					Disponible
-				</f:facet>
-							<h:outputLabel value="#{cus.name}" />
+						<p:column headerText="Piso">
+
+							<h:outputLabel value="#{qui.piso}" />
+						</p:column>
+
+						<p:column headerText="Disponible">
+							<h:outputLabel value="#{qui.disponible}" />
+						</p:column>
+
+						<p:column headerText="Eliminar">
+							<p:commandButton
+								action="#{instalacontroller.eliminarQuirofano(qui)}"
+								process="@this" value="#{msj['asociacioncuenta.verificar']}"
+								update="tablaCamas" />
 						</p:column>
 
 					</p:dataTable>
@@ -114,7 +117,8 @@
 						<h:panelGrid id="buscama" columns="3">
 
 							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
-								process="@this tfbuscama " update="datoscama" action="#" />
+								process="@this tfbuscama " update="datoscama"
+								action="#{instalacontroller.buscarCama}" />
 							<p:inputText id="tfbuscama" value="" />
 							<p:message for="tfbuscama" />
 
@@ -122,27 +126,27 @@
 
 					</p:panel>
 
-					<p:panel id="camabuspanel" header="Crear Cama">
+					<p:panel id="camacreaerpanel" header="Crear Cama">
 
 						<h:panelGrid id="datoscama" columns="2">
 
 							<p:outputLabel id="lbldescripcioncama" value="Descripcion:" />
 							<p:inputText id="tfdescripcioncama"
-								value="#{customerController.numerodocumento}" />
-
+								value="#{instalacontroller.descripcionCama}" />
+							<br />
 							<p:outputLabel id="lblpisocama" value="Piso:" />
 							<h:selectOneMenu id="cbpisocama"
-								value="#{customerController.tipodocumento}">
+								value="#{instalacontroller.pisoCama}">
 								<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
 								<f:selectItem itemValue="Piso 1" itemLabel="Piso 1" />
 								<f:selectItem itemValue="Piso 2" itemLabel="Piso 2" />
 								<f:selectItem itemValue="Piso 3" itemLabel="Piso 3" />
 								<f:selectItem itemValue="Piso 4" itemLabel="Piso 4" />
 							</h:selectOneMenu>
-
+							<br />
 							<p:outputLabel id="lblhabitacioncama" value="Habitacion:" />
 							<h:selectOneMenu id="cbhabitacioncama"
-								value="#{customerController.tipodocumento}">
+								value="#{instalacontroller.habitacionCama}">
 								<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
 								<f:selectItem itemValue="Habitacion 1" itemLabel="Habitacion 1" />
 								<f:selectItem itemValue="Habitacion 2" itemLabel="Habitacion 2" />
@@ -159,9 +163,9 @@
 
 						<h:panelGrid columns="2">
 							<p:commandButton styleClass="ui-priority-primary" value="Crear"
-								ajax="false" action="#" />
+								ajax="false" action="#{instalacontroller.crearCama}" />
 							<p:commandButton styleClass="ui-priority-primary" value="Editar"
-								ajax="false" action="#" />
+								ajax="false" action="#{instalacontroller.editarCama}" />
 
 						</h:panelGrid>
 
@@ -172,42 +176,35 @@
 					<br />
 
 					<!-- value="customers" la lista con que se va a lleanr tabla y su get -->
-					<p:dataTable id="tablaCamas"
-						value="#{customerController.customers}" var="cus" border="1">
-						<p:column>
-							<f:facet name="header">
-					Id
-				</f:facet>
+					<p:dataTable id="tablaCamas" value="#{instalacontroller.camas}"
+						var="cam" border="1">
+						<p:column headerText="Id">
 							<!-- El label es el valor del atributo -->
-							<h:outputLabel value="#{cus.idType}" />
+							<h:outputLabel value="#{cam.id}" />
 						</p:column>
 
-						<p:column>
-							<f:facet name="header">
-					Descripcion
-				</f:facet>
-							<h:outputLabel value="#{cus.idNum}" />
+						<p:column headerText="Descripcion">
+
+							<h:outputLabel value="#{cam.descripcion}" />
 						</p:column>
 
-						<p:column>
-							<f:facet name="header">
-					Piso
-				</f:facet>
-							<h:outputLabel value="#{cus.name}" />
+						<p:column headerText="Piso">
+							<h:outputLabel value="#{cam.piso}" />
 						</p:column>
 
-						<p:column>
-							<f:facet name="header">
-					Habitacion
-				</f:facet>
-							<h:outputLabel value="#{cus.name}" />
+						<p:column headerText="Habitacion">
+							<h:outputLabel value="#{cam.habitacion}" />
 						</p:column>
 
-						<p:column>
-							<f:facet name="header">
-					Ocupado por
-				</f:facet>
-							<h:outputLabel value="#{cus.name}" />
+						<p:column headerText="Ocupado por">
+							<h:outputLabel value="#{cam.ocupadoPor}" />
+						</p:column>
+
+
+						<p:column headerText="Eliminar">
+							<p:commandButton action="#{instalacontroller.eliminarCama(cam)}"
+								process="@this" value="#{msj['asociacioncuenta.verificar']}"
+								update="tablaCamas" />
 						</p:column>
 
 					</p:dataTable>

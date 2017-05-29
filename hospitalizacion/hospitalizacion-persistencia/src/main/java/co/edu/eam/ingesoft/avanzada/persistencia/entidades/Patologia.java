@@ -29,6 +29,13 @@ public class Patologia implements Serializable{
 	
 	@Column(name="descripcion", nullable=false, length=50)
 	private String descripcion;
+	
+	@Column(name="tipo", nullable=false, length=50)
+	private String tipo;
+	
+	@Column(name="sintomas", nullable=false, length=200)
+	private String sintomas;
+	
 
 	public Patologia() {
 		super();
@@ -49,6 +56,24 @@ public class Patologia implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getSintomas() {
+		return sintomas;
+	}
+
+	public void setSintomas(String sintomas) {
+		this.sintomas = sintomas;
+	}
+	
+	
 	
 	
 }

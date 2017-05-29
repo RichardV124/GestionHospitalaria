@@ -25,6 +25,12 @@ public class Cama implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name="piso",nullable=false,length=50)
+	private String piso;
+	
+	@Column(name="habitacion",nullable=false,length=50)
+	private String habitacion;
+	
 	@Column(name="disponible",nullable=false)
 	private boolean disponible;
 	
@@ -33,6 +39,7 @@ public class Cama implements Serializable {
 	
 	public Cama() {
 		super();
+		disponible=false;
 	}
 
 	public int getId() {
@@ -57,6 +64,22 @@ public class Cama implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getPiso() {
+		return piso;
+	}
+
+	public void setPiso(String piso) {
+		this.piso = piso;
+	}
+
+	public String getHabitacion() {
+		return habitacion;
+	}
+
+	public void setHabitacion(String habitacion) {
+		this.habitacion = habitacion;
 	}
 
 	

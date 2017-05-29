@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Sintoma;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoExamen;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoMedico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;

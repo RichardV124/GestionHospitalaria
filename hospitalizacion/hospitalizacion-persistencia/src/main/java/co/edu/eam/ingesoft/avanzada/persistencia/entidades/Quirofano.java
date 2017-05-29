@@ -18,6 +18,12 @@ public class Quirofano implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name="nombre",nullable=false,length=50)
+	private String nombre;
+	
+	@Column(name="piso",nullable=false,length=50)
+	private String piso;
+	
 	@Column(name="descripcion",nullable=false,length=50)
 	private String descripcion;
 	
@@ -26,6 +32,7 @@ public class Quirofano implements Serializable{
 
 	public Quirofano() {
 		super();
+		disponible=false;
 	}
 
 	public int getId() {
@@ -50,6 +57,22 @@ public class Quirofano implements Serializable{
 
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getPiso() {
+		return piso;
+	}
+
+	public void setPiso(String piso) {
+		this.piso = piso;
 	}
 	
 	

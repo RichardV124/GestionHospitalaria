@@ -33,6 +33,22 @@ public class PatologiaTratamientoPK implements Serializable{
 			return false;
 		return true;
 	}
+
+	public int getPatologia() {
+		return patologia;
+	}
+
+	public void setPatologia(int patologia) {
+		this.patologia = patologia;
+	}
+
+	public int getTratamiento() {
+		return tratamiento;
+	}
+
+	public void setTratamiento(int tratamiento) {
+		this.tratamiento = tratamiento;
+	}
 	
 	
 	

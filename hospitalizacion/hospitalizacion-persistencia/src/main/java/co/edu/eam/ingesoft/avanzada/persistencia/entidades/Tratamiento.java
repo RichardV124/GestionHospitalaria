@@ -25,7 +25,10 @@ public class Tratamiento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion",nullable=false,length=50)
+	@Column(name="nombre",nullable=false,length=50)
+	private String nombre;
+	
+	@Column(name="descripcion",nullable=false,length=200)
 	private String descripcion;
 
 	public Tratamiento() {
@@ -47,6 +50,15 @@ public class Tratamiento implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	
 	
 }
