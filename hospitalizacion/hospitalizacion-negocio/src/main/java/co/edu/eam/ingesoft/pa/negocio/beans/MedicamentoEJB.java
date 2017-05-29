@@ -79,7 +79,7 @@ public class MedicamentoEJB {
 	 * metodo para listar los horarios registrados
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public List<Medicamento> listarHorarios() {
+	public List<Medicamento> listarMedicamentos() {
 		Query query = em.createNamedQuery(Medicamento.CONSULTA_LISTAR_MEDICAMENTOS);
 		List<Medicamento> med = query.getResultList();
 		if (med.isEmpty()) {

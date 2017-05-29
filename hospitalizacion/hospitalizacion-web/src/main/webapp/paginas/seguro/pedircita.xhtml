@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+
+	<ui:define name="cuerpo">
+
+		<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+			closable="true" />
+
+		<h:form prependId="false">
+
+			<p:fieldset legend="Pedir Cita Medica" style="margin-top:100px">
+				<h:panelGrid columns="3" id="ppedircita">
+					
+					<p:outputLabel for="cbmedico" id="lblmedico"
+						value="Medico" />
+					<h:selectOneMenu id="cbmedico" class="form-control" value="#{pedirCitaAjaxController.medicoSeleccionado}">
+						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+						<f:selectItems value="#{pedirCitaAjaxController.medicos}" var="med"
+							itemValue="#{med.cedula}" itemLabel="#{med.nombre}" />
+						<f:ajax event="change" execute="@this" render="cbhorario" listener="#{pedirCitaAjaxController.listarHorariosMedico(med.cedula)}"/>
+					</h:selectOneMenu>
+					<p:message for="cbmedico" />
+					
+					<p:outputLabel for="cbhorario" id="lblhorario"
+						value="Horario" />
+					<h:selectOneMenu id="cbhorario" class="form-control" value="#{pedirCitaAjaxController.horarioSeleccionado}">
+						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+						<f:selectItems value="#{pedirCitaAjaxController.horarios}" var="hor"
+							itemValue="#{hor}" itemLabel="#{hor}" />
+					</h:selectOneMenu>
+					<p:message for="cbhorario" />			
+					
+					<p:commandButton styleClass="ui-priority-primary" value="Registrar"
+					 action="#{pedirCitaAjaxController.registrar}" process="@this"
+					 update="ppedircita tablacitas"/>
+				</h:panelGrid>
+			</p:fieldset>	
+			
+			<p:fieldset legend="Citas Pendientes" style="margin-top:100px">
+				<p:dataTable id="tablacitas" value="#{pedirCitaAjaxController.citas}" var="cita"
+					 border="1">
+
+					<p:column headerText="Fecha">
+
+						<h:outputLabel value="inv.nombre" />
+					</p:column>
+
+					<p:column headerText="Hora Inicial">
+
+						<h:outputLabel value="inv.fecha" />
+					</p:column>
+
+					<p:column headerText="Hora Final">
+
+						<h:outputLabel value="inv.horaInicial" />
+					</p:column>
+
+					<p:column headerText="Medico">
+
+						<h:outputLabel value="inv.horaFinal" />
+					</p:column>
+					
+					<p:column headerText="Caracter">
+
+						<h:outputLabel value="inv.horaFinal" />
+					</p:column>
+
+					<p:column headerText="Opciones">
+						<p:commandButton action="#{pedirCitaAjaxController.cancelarCita(inv)}"
+							value="Cancelar" process="@this" 
+							update="tablainventario" 
+							 />
+					</p:column>
+
+				</p:dataTable>
+			</p:fieldset>	
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

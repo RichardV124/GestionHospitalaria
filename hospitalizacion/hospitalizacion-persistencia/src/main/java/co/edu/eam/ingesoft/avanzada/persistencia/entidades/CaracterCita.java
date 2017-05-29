@@ -7,11 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="CARACTER")
+@NamedQueries({ 
+	@NamedQuery(name = CaracterCita.CONSULTA_LISTAR_CARACTER_CITA, query = "SELECT cc FROM CaracterCita cc") 
+	})
 public class CaracterCita implements Serializable{
+	
+	public static final String CONSULTA_LISTAR_CARACTER_CITA = "CaracterCita.ListarCaracterCita";
 	
 	@Id
 	@Column(name="ID")

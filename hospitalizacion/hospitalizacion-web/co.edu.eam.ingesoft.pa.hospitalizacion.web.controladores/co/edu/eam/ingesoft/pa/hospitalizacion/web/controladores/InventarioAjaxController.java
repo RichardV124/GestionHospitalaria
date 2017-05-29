@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pa.hospitalizacion.web.controladores;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,16 +14,21 @@ import javax.validation.constraints.NotNull;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Farmacia;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.FarmaciaMedicamento;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.FarmaciaMedicamentoPK;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medicamento;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.TipoMedicamento;
+import co.edu.eam.ingesoft.pa.negocio.beans.FarmaciaEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.FarmaciaMedicamentoEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicamentoEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.TipoMedicamentoEJB;
+import co.edu.eam.ingesoft.pa.negocio.dtos.FarmaciaMedicamentoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @Named("inventarioAjaxController")
 @ViewScoped
-public class InventarioAjaxController {
+public class InventarioAjaxController implements Serializable{
 
 	/**
 	 * numero de referencia
@@ -42,20 +48,45 @@ public class InventarioAjaxController {
 	@NotNull(message = "Debe ingresar la fecha de vencimiento")
 	private String fechaVencimiento;
 	
+	/**
+	 * cantidad del medicamento
+	 */
+	@NotNull(message = "Debe ingresar la cantidad")
+	private String cantidad;
+	
 	@EJB
 	private TipoMedicamentoEJB tipoMedicamentoEJB;
 	
 	@EJB
 	private MedicamentoEJB medicamentoEJB;
 	
+	@EJB
+	private FarmaciaEJB farmaciaEJB;
+	
+	@EJB
+	private FarmaciaMedicamentoEJB farmaciaMedicamentoEJB;
+	
 	private TipoMedicamento tipoSeleccionado;
 	
 	private List<TipoMedicamento> tipos;
+	
+	private Farmacia farmaciaSeleccionada;
+	
+	private List<Farmacia> farmacias;
+	
+	private Medicamento medicamentoSeleccionado;
+	
+	private List<Medicamento> medicamentos;
+	
+	private List<FarmaciaMedicamentoDTO> inventario;
 	
 	@PostConstruct
 	public void inicializar() {
 		try {
 			listarTipos();
+			listarFarmacias();
+			listarMedicamentos();
+			listarInventario();
 		} catch (ExcepcionNegocio e1) {
 			Messages.addFlashGlobalError(e1.getMessage());
 			e1.printStackTrace();
@@ -70,7 +101,19 @@ public class InventarioAjaxController {
 	public void listarTipos(){
 		tipos = tipoMedicamentoEJB.listarTipoMedicamentos();
 	}
+	
+	public void listarFarmacias(){
+		farmacias = farmaciaEJB.listarFarmacias();
+	}
 
+	public void listarMedicamentos(){
+		medicamentos = medicamentoEJB.listarMedicamentos();
+	}
+	
+	public void listarInventario(){
+		inventario = farmaciaMedicamentoEJB.listarInventario();
+	}
+	
 	public void registrarMedicamento() throws ParseException{
 		Medicamento m = new Medicamento();
 		m.setDescripcion(nombre);
@@ -81,9 +124,25 @@ public class InventarioAjaxController {
 		
 		medicamentoEJB.crear(m);
 		Messages.addFlashGlobalInfo("Se registró el medicamento con exito!");
+		listarMedicamentos();
 	}
 	
+	public void aniadirInventario(){
+		FarmaciaMedicamento fm = new FarmaciaMedicamento();
+		fm.setFarmacia(farmaciaSeleccionada);
+		fm.setMedicamento(medicamentoSeleccionado);
+		fm.setCantidad(Integer.parseInt(cantidad));
+		farmaciaMedicamentoEJB.crear(fm);
+		Messages.addFlashGlobalInfo("Se registró el inventario con exito!");
+	}
 	
+	public void eliminarInventario(FarmaciaMedicamentoDTO inv){
+		FarmaciaMedicamentoPK fmPK = new FarmaciaMedicamentoPK();
+		fmPK.setFarmacia(inv.getIdFarmacia());
+		fmPK.setMedicamento(inv.getIdMedicamento());
+		farmaciaMedicamentoEJB.eliminar(fmPK);
+		Messages.addFlashGlobalInfo("Se eliminó el item del inventario con exito!");
+	}
 	
 	public String getNumRef() {
 		return numRef;
@@ -124,6 +183,54 @@ public class InventarioAjaxController {
 	public void setTipos(List<TipoMedicamento> tipos) {
 		this.tipos = tipos;
 	}
-	
+
+	public Farmacia getFarmaciaSeleccionada() {
+		return farmaciaSeleccionada;
+	}
+
+	public void setFarmaciaSeleccionada(Farmacia farmaciaSeleccionada) {
+		this.farmaciaSeleccionada = farmaciaSeleccionada;
+	}
+
+	public List<Farmacia> getFarmacias() {
+		return farmacias;
+	}
+
+	public void setFarmacias(List<Farmacia> farmacias) {
+		this.farmacias = farmacias;
+	}
+
+	public Medicamento getMedicamentoSeleccionado() {
+		return medicamentoSeleccionado;
+	}
+
+	public void setMedicamentoSeleccionado(Medicamento medicamentoSeleccionado) {
+		this.medicamentoSeleccionado = medicamentoSeleccionado;
+	}
+
+	public List<Medicamento> getMedicamentos() {
+		return medicamentos;
+	}
+
+	public void setMedicamentos(List<Medicamento> medicamentos) {
+		this.medicamentos = medicamentos;
+	}
+
+	public List<FarmaciaMedicamentoDTO> getInventario() {
+		return inventario;
+	}
+
+	public void setInventario(List<FarmaciaMedicamentoDTO> inventario) {
+		this.inventario = inventario;
+	}
+
+	public String getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(String cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	
 }

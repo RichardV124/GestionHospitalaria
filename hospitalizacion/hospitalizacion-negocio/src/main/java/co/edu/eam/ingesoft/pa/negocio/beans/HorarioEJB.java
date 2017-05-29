@@ -12,6 +12,7 @@ import javax.persistence.Query;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Horario;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
+import co.edu.eam.ingesoft.pa.negocio.dtos.MedicoDisponibleDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @LocalBean
@@ -86,6 +87,22 @@ public class HorarioEJB {
 			throw new ExcepcionNegocio("No hay horarios registrados en la base de datos");
 		} else {
 			return hor;
+		}
+	}
+	
+	/**
+	 * metodo para listar los horarios del medico disponible
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<Horario> listarHorariosMedicoDisponible(int cedMed) {
+		Query query = em.createNativeQuery("SELECT H.ID, H.FECHA, H.HORA_INICIAL, H.HORA_FINAL FROM HORARIO_MEDICO HM "
+				+ "INNER JOIN HORARIO H ON HM.HORARIO_ID=H.ID WHERE HM.MEDICO_CEDULA=?1 AND HM.DISPONIBLE=1");
+		query.setParameter(1, cedMed);
+		List<Horario> hmd = query.getResultList();
+		if (hmd.isEmpty()) {
+			throw new ExcepcionNegocio("El medico no tiene horarios disponibles");
+		} else {
+			return hmd;
 		}
 	}
 }

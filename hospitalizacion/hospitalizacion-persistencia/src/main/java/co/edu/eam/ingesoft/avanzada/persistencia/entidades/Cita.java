@@ -25,7 +25,7 @@ public class Cita implements Serializable{
 	@Column(name="ATENDIDO", nullable=false)
 	private boolean atendido;
 	
-	@Column(name="ANOTACIONES")
+	@Column(name="ANOTACIONES", nullable=true)
 	private String anotaciones;
 	
 	@JoinColumn(name="CARACTER_ID", nullable=false)

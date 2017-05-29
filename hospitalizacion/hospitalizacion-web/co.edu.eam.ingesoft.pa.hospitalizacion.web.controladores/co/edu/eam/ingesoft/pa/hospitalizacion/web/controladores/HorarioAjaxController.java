@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pa.hospitalizacion.web.controladores;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +16,7 @@ import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Horario;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HorarioMedico;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HorarioMedicoPK;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.pa.negocio.beans.HorarioEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.HorarioMedicoEJB;
@@ -24,7 +26,7 @@ import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @Named("horarioAjaxController")
 @ViewScoped
-public class HorarioAjaxController {
+public class HorarioAjaxController implements Serializable{
 
 	/**
 	 * fecha del horario
@@ -105,8 +107,12 @@ public class HorarioAjaxController {
 		listarHorariosAsignados();
 	}
 	
-	public void eliminarHorarioAsinado(HorarioMedico hm){
-		
+	public void eliminarHorarioAsignado(HorarioMedicoDTO hm){
+		HorarioMedicoPK hmPK = new HorarioMedicoPK();
+		hmPK.setHorario(hm.getHorario());
+		hmPK.setMedico(hm.getMedico());
+ 		horarioMedicoEJB.eliminar(hmPK);
+ 		Messages.addFlashGlobalInfo("Se le eliminó el horario asignado al medico con exito!");
 	}
 	
 	public void limpiarCampos(){

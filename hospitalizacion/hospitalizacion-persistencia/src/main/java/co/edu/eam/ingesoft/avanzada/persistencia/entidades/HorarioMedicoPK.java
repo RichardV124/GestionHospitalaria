@@ -6,14 +6,14 @@ public class HorarioMedicoPK implements Serializable{
 
 	private int horario;
 	
-	private String medico;
+	private int medico;
 
 	public HorarioMedicoPK() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public HorarioMedicoPK(int horario, String medico) {
+	public HorarioMedicoPK(int horario, int medico) {
 		super();
 		this.horario = horario;
 		this.medico = medico;
@@ -27,11 +27,11 @@ public class HorarioMedicoPK implements Serializable{
 		this.horario = horario;
 	}
 
-	public String getMedico() {
+	public int getMedico() {
 		return medico;
 	}
 
-	public void setMedico(String medico) {
+	public void setMedico(int medico) {
 		this.medico = medico;
 	}
 
@@ -40,7 +40,7 @@ public class HorarioMedicoPK implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + horario;
-		result = prime * result + ((medico == null) ? 0 : medico.hashCode());
+		result = prime * result + medico;
 		return result;
 	}
 
@@ -55,13 +55,9 @@ public class HorarioMedicoPK implements Serializable{
 		HorarioMedicoPK other = (HorarioMedicoPK) obj;
 		if (horario != other.horario)
 			return false;
-		if (medico == null) {
-			if (other.medico != null)
-				return false;
-		} else if (!medico.equals(other.medico))
+		if (medico != other.medico)
 			return false;
 		return true;
 	}
-	
 	
 }

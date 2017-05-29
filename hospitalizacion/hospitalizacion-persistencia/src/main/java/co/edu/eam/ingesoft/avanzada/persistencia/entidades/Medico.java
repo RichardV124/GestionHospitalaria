@@ -24,7 +24,7 @@ public class Medico implements Serializable{
 	
 	@Id
 	@Column(name="CEDULA")
-	private String cedula;
+	private int cedula;
 	
 	@Column(name="NOMBRE")
 	private	String nombre;
@@ -61,11 +61,11 @@ public class Medico implements Serializable{
 		super();
 	}
 
-	public String getCedula() {
+	public int getCedula() {
 		return cedula;
 	}
 
-	public void setCedula(String cedula) {
+	public void setCedula(int cedula) {
 		this.cedula = cedula;
 	}
 

@@ -17,19 +17,19 @@
 					<p:outputLabel id="lblnumref" for="tfnumref"
 						value="Numero de Referencia" />
 					<p:inputText id="tfnumref" class="form-control" placeholder="Numero de Referencia"
-						value="" />
+						value="#{inventarioAjaxController.numRef}" />
 					<p:message for="tfnumref" />
 
 					<p:outputLabel id="lblnombre" for="tfnombre"
 						value="Nombre" />
 					<p:inputText id="tfnombre" class="form-control" placeholder="Nombre"
-						value="" />
+						value="#{inventarioAjaxController.nombre}" />
 					<p:message for="tfnombre" />
 
 					<p:outputLabel id="lblfechavencimiento" for="tffechavencimiento"
 						value="Fecha de Vencimiento" /> 
 					<p:inputText id="tffechavencimiento" class="form-control" placeholder="DD-MM-AAAAl"
-						value="" />
+						value="#{inventarioAjaxController.fechaVencimiento}" />
 					<p:message for="tffechavencimiento" />
 					
 					<p:outputLabel for="cbtipo" id="lbltipo"
@@ -43,65 +43,71 @@
 					
 					<p:commandButton styleClass="ui-priority-primary" value="Registrar"
 					 action="#{inventarioAjaxController.registrarMedicamento}" process="@this"
-					 update="pmedicamento phorario"/>
+					 update="pmedicamento pinventario"/>
 				</h:panelGrid>
 			</p:fieldset>	
 			
-		 	<p:fieldset legend="Asignacion de horarios" style="margin-top:100px">
-				<h:panelGrid columns="3" id="pasigh">
+		 	<p:fieldset legend="Gestion del Inventario" style="margin-top:100px">
+				<h:panelGrid columns="3" id="pinventario">
 
-					<p:outputLabel for="cbmedico" id="lblmedico"
-						value="Medico" />
-					<h:selectOneMenu id="cbmedico" class="form-control" value="#{horarioAjaxController.medicoSeleccionado}">
+					<p:outputLabel for="cbmedicamento" id="lblmedicamento"
+						value="Medicamento" />
+					<h:selectOneMenu id="cbmedicamento" class="form-control" value="#{inventarioAjaxController.medicamentoSeleccionado}">
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
-						<f:selectItems value="#{horarioAjaxController.medicos}" var="med"
+						<f:selectItems value="#{inventarioAjaxController.medicamentos}" var="med"
 							itemValue="#{med}" itemLabel="#{med.nombre}" />
 					</h:selectOneMenu>
-					<p:message for="cbmedico" />
+					<p:message for="cbmedicamento" />
 
-					<p:outputLabel for="cbhorario" id="lblhorario"
-						value="Horario" />
-					<h:selectOneMenu id="cbhorario" class="form-control" value="#{horarioAjaxController.horarioSeleccionado}">
+					<p:outputLabel for="cbfarmacia" id="lblfarmacia"
+						value="Farmacia" />
+					<h:selectOneMenu id="cbfarmacia" class="form-control" value="#{inventarioAjaxController.farmaciaSeleccionada}">
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
-						<f:selectItems value="#{horarioAjaxController.horarios}" var="hora"
-							itemValue="#{hora}" itemLabel="#{hora}" />
+						<f:selectItems value="#{inventarioAjaxController.farmacias}" var="far"
+							itemValue="far" itemLabel="#{far.descripcion}" />
 					</h:selectOneMenu>
-					<p:message for="cbhorario" />			
+					<p:message for="cbfarmacia" />	
+					
+					<p:outputLabel id="lblcantidad" for="tfcantidad"
+						value="Cantidad" /> 
+					<p:inputText id="tfcantidad" class="form-control" placeholder="Cantidad"
+						value="#{inventarioAjaxController.cantidad}" />
+					<p:message for="tfcantidad" />		
 					
 					<p:commandButton styleClass="ui-priority-primary" value="Asignar"
-					 action="#{horarioAjaxController.asignarHorario}" process="@this"
-					 update="pasigh tablahorariosasignados"/>
+					 action="#{inventarioAjaxController.aniadirInventario}" process="@this"
+					 update="pinventario tablainventario"/>
 				</h:panelGrid>
 			</p:fieldset>
 			
-			<p:fieldset legend="Horarios Asignados" style="margin-top:100px">
-				<p:dataTable id="tablahorariosasignados" value="#{horarioAjaxController.horariosAsig}" var="hor"
+			<p:fieldset legend="Inventario" style="margin-top:100px">
+				<p:dataTable id="tablainventario" value="#{inventarioAjaxController.inventario}" var="inv"
 					 border="1">
 
-					<p:column headerText="Medico">
+					<p:column headerText="Numero de Referencia">
 
-						<h:outputLabel value="hor.nombre" />
+						<h:outputLabel value="inv.idMedicamento" />
 					</p:column>
 
-					<p:column headerText="Fecha">
+					<p:column headerText="Medicamento">
 
-						<h:outputLabel value="hor.fecha" />
+						<h:outputLabel value="inv.medicamento" />
 					</p:column>
 
-					<p:column headerText="Hora Inicial">
+					<p:column headerText="Cantidad">
 
-						<h:outputLabel value="hor.horaInicial" />
+						<h:outputLabel value="inv.cantidad" />
 					</p:column>
 
-					<p:column headerText="Hora Final">
+					<p:column headerText="Farmacia">
 
-						<h:outputLabel value="hor.horaFinal" />
+						<h:outputLabel value="inv.farmacia" />
 					</p:column>
 
 					<p:column headerText="Opciones">
-						<p:commandButton action="#{horarioAjaxController.eliminarHorarioAsinado(hor)}"
+						<p:commandButton action="#{inventarioAjaxController.eliminarInventario(inv)}"
 							process="@this" value="Eliminar"
-							update="tablahorariosasignados" 
+							update="tablainventario" 
 							 />
 					</p:column>
 

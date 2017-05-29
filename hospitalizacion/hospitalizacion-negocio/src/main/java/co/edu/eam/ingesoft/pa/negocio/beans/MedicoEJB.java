@@ -12,6 +12,8 @@ import javax.persistence.Query;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Departamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
+import co.edu.eam.ingesoft.pa.negocio.dtos.HorarioMedicoDTO;
+import co.edu.eam.ingesoft.pa.negocio.dtos.MedicoDisponibleDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @LocalBean
@@ -30,7 +32,7 @@ public class MedicoEJB {
 	 *         medico
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public Medico buscar(String numId) {
+	public Medico buscar(int numId) {
 		return em.find(Medico.class, numId);
 	}
 
@@ -57,7 +59,7 @@ public class MedicoEJB {
 	 *            numero de identificacion del medico a eliminar
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void eliminar(String numId) {
+	public void eliminar(int numId) {
 		Medico p = buscar(numId);
 		if (p != null) {
 			em.remove(p);
@@ -94,6 +96,21 @@ public class MedicoEJB {
 			throw new ExcepcionNegocio("No hay medicos registrados en la base de datos");
 		} else {
 			return med;
+		}
+	}
+	
+	/**
+	 * metodo para listar los medicos disponibles
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<MedicoDisponibleDTO> listarMedicosDisponibles() {
+		Query query = em.createNativeQuery("SELECT M.CEDULA, M.NOMBRE FROM HORARIO_MEDICO HM "
+				+ "INNER JOIN MEDICO M ON HM.MEDICO_CEDULA=M.CEDULA WHERE HM.DISPONIBLE=1;");
+		List<MedicoDisponibleDTO> md = query.getResultList();
+		if (md.isEmpty()) {
+			throw new ExcepcionNegocio("No hay ningun medico disponible");
+		} else {
+			return md;
 		}
 	}
 
