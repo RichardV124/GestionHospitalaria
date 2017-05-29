@@ -44,8 +44,8 @@ public class Cita implements Serializable{
 	
 	@ManyToOne(cascade = {})
 	@JoinColumns({
-		    @JoinColumn(name = "HORARIO_MEDICO_HORARIO_ID", referencedColumnName = "id_horario"),
-			@JoinColumn(name = "HORARIO_MEDICO_MEDICO_CEDULA", referencedColumnName = "ced_medico")
+		    @JoinColumn(name = "HORARIO_MEDICO_HORARIO_ID", referencedColumnName = "HORARIO_ID"),
+			@JoinColumn(name = "HORARIO_MEDICO_MEDICO_CEDULA", referencedColumnName = "MEDICO_CEDULA")
 	})
 	private HorarioMedico horarioMedico;
 
