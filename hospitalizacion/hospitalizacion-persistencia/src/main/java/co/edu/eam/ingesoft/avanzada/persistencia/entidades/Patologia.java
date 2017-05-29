@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_PATOLOGIA")
+@Table(name="PATOLOGIA")
 @NamedQueries({ 
 	@NamedQuery(name = Patologia.CONSULTA_LISTAR_PATOLOGIAS, query = "SELECT p FROM Patologia p") 
 	})
@@ -23,17 +23,17 @@ public class Patologia implements Serializable{
 	
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion", nullable=false, length=50)
+	@Column(name="DESCRIPCION", nullable=false, length=50)
 	private String descripcion;
 	
-	@Column(name="tipo", nullable=false, length=50)
+	@Column(name="TIPO", nullable=false, length=50)
 	private String tipo;
 	
-	@Column(name="sintomas", nullable=false, length=200)
+	@Column(name="SINTOMAS", nullable=false, length=200)
 	private String sintomas;
 	
 

@@ -9,33 +9,33 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_PERSONAL")
+@Table(name="PERSONAL")
 public class Personal {
 
 	@Id
-	@Column(name="cedula")
-	private String cedula;
+	@Column(name="CEDULA")
+	private int cedula;
 	
-	@Column(name="nombre",nullable=false,length=50)
+	@Column(name="NOMBRE",nullable=false,length=50)
 	private String nombre;
 	
 	@ManyToOne
-	@JoinColumn(name="id_farmacia")
+	@JoinColumn(name="FARMACIA_ID")
 	private Farmacia farmacia;
 	
 	@OneToOne
-	@JoinColumn(name="usuario",unique=true)
+	@JoinColumn(name="USUARIO_USUARIO",unique=true)
 	private Usuario usuario;
 
 	public Personal() {
 		super();
 	}
 
-	public String getCedula() {
+	public int getCedula() {
 		return cedula;
 	}
 
-	public void setCedula(String cedula) {
+	public void setCedula(int cedula) {
 		this.cedula = cedula;
 	}
 

@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_TIPO_CIRUGIA")
+@Table(name="TIPO_CIRUGIA")
 @NamedQueries({ 
 	@NamedQuery(name = TipoCirugia.CONSULTA_LISTAR_TIPO_CIRUGIA, query = "SELECT tc FROM TipoCirugia tc") 
 	})
@@ -21,11 +21,11 @@ public class TipoCirugia implements Serializable{
 	public static final String CONSULTA_LISTAR_TIPO_CIRUGIA = "TipoCirugia.ListarTipoCirugia";
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion",nullable=false,length=50)
+	@Column(name="DESCRIPCION",nullable=false,length=50)
 	private String descripcion;
 
 	public TipoCirugia() {

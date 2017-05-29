@@ -15,15 +15,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="T_RESULTADO")
+@Table(name="RESULTADO")
 public class Resultado implements Serializable{
 
 	@Id
-	@Column(name="id")
+	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="descripcion",nullable=false,length=50)
+	@Column(name="DESCRIPCION",nullable=false,length=50)
 	private String descripcion;
 	
 	@Column(name="FECHA")
@@ -31,7 +31,7 @@ public class Resultado implements Serializable{
 	private Date fechaResultado;
 	
 	@ManyToOne
-	@JoinColumn(name="EXAMEN_CITA_ID")
+	@JoinColumn(name="EXAMENES_CITA_ID")
 	private ExamenesCita examenesCita;
 
 	public Resultado() {
