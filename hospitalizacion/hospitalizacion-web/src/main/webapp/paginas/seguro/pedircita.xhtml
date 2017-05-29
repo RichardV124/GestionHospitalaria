@@ -20,7 +20,7 @@
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 						<f:selectItems value="#{pedirCitaAjaxController.medicos}" var="med"
 							itemValue="#{med.cedula}" itemLabel="#{med.nombre}" />
-						<f:ajax event="change" execute="@this" render="cbhorario" listener="#{pedirCitaAjaxController.listarHorariosMedico(med.cedula)}"/>
+						<f:ajax event="change" execute="@this" render="cbhorario" listener="#{pedirCitaAjaxController.listarHorariosMedico}"/>
 					</h:selectOneMenu>
 					<p:message for="cbmedico" />
 					

@@ -60,9 +60,9 @@ public class PedirCitaAjaxController implements Serializable{
 		medicos = medicoEJB.listarMedicosDisponibles();
 	}
 	
-	public void listarHorariosMedico(int cedMed){
-		if(cedMed!=0){
-			horarios = horarioEJB.listarHorariosMedicoDisponible(cedMed);
+	public void listarHorariosMedico(){
+		if(medicoSeleccionado!=0){
+			horarios = horarioEJB.listarHorariosMedicoDisponible(medicoSeleccionado);
 		}
 	}
 	
