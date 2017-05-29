@@ -14,9 +14,11 @@ import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Horario;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HorarioMedico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.pa.negocio.beans.HorarioEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicoEJB;
+import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @Named("horarioAjaxController")
 @ViewScoped
@@ -54,9 +56,23 @@ public class HorarioAjaxController {
 	
 	private List<Horario> horarios;
 	
+	private List<HorarioMedico> horariosAsig;
+	
 	
 	@PostConstruct
 	public void inicializar() {
+		try {
+			listarMedicos();
+			listarMedicos();
+			listarHorariosAsignados();
+		} catch (ExcepcionNegocio e1) {
+			Messages.addFlashGlobalError(e1.getMessage());
+			e1.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Messages.addFlashGlobalInfo(e.getMessage());
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -71,6 +87,10 @@ public class HorarioAjaxController {
 		
 		limpiarCampos();
 		listarHorarios();
+	}
+	
+	public void asignarHorario(){
+		
 	}
 	
 	public void limpiarCampos(){

@@ -54,6 +54,8 @@
 						value="Horario" />
 					<h:selectOneMenu id="cbhorario" class="form-control" value="">
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+						<f:selectItems value="#{horarioAjaxController.horarios}" var="hora"
+							itemValue="#{hora.id}" itemLabel="#{hora}" />
 					</h:selectOneMenu>
 					<p:message for="cbhorario" />			
 					
