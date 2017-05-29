@@ -28,9 +28,11 @@ import co.edu.eam.ingesoft.pa.negocio.beans.RolEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.TipoMedicoEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.UsuarioEJB;
 
+import javax.faces.bean.ManagedBean; 
 
-@Named("medicoAjaxController")
-@ViewScoped
+
+@ViewScoped 
+@Named("medicoajaxcontroller") 
 public class MedicoAjaxController implements Serializable {
 	
 	@EJB

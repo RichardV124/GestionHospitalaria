@@ -32,6 +32,34 @@ public class CitaCirugiaPK implements Serializable{
 			return false;
 		return true;
 	}
+
+	/**
+	 * @return the cita
+	 */
+	public int getCita() {
+		return cita;
+	}
+
+	/**
+	 * @param cita the cita to set
+	 */
+	public void setCita(int cita) {
+		this.cita = cita;
+	}
+
+	/**
+	 * @return the cirugia
+	 */
+	public int getCirugia() {
+		return cirugia;
+	}
+
+	/**
+	 * @param cirugia the cirugia to set
+	 */
+	public void setCirugia(int cirugia) {
+		this.cirugia = cirugia;
+	}
 	
 	
 	
