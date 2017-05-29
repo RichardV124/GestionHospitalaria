@@ -79,6 +79,11 @@ public class Horario implements Serializable{
 	public void setHoraFinal(int horaFinal) {
 		this.horaFinal = horaFinal;
 	}
+
+	@Override
+	public String toString() {
+		return fecha + " horaInicial=" + horaInicial + ", horaFinal=" + horaFinal;
+	}
 	
 	
 }
