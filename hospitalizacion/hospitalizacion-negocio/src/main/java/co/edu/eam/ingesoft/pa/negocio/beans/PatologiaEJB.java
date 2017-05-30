@@ -15,6 +15,8 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.PatologiaTratamiento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
 import co.edu.eam.ingesoft.pa.negocio.dtos.CamaDTO;
+import co.edu.eam.ingesoft.pa.negocio.dtos.MedicamentoEntregadoDTO;
+import co.edu.eam.ingesoft.pa.negocio.dtos.PatologiaHistorialDTO;
 import co.edu.eam.ingesoft.pa.negocio.dtos.PatologiaTratamientoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -103,6 +105,31 @@ public class PatologiaEJB {
 			dto.setPatologia(a[1].toString());
 			dto.setIdTratamiento(Integer.parseInt(a[2].toString()));
 			dto.setTratamiento(a[3].toString());
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+	
+	/**
+	 * metodo para listar las patologias presentadas en la cita
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<PatologiaHistorialDTO> listarPatologiasHistorial(int cita) {
+
+		Query q = em.createNativeQuery("SELECT p.NOMBRE,p.SINTOMAS FROM CITA_PATOLOGIA_TRATAMIENTO cpt "
+				+ "JOIN PATOLOGIA_TRATAMIENTO pt ON cpt.PATO_TRATA_PATO_ID=pt.PATOLOGIA_ID "
+				+ "JOIN PATOLOGIA p ON p.ID=pt.PATOLOGIA_ID WHERE cpt.CITA_ID=?1;");
+		q.setParameter(1, cita);
+
+		List<PatologiaHistorialDTO> lista = new ArrayList<PatologiaHistorialDTO>();
+		List<Object[]> patologias = q.getResultList();
+
+		for (Object[] a : patologias) {
+
+			PatologiaHistorialDTO dto = new PatologiaHistorialDTO();
+			dto.setNombre(a[0].toString());
+			dto.setSintomas(a[1].toString());
 			lista.add(dto);
 		}
 

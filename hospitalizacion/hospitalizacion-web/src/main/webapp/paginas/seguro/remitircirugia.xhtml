@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+
+	<ui:define name="cuerpo">
+
+		<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+			closable="true" />
+		<h:form prependId="false">
+
+			<p:fieldset legend="Datos de la cirugia" style="margin-top:10px">
+				<h:panelGrid id="datosmed" columns="3">
+
+					<p:outputLabel for=tfidcita id="idcitacirugia" value="Cita" />
+					<p:inputText id="tfidcita" class="form-control"
+						value="#{remitircirugiacontroller.idCita}" />
+					<p:message for="tfidcita" />
+
+					<p:outputLabel for="tfcedpaciente" id="cedpaciente"
+						value="Numero documento" />
+					<p:inputText id="tfcedpaciente" class="form-control"
+						placeholder="Numero documento"
+						value="#{remitircirugiacontroller.cedulaPaciente}" />
+					<p:message for="tfcedpaciente" />
+
+					<p:outputLabel for="tfnompaciente" id="nompaciente" value="Nombre" />
+					<p:inputText id="tfnompaciente" class="form-control"
+						placeholder="Nombre"
+						value="#{remitircirugiacontroller.nombrePaciente}" />
+					<p:message for="tfnompaciente" />
+
+					<p:outputLabel for="cbcirugiapac" id="lblcirugiapa" value="Cirugia" />
+					<h:selectOneMenu id="cbcirugiapac" class="form-control"
+						value="#{remitircirugiacontroller.cirugiaSeleccionada}">
+						<f:selectItems value="#{remitircirugiacontroller.cirugias}"
+							var="ciru" itemValue="#{ciru.id}" itemLabel="#{ciru.descripcion}" />
+					</h:selectOneMenu>
+					<p:message for="lblcirugiapa" />
+
+					<p:outputLabel for="tfquirofanopa" id="quirofanopa"
+						value="Quirofano" />
+					<h:selectOneMenu id="tfquirofanopa" class="form-control"
+						value="#{remitircirugiacontroller.quirofanoSeleccionado}">
+						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+						<f:selectItems value="#{remitircirugiacontroller.quirofanos}"
+							var="qui" itemValue="#{qui.id}" itemLabel="#{tipo.nombre}" />
+					</h:selectOneMenu>
+					<p:message for="tfquirofanopa" />
+
+					<p:outputLabel for="fechacirupa" value="Fecha:" />
+					<p:calendar id="fechacirupa"
+						value="#{remitircirugiacontroller.fecha}" showOn="fechacirupa" />
+
+
+					<h:panelGrid columns="2">
+						<p:commandButton styleClass="ui-priority-primary"
+							value="Registrar" action="#{remitircirugiacontroller.registrar}"
+							process="@this datosmed" update="datosmed panellistamed" />
+
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:fieldset>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pa.negocio.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.TransactionAttribute;
@@ -9,6 +10,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
+import co.edu.eam.ingesoft.pa.negocio.dtos.CirugiaHistorialDTO;
+import co.edu.eam.ingesoft.pa.negocio.dtos.MedicamentoEntregadoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 public class CirugiaEJB {
@@ -56,4 +59,29 @@ public class CirugiaEJB {
 		return lista;
 	}
 
+	/**
+	 * metodo para listar las cirugias realizadas por medio de la cita
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<CirugiaHistorialDTO> listarCirugiasHistorial(int cita) {
+
+		Query q = em.createNativeQuery("SELECT c.DESCRIPCION,c.TIEMPO_ESTIMADO,cc.FECHA FROM CITA_CIRUGIA cc "
+				+ "JOIN CIRUGIA c ON c.ID=cc.CIRUGIA_ID WHERE cc.CITA_ID=1?;");
+		q.setParameter(1, cita);
+
+		List<CirugiaHistorialDTO> lista = new ArrayList<CirugiaHistorialDTO>();
+		List<Object[]> cirugias = q.getResultList();
+
+		for (Object[] a : cirugias) {
+
+			CirugiaHistorialDTO dto = new CirugiaHistorialDTO();
+			dto.setDescripcion(a[0].toString());
+			dto.setDuracion(a[1].toString());
+			dto.setFecha(a[2].toString());
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+	
 }

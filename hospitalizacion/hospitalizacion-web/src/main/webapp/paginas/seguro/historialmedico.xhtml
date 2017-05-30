@@ -13,7 +13,7 @@
 				<h:panelGrid id="buscarhistorial" columns="3">
 					<p:outputLabel id="lblcedulahistorial" value="Cedula del paciente:" />
 					<p:inputText id="tfcedulahistorial"
-						value="#{customerController.numerodocumento}" />
+						value="#{historialController.documentoBuscar}" />
 					<p:commandButton styleClass="ui-priority-primary" value="Buscar"
 						process="@this tfcedulahistorial " update="" action="#" />
 
@@ -21,7 +21,7 @@
 					<br />
 					<br />
 					<p:outputLabel id="lblnombremostrarhistorial"
-						value="    #{customerController.numerodocumento}" />
+						value="    #{historialController.nombrePaciente}" />
 
 
 				</h:panelGrid>
@@ -36,33 +36,33 @@
 						<h:panelGrid id="citashistorial" columns="4">
 
 							<p:dataTable id="tablaClientes"
-								value="#{customerController.customers}" var="cus" border="1">
+								value="#{historialController.citas}" var="cit" border="1">
 								<p:column>
 									<f:facet name="header">
 					Fecha
 				</f:facet>
 									<!-- El label es el valor del atributo -->
-									<h:outputLabel value="#{cus.idType}" />
+									<h:outputLabel value="#{cit.fecha}" />
 								</p:column>
 
 								<p:column>
 									<f:facet name="header">
 					Hora
 				</f:facet>
-									<h:outputLabel value="#{cus.idNum}" />
+									<h:outputLabel value="#{cit.hora}" />
 								</p:column>
 
 								<p:column>
 									<f:facet name="header">
 					Medico
 				</f:facet>
-									<h:outputLabel value="#{cus.name}" />
+									<h:outputLabel value="#{cit.nombreMedico}" />
 								</p:column>
 
-								<p:column headerText="Ver cita">
-									<p:commandButton action="#" process="@this"
-										value="#{msj['asociacioncuenta.verificar']}"
-										update="tablaCuentasAsociadas" />
+								<p:column headerText="Opciones">
+									<p:commandButton action="#{historialController.verCita(cit)}"
+										process="@this" value="Ver cita"
+										update="buspacientehistorialpaciente" />
 								</p:column>
 							</p:dataTable>
 
@@ -70,15 +70,33 @@
 								style="margin-left:20px">
 
 								<p:inputTextarea id="tfanotacioncita"
-									value="#{customerController.numerodocumento}" />
+									value="#{historialController.anotaciones}" />
 
 							</p:panel>
 
-							<p:panel id="panelmedicamentoscita" header="Medicamentos recetados"
-								style="margin-left:20px">
+							<p:panel id="panelmedicamentoscita"
+								header="Medicamentos recetados" style="margin-left:20px">
 
-								<p:inputTextarea id="tfmedicamentoscita"
-									value="#{customerController.numerodocumento}" />
+								<p:dataTable id="tablaClientes"
+									value="#{historialController.medicamentos}" var="med"
+									border="1">
+									<p:column>
+										<f:facet name="header">
+					Medicamento
+				</f:facet>
+										<!-- El label es el valor del atributo -->
+										<h:outputLabel value="#{med.medicamentoDescripcion}" />
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">
+					Cantidad
+				</f:facet>
+										<h:outputLabel value="#{med.cantidad}" />
+									</p:column>
+
+								</p:dataTable>
+
 
 							</p:panel>
 
@@ -88,111 +106,113 @@
 				</p:accordionPanel>
 
 
-			<h:panelGrid id="examenfermedadhistorial" columns="2">
-				<p:accordionPanel>
+				<h:panelGrid id="examenfermedadhistorial" columns="2">
+					<p:accordionPanel>
 
-					<p:tab title="Examenes">
+						<p:tab title="Examenes">
 
-						<h:panelGrid id="examhistorialkk" columns="2">
+							<h:panelGrid id="examhistorialkk" columns="2">
 
-							<p:dataTable id="tablaExamenHistorial"
-								value="#{customerController.customers}" var="cus" border="1">
-								<p:column>
-									<f:facet name="header">
+								<p:dataTable id="tablaExamenHistorial"
+									value="#{historialController.examenes}" var="ex" border="1">
+									<p:column>
+										<f:facet name="header">
 					Examen
 				</f:facet>
-									<!-- El label es el valor del atributo -->
-									<h:outputLabel value="#{cus.idType}" />
-								</p:column>
+										<!-- El label es el valor del atributo -->
+										<h:outputLabel value="#{ex.nombreExamen}" />
+									</p:column>
 
-								<p:column headerText="Ver resultados">
-									<p:commandButton action="#" process="@this"
-										value="#{msj['asociacioncuenta.verificar']}"
-										update="tablaCuentasAsociadas" />
-								</p:column>
-							</p:dataTable>
+									<p:column headerText="Opciones">
+										<p:commandButton
+											action="#{historialController.verResultadosExamen(ex)}"
+											process="@this" value="Ver resultados"
+											update="resultadoexamenhistorial" />
+									</p:column>
+								</p:dataTable>
 
-							<p:panel id="resultadoexamenhistorial" header="Resultado"
-								style="margin-left:20px">
+								<p:panel id="resultadoexamenhistorial"
+									header="Descripcion examen" style="margin-left:20px">
 
-								<p:inputTextarea id="tfresultadoexamenhistorial"
-									value="#{customerController.numerodocumento}" />
+									<p:inputTextarea id="tfresultadoexamenhistorial"
+										value="#{historialController.descripcionExamen}" />
 
-							</p:panel>
+								</p:panel>
 
-						</h:panelGrid>
+							</h:panelGrid>
 
-					</p:tab>
+						</p:tab>
 
-				</p:accordionPanel>
+					</p:accordionPanel>
 
-				<p:accordionPanel style="margin-left:20px">
+					<p:accordionPanel style="margin-left:20px">
 
-					<p:tab title="Patologia">
+						<p:tab title="Patologia">
 
-						<h:panelGrid id="patolhistorialkk" columns="2">
+							<h:panelGrid id="patolhistorialkk" columns="2">
 
-							<p:dataTable id="tablaExamenHistorial"
-								value="#{customerController.customers}" var="cus" border="1">
-								<p:column>
-									<f:facet name="header">
+								<p:dataTable id="tablaExamenHistorial"
+									value="#{historialController.patologias}" var="pat" border="1">
+									<p:column>
+										<f:facet name="header">
 					Patologia
 				</f:facet>
-									<!-- El label es el valor del atributo -->
-									<h:outputLabel value="#{cus.idType}" />
-								</p:column>
+										<!-- El label es el valor del atributo -->
+										<h:outputLabel value="#{pat.nombre}" />
+									</p:column>
 
-								<p:column headerText="Ver resultados">
-									<p:commandButton action="#" process="@this"
-										value="#{msj['asociacioncuenta.verificar']}"
-										update="tablaCuentasAsociadas" />
-								</p:column>
-							</p:dataTable>
+									<p:column headerText="Opciones">
+										<p:commandButton
+											action="#{historialController.verSintomas(pat)}"
+											process="@this" value="Ver sintomas"
+											update="tablaCuentasAsociadas" />
+									</p:column>
+								</p:dataTable>
 
-							<p:panel id="enfermdescripcionhistorial" header="Descripcion"
-								style="margin-left:20px">
+								<p:panel id="enfermsintomashistorial" header="Sintomas"
+									style="margin-left:20px">
 
-								<p:inputTextarea id="tfdescripcionenfermedadhistorial"
-									value="#{customerController.numerodocumento}" />
+									<p:inputTextarea id="tfdescripcionenfermedadhistorial"
+										value="#{historialController.sintomas}" />
 
-							</p:panel>
+								</p:panel>
 
-						</h:panelGrid>
+							</h:panelGrid>
 
-					</p:tab>
+						</p:tab>
 
-				</p:accordionPanel>
+					</p:accordionPanel>
 
-			</h:panelGrid>
-			
-			<p:accordionPanel>
+				</h:panelGrid>
+
+				<p:accordionPanel>
 
 					<p:tab title="Procedimientos quirugicos">
 
 						<h:panelGrid id="cirugiashistorial" columns="2">
 
 							<p:dataTable id="tablaClientes"
-								value="#{customerController.customers}" var="cus" border="1">
+								value="#{historialController.cirugias}" var="ciru" border="1">
 								<p:column>
 									<f:facet name="header">
 					Cirugia
 				</f:facet>
 									<!-- El label es el valor del atributo -->
-									<h:outputLabel value="#{cus.idType}" />
+									<h:outputLabel value="#{ciru.descripcion}" />
 								</p:column>
 
 								<p:column>
 									<f:facet name="header">
 					Fecha
 				</f:facet>
-									<h:outputLabel value="#{cus.idNum}" />
+									<h:outputLabel value="#{ciru.fecha}" />
 								</p:column>
 
 								<p:column>
 									<f:facet name="header">
 					Duracion
 				</f:facet>
-									<h:outputLabel value="#{cus.name}" />
+									<h:outputLabel value="#{ciru.duracion}" />
 								</p:column>
 							</p:dataTable>
 
@@ -200,7 +220,7 @@
 					</p:tab>
 
 				</p:accordionPanel>
-			
+
 			</p:panel>
 		</h:form>
 	</ui:define>

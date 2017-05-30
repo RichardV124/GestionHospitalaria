@@ -85,8 +85,7 @@ public class ExamenesCitaDTO {
 	 */
 	public void setDescripcionTipoExamen(String descripcionTipoExamen) {
 		this.descripcionTipoExamen = descripcionTipoExamen;
-	}
-	
+	}	
 	
 	
 }
