@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @Table(name="MEDICAMENTO_RECETADOS")
 @IdClass(MedicamentosRecetadosPK.class)
 @Entity
-public class MedicamentosRecetados implements Serializable{
+public class MedicamentoRecetado implements Serializable{
 
 	@Id
 	@ManyToOne
@@ -48,7 +48,7 @@ public class MedicamentosRecetados implements Serializable{
 	@ManyToOne
 	private MedicamentosEntregados medicEntregados;
 
-	public MedicamentosRecetados() {
+	public MedicamentoRecetado() {
 		super();
 	}
 

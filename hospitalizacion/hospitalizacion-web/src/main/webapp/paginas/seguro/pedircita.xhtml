@@ -31,7 +31,16 @@
 						<f:selectItems value="#{pedirCitaAjaxController.horarios}" var="hor"
 							itemValue="#{hor}" itemLabel="#{hor}" />
 					</h:selectOneMenu>
-					<p:message for="cbhorario" />			
+					<p:message for="cbhorario" />	
+					
+					<p:outputLabel for="cbcaracter" id="lblcaracter"
+						value="Caracter" />
+					<h:selectOneMenu id="cbcaracter" class="form-control" value="#{pedirCitaAjaxController.caracterSeleccionado}">
+						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+						<f:selectItems value="#{pedirCitaAjaxController.caracteres}" var="car"
+							itemValue="#{car}" itemLabel="#{car.descripcion}" />
+					</h:selectOneMenu>
+					<p:message for="cbcaracter" />		
 					
 					<p:commandButton styleClass="ui-priority-primary" value="Registrar"
 					 action="#{pedirCitaAjaxController.registrar}" process="@this"
@@ -40,38 +49,38 @@
 			</p:fieldset>	
 			
 			<p:fieldset legend="Citas Pendientes" style="margin-top:100px">
-				<p:dataTable id="tablacitas" value="#{pedirCitaAjaxController.citas}" var="cita"
+				<p:dataTable id="tablacitas" value="#{pedirCitaAjaxController.citasPendientes}" var="cita"
 					 border="1">
 
 					<p:column headerText="Fecha">
 
-						<h:outputLabel value="inv.nombre" />
+						<h:outputLabel value="cita.fecha" />
 					</p:column>
 
 					<p:column headerText="Hora Inicial">
 
-						<h:outputLabel value="inv.fecha" />
+						<h:outputLabel value="cita.horaInicial" />
 					</p:column>
 
 					<p:column headerText="Hora Final">
 
-						<h:outputLabel value="inv.horaInicial" />
+						<h:outputLabel value="cita.horaFinal" />
 					</p:column>
 
 					<p:column headerText="Medico">
 
-						<h:outputLabel value="inv.horaFinal" />
+						<h:outputLabel value="cita.medico" />
 					</p:column>
 					
 					<p:column headerText="Caracter">
 
-						<h:outputLabel value="inv.horaFinal" />
+						<h:outputLabel value="cita.caracter" />
 					</p:column>
 
 					<p:column headerText="Opciones">
-						<p:commandButton action="#{pedirCitaAjaxController.cancelarCita(inv)}"
+						<p:commandButton action="#{pedirCitaAjaxController.cancelarCita(cita)}"
 							value="Cancelar" process="@this" 
-							update="tablainventario" 
+							update="tablacitas" 
 							 />
 					</p:column>
 

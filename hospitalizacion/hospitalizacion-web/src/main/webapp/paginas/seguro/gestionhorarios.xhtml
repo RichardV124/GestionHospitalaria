@@ -11,31 +11,56 @@
 
 		<h:form prependId="false">
 
-			<p:fieldset legend="Registro de horario medico" style="margin-top:100px">
-				<h:panelGrid columns="3" id="phorario">
+			<p:fieldset legend="Gestion de horarios Medicos" style="margin-top:100px">
+				
+					<p:panel id="pbusqueda" header="Busqueda"
+						style="margin-bottom:20px">
+						<h:panelGrid id="bushorario" columns="3">
 
-					<p:outputLabel id="lblfecha" for="tffecha"
-						value="Fecha" />
-					<p:inputText id="tffecha" class="form-control" placeholder="DD-MM-AAAA"
-						value="#{horarioAjaxController.fecha}" />
-					<p:message for="tffecha" />
+							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
+								process="@this tfbushorario " update="phorario"
+								action="#{horarioAjaxController.buscarHorario}" />
+							<p:inputText id="tfbushorario" placeholder="ID del horario"
+								value="#{horarioAjaxController.Buscar}" />
+							<p:message for="tfbushorario" />
 
-					<p:outputLabel id="lblhorainicial" for="tfhorainicial"
-						value="Hora Inicial" />
-					<p:inputText id="tfhorainicial" class="form-control" placeholder="Hora inicial"
-						value="#{horarioAjaxController.horaInicial}" />
-					<p:message for="tfhorainicial" />
+						</h:panelGrid>
 
-					<p:outputLabel id="lblhoraifinal" for="tfhoraifinal"
-						value="Hora final" /> 
-					<p:inputText id="tfhoraifinal" class="form-control" placeholder="Hora final"
-						value="#{horarioAjaxController.horaFinal}" />
-					<p:message for="tfhoraifinal" />			
+					</p:panel>
+			
+				<p:panel id="pregistro" header="Registro"
+						style="margin-bottom:20px">
+
+					<h:panelGrid columns="3" id="phorario">
+
+						<p:outputLabel id="lblfecha" for="tffecha"
+							value="Fecha" />
+						<p:inputText id="tffecha" class="form-control" placeholder="DD-MM-AAAA"
+							value="#{horarioAjaxController.fecha}" />
+						<p:message for="tffecha" />
+	
+						<p:outputLabel id="lblhorainicial" for="tfhorainicial"
+							value="Hora Inicial" />
+						<p:inputText id="tfhorainicial" class="form-control" placeholder="Hora inicial"
+							value="#{horarioAjaxController.horaInicial}" />
+						<p:message for="tfhorainicial" />
+	
+						<p:outputLabel id="lblhoraifinal" for="tfhoraifinal"
+							value="Hora final" /> 
+						<p:inputText id="tfhoraifinal" class="form-control" placeholder="Hora final"
+							value="#{horarioAjaxController.horaFinal}" />
+						<p:message for="tfhoraifinal" />			
+						
+						<p:commandButton styleClass="ui-priority-primary" value="Registrar"
+						 action="#{horarioAjaxController.registrar}" process="@this"
+						 update="pasigh phorario"/>
+						 <p:commandButton styleClass="ui-priority-primary" value="Editar"
+						 action="#{horarioAjaxController.editar}" process="@this"
+						 update="pasigh phorario"/>
+					</h:panelGrid>	
+
+				</p:panel>
 					
-					<p:commandButton styleClass="ui-priority-primary" value="Registrar"
-					 action="#{horarioAjaxController.registrar}" process="@this"
-					 update="pasigh phorario"/>
-				</h:panelGrid>
 			</p:fieldset>	
 			
 		 	<p:fieldset legend="Asignacion de horarios" style="margin-top:100px">

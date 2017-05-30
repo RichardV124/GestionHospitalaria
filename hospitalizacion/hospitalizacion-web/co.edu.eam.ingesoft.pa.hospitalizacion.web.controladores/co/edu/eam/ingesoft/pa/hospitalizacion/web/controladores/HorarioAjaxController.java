@@ -46,6 +46,9 @@ public class HorarioAjaxController implements Serializable{
 	@NotNull(message = "Debe digitar la hora de final del horario")
 	private String horaFinal;
 	
+	@NotNull(message = "Debe digitar el id del horario")
+	private String buscarHorario;
+	
 	@EJB
 	private HorarioEJB horarioEJB;
 	
@@ -81,6 +84,40 @@ public class HorarioAjaxController implements Serializable{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void buscar(){
+		Horario h = horarioEJB.buscar(Integer.parseInt(buscarHorario));
+		if(h!=null){
+			fecha = String.valueOf(h.getFecha());
+			horaInicial = String.valueOf(h.getHoraInicial());
+			horaFinal = String.valueOf(h.getHoraFinal());	
+		}else{
+			Messages.addFlashGlobalInfo("El horario no está registrado!");
+		}
+	}
+	
+	public void editar() throws ParseException{
+		try {
+			Horario h = new Horario();
+			Date fechaH = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
+			h.setFecha(fechaH);
+			h.setHoraInicial(Integer.parseInt(horaInicial));
+			h.setHoraFinal(Integer.parseInt(horaFinal));
+			h.setId(Integer.parseInt(buscarHorario));
+			
+			horarioEJB.editar(h);
+			Messages.addFlashGlobalInfo("Se editó el horario con exito!");
+			limpiarCampos();
+			listarHorarios();
+		} catch (ExcepcionNegocio e1) {
+			Messages.addFlashGlobalError(e1.getMessage());
+			e1.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Messages.addFlashGlobalInfo(e.getMessage());
+			e.printStackTrace();
+		}		
 	}
 	
 	public void registrar() throws ParseException{
@@ -196,5 +233,5 @@ public class HorarioAjaxController implements Serializable{
 	public void setHorariosAsig(List<HorarioMedicoDTO> horariosAsig) {
 		this.horariosAsig = horariosAsig;
 	}
-	
+
 }

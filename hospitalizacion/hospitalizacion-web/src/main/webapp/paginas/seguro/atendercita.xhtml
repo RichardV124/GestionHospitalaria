@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+
+	<ui:define name="cuerpo">
+
+		<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+			closable="true" />
+
+		<h:form prependId="false">
+
+			<p:fieldset legend="Atender Cita" style="margin-top:100px">
+			
+				<p:accordionPanel>
+					<p:tab title="Cita Medica">
+						<h:panelGrid columns="3" id="precetamedica">
+							<p:outputLabel for="cbmedicamento" id="lblmedicamento"
+								value="Medicamento" />
+							<h:selectOneMenu id="cbmedicamento" class="form-control" value="#{atenderCitaAjaxController.medicamentoSeleccionado}">
+								<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+								<f:selectItems value="#{atenderCitaAjaxController.medicamentos}" var="med"
+									itemValue="#{med}" itemLabel="#{med.nombre}" />
+							</h:selectOneMenu>
+							<p:message for="cbmedicamento" />
+							
+							<p:outputLabel id="lblcantidad" for="tfcantidad"
+								value="Cantidad" /> 
+							<p:inputText id="tfcantidad" class="form-control" placeholder="Cantidad"
+								value="#{atenderCitaAjaxController.cantidad}" />
+							<p:message for="tfcantidad" />
+							
+							<p:outputLabel id="lbldosis" for="tfdosis"
+								value="Dosis" /> 
+							<p:inputText id="tfdosis" class="form-control" placeholder="Dosis"
+								value="#{atenderCitaAjaxController.dosis}" />
+							<p:message for="tfdosis" />			
+							
+							<p:commandButton styleClass="ui-priority-primary" value="Asignar"
+							 action="#{atenderCitaAjaxController.agregarRecetaMedica}" process="@this"
+							 update="precetamedica tablarecetamedica"/>
+						</h:panelGrid>
+						
+						<p:dataTable id="tablarecetamedica" value="#{atenderCitaAjaxController.medicamentosRecetados}" var="med"
+							 border="1">
+
+							<p:column headerText="Numero de Referencia">
+		
+								<h:outputLabel value="med.id" />
+							</p:column>
+		
+							<p:column headerText="Medicamento">
+		
+								<h:outputLabel value="med.medicamento" />
+							</p:column>
+		
+							<p:column headerText="Cantidad">
+		
+								<h:outputLabel value="med.cantidad" />
+							</p:column>
+		
+							<p:column headerText="Dosis">
+		
+								<h:outputLabel value="med.dosis" />
+							</p:column>
+		
+							<p:column headerText="Opciones">
+								<p:commandButton action="#{inventarioAjaxController.eliminarInventario(med)}"
+									process="@this" value="Eliminar"
+									update="tablainventario" 
+									 />
+							</p:column>
+
+						</p:dataTable>
+	
+					</p:tab>
+					
+					<p:tab title="Enfermedades">
+						
+						
+	
+					</p:tab>
+					
+					<p:tab title="Receta Medica">
+						
+						
+	
+					</p:tab>
+					
+					<p:tab title="Examenes">
+						
+						
+	
+					</p:tab>
+					
+					<p:tab title="Remisiones">
+						
+						
+	
+					</p:tab>
+
+				</p:accordionPanel>
+			
+				
+			</p:fieldset>	
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
