@@ -5,6 +5,9 @@
 	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
 
 	<ui:define name="cuerpo">
+	
+	<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+			closable="true" />
 		<h:form preprpenId="false">
 
 			<p:accordionPanel>
@@ -27,18 +30,18 @@
 
 					<p:panel id="quicrearpanel" header="Crear Quirofano">
 
-						<h:panelGrid id="datosquirofano" columns="2">
+						<h:panelGrid id="datosquirofano" columns="3">
 
 							<p:outputLabel id="lblnombrequirofanocrear" value="Nombre" />
 							<p:inputText id="tfnombrequirofanocrear"
 								value="#{instalacontroller.nombreQuirofano}" />
+								<p:message for="tfnombrequirofanocrear" />
 
 							<p:outputLabel id="lbldescripcionquirofanocrear"
 								value="Descripcion:" />
 							<p:inputText id="tfdescripcionquirofanocrear"
 								value="#{instalacontroller.descripcionQuirofano}" />
-
-							<br />
+								<p:message for="tfdescripcionquirofanocrear" />
 
 							<p:outputLabel id="lblpisoquirofano" value="Piso:" />
 							<h:selectOneMenu id="cbpisoquirofano"
@@ -49,7 +52,7 @@
 								<f:selectItem itemValue="Piso 3" itemLabel="Piso 3" />
 								<f:selectItem itemValue="Piso 4" itemLabel="Piso 4" />
 							</h:selectOneMenu>
-							<br />
+							<p:message for="cbpisoquirofano" />
 
 						</h:panelGrid>
 
@@ -119,7 +122,7 @@
 							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
 								process="@this tfbuscama " update="datoscama"
 								action="#{instalacontroller.buscarCama}" />
-							<p:inputText id="tfbuscama" value="" />
+							<p:inputText id="tfbuscama" value="#{instalacontroller.camaBuscar}" />
 							<p:message for="tfbuscama" />
 
 						</h:panelGrid>
@@ -128,12 +131,14 @@
 
 					<p:panel id="camacreaerpanel" header="Crear Cama">
 
-						<h:panelGrid id="datoscama" columns="2">
+						<h:panelGrid id="datoscama" columns="3">
 
 							<p:outputLabel id="lbldescripcioncama" value="Descripcion:" />
 							<p:inputText id="tfdescripcioncama"
 								value="#{instalacontroller.descripcionCama}" />
-							<br />
+							<p:message for="tfdescripcioncama" />
+							
+							
 							<p:outputLabel id="lblpisocama" value="Piso:" />
 							<h:selectOneMenu id="cbpisocama"
 								value="#{instalacontroller.pisoCama}">
@@ -143,7 +148,8 @@
 								<f:selectItem itemValue="Piso 3" itemLabel="Piso 3" />
 								<f:selectItem itemValue="Piso 4" itemLabel="Piso 4" />
 							</h:selectOneMenu>
-							<br />
+							<p:message for="cbpisocama" />
+							
 							<p:outputLabel id="lblhabitacioncama" value="Habitacion:" />
 							<h:selectOneMenu id="cbhabitacioncama"
 								value="#{instalacontroller.habitacionCama}">
@@ -155,6 +161,7 @@
 								<f:selectItem itemValue="Habitacion 5" itemLabel="Habitacion 5" />
 								<f:selectItem itemValue="Habitacion 6" itemLabel="Habitacion 6" />
 							</h:selectOneMenu>
+							<p:message for="cbhabitacioncama" />
 
 						</h:panelGrid>
 
