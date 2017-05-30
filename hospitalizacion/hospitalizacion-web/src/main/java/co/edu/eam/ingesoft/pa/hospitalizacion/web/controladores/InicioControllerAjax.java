@@ -25,7 +25,7 @@ public class InicioControllerAjax implements Serializable {
 	}
 	
 	public String redirigirGestionMedico(){
-		return "/paginas/seguro/gestionmedicoxhtml?faces-redirect=true";
+		return "/paginas/seguro/gestionmedico.xhtml?faces-redirect=true";
 	}
 	
 	public String redirigirGestionPatologia(){
