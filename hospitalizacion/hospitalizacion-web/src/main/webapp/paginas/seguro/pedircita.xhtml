@@ -29,7 +29,7 @@
 					<h:selectOneMenu id="cbhorario" class="form-control" value="#{pedirCitaAjaxController.horarioSeleccionado}">
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 						<f:selectItems value="#{pedirCitaAjaxController.horarios}" var="hor"
-							itemValue="#{hor}" itemLabel="#{hor}" />
+							itemValue="#{hor.id}" itemLabel="#{hor}" />
 					</h:selectOneMenu>
 					<p:message for="cbhorario" />	
 					
@@ -38,7 +38,7 @@
 					<h:selectOneMenu id="cbcaracter" class="form-control" value="#{pedirCitaAjaxController.caracterSeleccionado}">
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 						<f:selectItems value="#{pedirCitaAjaxController.caracteres}" var="car"
-							itemValue="#{car}" itemLabel="#{car.descripcion}" />
+							itemValue="#{car.id}" itemLabel="#{car.descripcion}" />
 					</h:selectOneMenu>
 					<p:message for="cbcaracter" />		
 					

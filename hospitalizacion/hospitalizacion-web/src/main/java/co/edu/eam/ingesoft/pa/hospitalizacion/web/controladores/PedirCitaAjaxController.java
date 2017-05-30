@@ -29,11 +29,11 @@ public class PedirCitaAjaxController implements Serializable{
 	
 	private List<MedicoDisponibleDTO> medicos;
 	
-	private Horario horarioSeleccionado;
+	private int horarioSeleccionado;
 	
 	private List<Horario> horarios;
 	
-	private CaracterCita caracterSeleccionado;
+	private int caracterSeleccionado;
 	
 	private List<CaracterCita> caracteres;
 	
@@ -105,11 +105,11 @@ public class PedirCitaAjaxController implements Serializable{
 		this.medicos = medicos;
 	}
 
-	public Horario getHorarioSeleccionado() {
+	public int getHorarioSeleccionado() {
 		return horarioSeleccionado;
 	}
 
-	public void setHorarioSeleccionado(Horario horarioSeleccionado) {
+	public void setHorarioSeleccionado(int horarioSeleccionado) {
 		this.horarioSeleccionado = horarioSeleccionado;
 	}
 
@@ -121,11 +121,11 @@ public class PedirCitaAjaxController implements Serializable{
 		this.horarios = horarios;
 	}
 
-	public CaracterCita getCaracterSeleccionado() {
+	public int getCaracterSeleccionado() {
 		return caracterSeleccionado;
 	}
 
-	public void setCaracterSeleccionado(CaracterCita caracterSeleccionado) {
+	public void setCaracterSeleccionado(int caracterSeleccionado) {
 		this.caracterSeleccionado = caracterSeleccionado;
 	}
 
@@ -136,5 +136,14 @@ public class PedirCitaAjaxController implements Serializable{
 	public void setCaracteres(List<CaracterCita> caracteres) {
 		this.caracteres = caracteres;
 	}
+
+	public List<CitaPendienteDTO> getCitasPendientes() {
+		return citasPendientes;
+	}
+
+	public void setCitasPendientes(List<CitaPendienteDTO> citasPendientes) {
+		this.citasPendientes = citasPendientes;
+	}
+	
 	
 }
