@@ -88,6 +88,24 @@
 							
 							<h:form>
 							<li class="active"><a href="index.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
+							<li class="active"><span><h:commandLink
+									action="#{inicioAjax.redirigirGestionInventario()}"
+									value="Gestion Inventario" /></span></li>
+							<li class="active"><span><h:commandLink
+									action="#{inicioAjax.redirigirGestionHorarios()}"
+									value="Gestion Horarios" /></span></li>
+							<li class="active"><span><h:commandLink
+									action="#{inicioAjax.redirigirGestionPaciente()}"
+									value="Gestion Pacientes" /></span></li>
+							<li class="active"><span><h:commandLink
+									action="#{inicioAjax.redirigirPedirCita()}"
+									value="Pedir Cita" /></span></li>
+							<li class="active"><span><h:commandLink
+									action="#{inicioAjax.redirigirAtenderCita()}"
+									value="Atender Cita" /></span></li>
+							<li class="active"><span><h:commandLink
+									action="#{inicioAjax.redirigirCitasDelDia()}"
+									value="Citas Del Dia" /></span></li>
 							<li><h:commandLink
 									action="#{inicioAjax.redirigirHistorialMedico()}"
 									value="Historial Medico" /></li>

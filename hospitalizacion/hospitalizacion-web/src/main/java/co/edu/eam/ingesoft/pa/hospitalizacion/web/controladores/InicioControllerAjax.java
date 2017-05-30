@@ -31,6 +31,30 @@ public class InicioControllerAjax implements Serializable {
 	public String redirigirGestionPatologia(){
 		return "/paginas/seguro/gestionpatologia.xhtml?faces-redirect=true";
 	}
+	
+	public String redirigirGestionPaciente(){
+		return "/paginas/seguro/gestionpaciente.xhtml?faces-redirect=true";
+	}
+	
+	public String redirigirGestionInventario(){
+		return "/paginas/seguro/gestioninventario.xhtml?faces-redirect=true";
+	}
+	
+	public String redirigirAtenderCita(){
+		return "/paginas/seguro/atendercita.xhtml?faces-redirect=true";
+	}
+	
+	public String redirigirPedirCita(){
+		return "/paginas/seguro/pedircita.xhtml?faces-redirect=true";
+	}
+	
+	public String redirigirCitasDelDia(){
+		return "/paginas/seguro/citasdeldia.xhtml?faces-redirect=true";
+	}
+	
+	public String redirigirGestionHorarios(){
+		return "/paginas/seguro/gestionhorarios.xhtml?faces-redirect=true";
+	}
 
 
 }

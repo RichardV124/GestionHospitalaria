@@ -45,4 +45,14 @@ public class CitasDiaAjaxController implements Serializable{
 	public void Atender(){
 		
 	}
+
+	public List<CitasDiaDTO> getCitas() {
+		return citas;
+	}
+
+	public void setCitas(List<CitasDiaDTO> citas) {
+		this.citas = citas;
+	}
+	
+	
 }
