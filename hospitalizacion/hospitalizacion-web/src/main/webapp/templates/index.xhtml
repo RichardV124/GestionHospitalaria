@@ -4,33 +4,45 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-<title>Hospital triviniers</title>
-<!-- Custom Theme files -->
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="We Care Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	<title>Hospital triviniers</title>
+	<!-- Custom Theme files -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords"
+		content="We Care Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //Custom Theme files -->
-<link href="#{request.contextPath}/css/bootstrap.css" type="text/css" rel="stylesheet" media="all" />
-<link href="#{request.contextPath}/css/style.css" type="text/css" rel="stylesheet" media="all" />
-<link rel="stylesheet" href="#{request.contextPath}/css/flexslider.css" type="text/css" media="screen" />
-<!-- js -->
-<script src="#{request.contextPath}/js/jquery-1.11.1.min.js"></script> 
-<!-- //js -->
-<!-- start-smooth-scrolling-->
-<script type="text/javascript" src="#{request.contextPath}/js/move-top.js"></script>
-<script type="text/javascript" src="#{request.contextPath}/js/easing.js"></script>	
-<script type="text/javascript">	
-		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-				event.preventDefault();
+	<script type="application/x-javascript">
 		
-		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+	
+	</script>
+	<!-- //Custom Theme files -->
+	<link href="#{request.contextPath}/css/bootstrap.css" type="text/css"
+		rel="stylesheet" media="all" />
+	<link href="#{request.contextPath}/css/style.css" type="text/css"
+		rel="stylesheet" media="all" />
+	<link rel="stylesheet" href="#{request.contextPath}/css/flexslider.css"
+		type="text/css" media="screen" />
+	<!-- js -->
+	<script src="#{request.contextPath}/js/jquery-1.11.1.min.js"></script>
+	<!-- //js -->
+	<!-- start-smooth-scrolling-->
+	<script type="text/javascript"
+		src="#{request.contextPath}/js/move-top.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/js/easing.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event) {
+				event.preventDefault();
+
+				$('html,body').animate({
+					scrollTop : $(this.hash).offset().top
+				}, 1000);
 			});
 		});
-</script>
-<!--//end-smooth-scrolling-->	
+	</script>
+	<!--//end-smooth-scrolling-->
 </h:head>
 <h:body>
 	<!--header-->
@@ -38,23 +50,28 @@
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header navbar-left">
-					<h1><a href="#{request.contextPath}/index.html"><img src="#{request.contextPath}/images/logo.png" alt=""/>We Care</a></h1>
+					<h1>
+						<a href="#{request.contextPath}/index.html"><img
+							src="#{request.contextPath}/images/logo.png" alt="" />We Care</a>
+					</h1>
 				</div>
 				<!--navigation-->
 				<div class="header-text navbar-left">
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+					<p>Lorem Ipsum is simply dummy text of the printing and
+						typesetting</p>
 				</div>
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
 				<div class="header-right">
 					<div class="top-nav-text">
 						<ul>
 							<li>Call us: <span>+11 111 2222</span></li>
-							<li>Email : <a class="email-link" href="mailto:example@mail.com">mail@example.com</a></li>
+							<li>Email : <a class="email-link"
+								href="mailto:example@mail.com">mail@example.com</a></li>
 							<li>
 								<ul class="social-icons">
 									<li><a href="#"></a></li>
@@ -65,27 +82,35 @@
 						</ul>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">					
+					<div class="collapse navbar-collapse navbar-right"
+						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-left">
+							
+							<h:form>
 							<li class="active"><a href="index.html"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
-							<li><a href="#{request.contextPath}/about.html" class="link link--yaku"><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></a></li>
-							<li><a href="#{request.contextPath}/codes.html" class="link link--yaku"><span>S</span><span>H</span><span>O</span><span>R</span><span>T</span> <span>C</span><span>O</span><span>D</span><span>E</span><span>S</span></a></li>
-							<li><a href="#" class="dropdown-toggle link link--yaku" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>G</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>Y</span><span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/gallery.html">Gallery1</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/gallery.html">Gallery2</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/gallery.html">Gallery3</a></li>      
-								</ul>
-							</li>
-							<li><a href="#{request.contextPath}/contact.html" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
-						</ul>		
-						<div class="clearfix"> </div>
-					</div><!--//navigation-->
+							<li><h:commandLink
+									action="#{inicioAjax.redirigirHistorialMedico()}"
+									value="Historial Medico" /></li>
+							<li><h:commandLink
+									action="#{inicioAjax.redirigirGestionInstalacion()}"
+									value="Gestion instalaciones" /></li>
+							<li><h:commandLink
+									action="#{inicioAjax.redirigirGestionMedico()}"
+									value="Gestion medicos" /></li>
+									<li><h:commandLink
+									action="#{inicioAjax.redirigirGestionPatologia()}"
+									value="Gestion patologia y tratamiento" /></li>
+									
+									</h:form>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<!--//navigation-->
 				</div>
-				<div class="clearfix"> </div>
-			</div>	
-		</nav>		
-	</div>	
+				<div class="clearfix"></div>
+			</div>
+		</nav>
+	</div>
 	<!--//header-->
 	<!--banner-->
 	<div class="banner">
@@ -95,15 +120,19 @@
 					<ul class="slides">
 						<li>
 							<div class="banner-info">
-								<h2>Temporibus autem debitis </h2>
-								<p>Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable </p>								
+								<h2>Temporibus autem debitis</h2>
+								<p>Lorem Ipsum available, but the majority have suffered
+									alteration in some form, by injected humour, or randomised
+									words which don't look even slightly believable</p>
 								<a href="#" class="effect6">Get More</a>
 							</div>
 						</li>
 						<li>
 							<div class="banner-info">
-								<h2> Lautem quibusdam debitis </h2>
-								<p>Orem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable </p>								
+								<h2>Lautem quibusdam debitis</h2>
+								<p>Orem Ipsum available, but the majority have suffered
+									alteration in some form, by injected humour, or randomised
+									words which don't look even slightly believable</p>
 								<a href="#" class="effect6">Get More</a>
 							</div>
 						</li>
@@ -112,20 +141,20 @@
 			</section>
 		</div>
 		<!-- FlexSlider -->
-			<script src="#{request.contextPath}/js/jquery.flexslider.js"></script>
-			<script type="text/javascript">
-				$(window).load(function(){
-				  $('.flexslider').flexslider({
-					animation: "slide",
-					start: function(slider){
-					  $('body').removeClass('loading');
+		<script src="#{request.contextPath}/js/jquery.flexslider.js"></script>
+		<script type="text/javascript">
+			$(window).load(function() {
+				$('.flexslider').flexslider({
+					animation : "slide",
+					start : function(slider) {
+						$('body').removeClass('loading');
 					}
-				  });
 				});
-			</script>
+			});
+		</script>
 		<!-- //FlexSlider -->
 	</div>
-	
+
 	<!--features-->
 	<div class="features">
 		<div class="container">
@@ -137,105 +166,110 @@
 	<div class="projects">
 		<div class="container">
 			<div class="col-md-3 project-right ">
-				<h3 class="title">OUR <span> PROJECTS</span></h3>
-				<p>Vero vulputate enim non justo posuere placerat Phasellus mauris vulputate enim non justo posuere placerat egetposuere enim .</p>
+				<h3 class="title">
+					OUR <span> PROJECTS</span>
+				</h3>
+				<p>Vero vulputate enim non justo posuere placerat Phasellus
+					mauris vulputate enim non justo posuere placerat egetposuere enim .</p>
 			</div>
 			<div class="col-md-9 project-left">
 				<!-- flex-slider -->
 				<div class="work-bottom">
-					<div class="nbs-flexisel-container"><div class="nbs-flexisel-inner">
-						<ul id="flexiselDemo1" class="nbs-flexisel-ul" style="left: -285px; display: block;">																																		
-							<li class="nbs-flexisel-item" style="width: 285px;">
-								<div class="project-grids">
-									<img src="#{request.contextPath}/images/img1.jpg" alt=""/>
-									<div class="team-bottom">
+					<div class="nbs-flexisel-container">
+						<div class="nbs-flexisel-inner">
+							<ul id="flexiselDemo1" class="nbs-flexisel-ul"
+								style="left: -285px; display: block;">
+								<li class="nbs-flexisel-item" style="width: 285px;">
+									<div class="project-grids">
+										<img src="#{request.contextPath}/images/img1.jpg" alt="" />
+										<div class="team-bottom"></div>
 									</div>
-								</div>
-							</li>
-							<li class="nbs-flexisel-item" style="width: 285px;">
-								<div class="project-grids">
-									<img src="#{request.contextPath}/images/img2.jpg" alt=""/>
-									<div class="team-bottom">
+								</li>
+								<li class="nbs-flexisel-item" style="width: 285px;">
+									<div class="project-grids">
+										<img src="#{request.contextPath}/images/img2.jpg" alt="" />
+										<div class="team-bottom"></div>
 									</div>
-								</div>
-							</li>
-							<li class="nbs-flexisel-item" style="width: 285px;">
-								<div class="project-grids">
-									<img src="#{request.contextPath}/images/img3.jpg" alt=""/>
-									<div class="team-bottom">
+								</li>
+								<li class="nbs-flexisel-item" style="width: 285px;">
+									<div class="project-grids">
+										<img src="#{request.contextPath}/images/img3.jpg" alt="" />
+										<div class="team-bottom"></div>
 									</div>
-								</div>
-							</li>
-							<li class="nbs-flexisel-item" style="width: 285px;">
-								<div class="project-grids">
-									<img src="#{request.contextPath}/images/img4.jpg" alt=""/>
-									<div class="team-bottom">
+								</li>
+								<li class="nbs-flexisel-item" style="width: 285px;">
+									<div class="project-grids">
+										<img src="#{request.contextPath}/images/img4.jpg" alt="" />
+										<div class="team-bottom"></div>
 									</div>
-								</div>
-							</li>
-						</ul>
-						<div class="nbs-flexisel-nav-left" style="top: 138px;"></div><div class="nbs-flexisel-nav-right" style="top: 138px;"></div></div></div>
-							<script type="text/javascript">
-								$(window).load(function() {
-									$("#flexiselDemo1").flexisel({
-										visibleItems: 4,
-										animationSpeed: 1000,
-										autoPlay: true,
-										autoPlaySpeed: 3000,    		
-										pauseOnHover: true,
-										enableResponsiveBreakpoints: true,
-										responsiveBreakpoints: { 
-											portrait: { 
-												changePoint:480,
-												visibleItems: 2
-											}, 
-											landscape: { 
-												changePoint:640,
-												visibleItems: 3
-											},
-											tablet: { 
-												changePoint:768,
-												visibleItems: 3
-											}
-										}
-									});
-									
-								});
-							</script>
-							<script type="text/javascript" src="#{request.contextPath}/js/jquery.flexisel.js"></script>				
-						<!-- //flex-slider -->	
+								</li>
+							</ul>
+							<div class="nbs-flexisel-nav-left" style="top: 138px;"></div>
+							<div class="nbs-flexisel-nav-right" style="top: 138px;"></div>
+						</div>
+					</div>
+					<script type="text/javascript">
+						$(window).load(function() {
+							$("#flexiselDemo1").flexisel({
+								visibleItems : 4,
+								animationSpeed : 1000,
+								autoPlay : true,
+								autoPlaySpeed : 3000,
+								pauseOnHover : true,
+								enableResponsiveBreakpoints : true,
+								responsiveBreakpoints : {
+									portrait : {
+										changePoint : 480,
+										visibleItems : 2
+									},
+									landscape : {
+										changePoint : 640,
+										visibleItems : 3
+									},
+									tablet : {
+										changePoint : 768,
+										visibleItems : 3
+									}
+								}
+							});
+
+						});
+					</script>
+					<script type="text/javascript"
+						src="#{request.contextPath}/js/jquery.flexisel.js"></script>
+					<!-- //flex-slider -->
 				</div>
 			</div>
-			<div class="clearfix"> </div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 	<!--//projects-->
 	<!--services-->
 	<div class="services">
 		<div class="container">
-			<h3 class="title"> OUR SERVICES</h3>
+			<h3 class="title">OUR SERVICES</h3>
 			<div class="services-info">
 				<div class="servc-icon">
-					<a href="#" class="diamond"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-					<p class="servc-text">Specialist</p>
-					</a>
+					<a href="#" class="diamond"><span
+						class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						<p class="servc-text">Specialist</p> </a>
 				</div>
 				<div class="servc-icon">
-					<a href="#" class="diamond"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-					<p class="servc-text"> Bonorum </p>
-					</a>
+					<a href="#" class="diamond"><span
+						class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+						<p class="servc-text">Bonorum</p> </a>
 				</div>
 				<div class="servc-icon">
-					<a href="#" class="diamond"><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>
-					<p class="servc-text">Specialist</p>
-					</a>
+					<a href="#" class="diamond"><span
+						class="glyphicon glyphicon-bed" aria-hidden="true"></span>
+						<p class="servc-text">Specialist</p> </a>
 				</div>
 				<div class="servc-icon">
-					<a href="#" class="diamond"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-					<p class="servc-text"> Bonorum </p>
-					</a>
+					<a href="#" class="diamond"><span
+						class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+						<p class="servc-text">Bonorum</p> </a>
 				</div>
-				<div class="clearfix"> </div>
+				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
@@ -243,12 +277,17 @@
 	<!--footer-->
 	<div class="footer">
 		<div class="container">
-			<h3 class="title">GET IN <span>TOUCH</span></h3>
+			<h3 class="title">
+				GET IN <span>TOUCH</span>
+			</h3>
 			<div class="footer-grids">
 				<div class="col-md-6 footer-left">
-					<h5><a href="#">Ready to hire me?</a></h5>
+					<h5>
+						<a href="#">Ready to hire me?</a>
+					</h5>
 					<div class="more">
-						<a href="#{request.contextPath}/contact.html" class="effect6">Get in touch</a>
+						<a href="#{request.contextPath}/contact.html" class="effect6">Get
+							in touch</a>
 					</div>
 				</div>
 				<div class="col-md-6 footer-right">
@@ -259,7 +298,7 @@
 						<div class="col-xs-10 contact-grdr">
 							<p>+111 222 3333 111</p>
 						</div>
-						<div class="clearfix"> </div>
+						<div class="clearfix"></div>
 					</div>
 					<div class="address">
 						<div class="col-xs-2 contact-grdl">
@@ -268,19 +307,21 @@
 						<div class="col-xs-10 contact-grdr">
 							<p>345 Diamond Street,London.</p>
 						</div>
-						<div class="clearfix"> </div>
+						<div class="clearfix"></div>
 					</div>
 					<div class="address">
 						<div class="col-xs-2 contact-grdl">
 							<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 						</div>
 						<div class="col-xs-10 contact-grdr">
-							<p><a href="#{request.contextPath}/mailto:example@mail.com">mail@example.com</a></p>
+							<p>
+								<a href="#{request.contextPath}/mailto:example@mail.com">mail@example.com</a>
+							</p>
 						</div>
-						<div class="clearfix"> </div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
-				<div class="clearfix"> </div>
+				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
@@ -294,8 +335,11 @@
 				<li><a href="#" class="twt"></a></li>
 				<li><a href="#" class="be"></a></li>
 			</ul>
-			<div class="clearfix"> </div>
-			<p>© 2016 We care . All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>	
+			<div class="clearfix"></div>
+			<p>
+				© 2016 We care . All rights reserved | Design by <a
+					href="http://w3layouts.com">W3layouts</a>
+			</p>
 		</div>
 	</div>
 	<!--//copy-right-->
@@ -309,17 +353,20 @@
 				scrollSpeed: 1200,
 				easingType: 'linear' 
 			};
-			*/
-			
-			$().UItoTop({ easingType: 'easeOutQuart' });
-			
+			 */
+
+			$().UItoTop({
+				easingType : 'easeOutQuart'
+			});
+
 		});
 	</script>
-	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	<a href="#" id="toTop" style="display: block;"> <span
+		id="toTopHover" style="opacity: 1;"> </span></a>
 	<!--//smooth-scrolling-of-move-up-->
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/bootstrap.js"></script>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/bootstrap.js"></script>
 </h:body>
 </html>
