@@ -15,6 +15,17 @@
 			
 				<p:accordionPanel>
 					<p:tab title="Cita Medica">
+						
+	
+					</p:tab>
+					
+					<p:tab title="Enfermedades">
+						
+						
+	
+					</p:tab>
+					
+					<p:tab title="Receta Medica">
 						<h:panelGrid columns="3" id="precetamedica">
 							<p:outputLabel for="cbmedicamento" id="lblmedicamento"
 								value="Medicamento" />
@@ -35,12 +46,21 @@
 								value="Dosis" /> 
 							<p:inputText id="tfdosis" class="form-control" placeholder="Dosis"
 								value="#{atenderCitaAjaxController.dosis}" />
-							<p:message for="tfdosis" />			
+							<p:message for="tfdosis" />		
 							
-							<p:commandButton styleClass="ui-priority-primary" value="Asignar"
+							<p:outputLabel id="lblrecomendaciones" for="tfrecomendaciones"
+								value="Recomendaciones" /> 
+							<p:inputTextarea id="tfrecomendaciones" class="form-control" placeholder="Recomendaciones"
+								value="#{atenderCitaAjaxController.recomendaciones}" />
+							<p:message for="tfrecomendaciones" />		
+							
+							<p:commandButton styleClass="ui-priority-primary" value="Recetar"
 							 action="#{atenderCitaAjaxController.agregarRecetaMedica}" process="@this"
 							 update="precetamedica tablarecetamedica"/>
 						</h:panelGrid>
+						
+							<br> </br>
+							<br> </br>
 						
 						<p:dataTable id="tablarecetamedica" value="#{atenderCitaAjaxController.medicamentosRecetados}" var="med"
 							 border="1">
@@ -66,32 +86,17 @@
 							</p:column>
 		
 							<p:column headerText="Opciones">
-								<p:commandButton action="#{inventarioAjaxController.eliminarInventario(med)}"
+								<p:commandButton action="#{inventarioAjaxController.eliminarRecetaMedica(med)}"
 									process="@this" value="Eliminar"
 									update="tablainventario" 
 									 />
 							</p:column>
 
 						</p:dataTable>
-	
-					</p:tab>
-					
-					<p:tab title="Enfermedades">
-						
-						
-	
-					</p:tab>
-					
-					<p:tab title="Receta Medica">
-						
-						
-	
 					</p:tab>
 					
 					<p:tab title="Examenes">
 						
-						
-	
 					</p:tab>
 					
 					<p:tab title="Remisiones">

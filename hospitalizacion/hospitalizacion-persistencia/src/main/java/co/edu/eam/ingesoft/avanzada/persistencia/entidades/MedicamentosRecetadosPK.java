@@ -4,9 +4,36 @@ import java.io.Serializable;
 
 public class MedicamentosRecetadosPK implements Serializable{
 
-	int medicamento;
+	private int medicamento;
 	
-	int cita;
+	private int cita;
+	
+	public MedicamentosRecetadosPK() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+	public MedicamentosRecetadosPK(int medicamento, int cita) {
+		super();
+		this.medicamento = medicamento;
+		this.cita = cita;
+	}
+
+	public int getMedicamento() {
+		return medicamento;
+	}
+
+	public void setMedicamento(int medicamento) {
+		this.medicamento = medicamento;
+	}
+
+	public int getCita() {
+		return cita;
+	}
+
+	public void setCita(int cita) {
+		this.cita = cita;
+	}
 
 	@Override
 	public int hashCode() {
@@ -32,6 +59,8 @@ public class MedicamentosRecetadosPK implements Serializable{
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	
