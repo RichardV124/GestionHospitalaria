@@ -3,7 +3,9 @@ package co.edu.eam.ingesoft.pa.hospitalizacion.web.controladores;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -52,7 +54,7 @@ public class InventarioAjaxController implements Serializable{
 	 * cantidad del medicamento
 	 */
 	@NotNull(message = "Debe ingresar la cantidad")
-	private String cantidad;
+	private String cantidadMed;
 	
 	@EJB
 	private TipoMedicamentoEJB tipoMedicamentoEJB;
@@ -66,15 +68,15 @@ public class InventarioAjaxController implements Serializable{
 	@EJB
 	private FarmaciaMedicamentoEJB farmaciaMedicamentoEJB;
 	
-	private TipoMedicamento tipoSeleccionado;
+	private int tipoSeleccionado;
 	
 	private List<TipoMedicamento> tipos;
 	
-	private Farmacia farmaciaSeleccionada;
+	private int farmaciaSeleccionada;
 	
 	private List<Farmacia> farmacias;
 	
-	private Medicamento medicamentoSeleccionado;
+	private int medicamentoSeleccionado;
 	
 	private List<Medicamento> medicamentos;
 	
@@ -117,10 +119,13 @@ public class InventarioAjaxController implements Serializable{
 	public void registrarMedicamento() throws ParseException{
 		Medicamento m = new Medicamento();
 		m.setDescripcion(nombre);
-		Date fechaV = new SimpleDateFormat("dd-MM-yyyy").parse(fechaVencimiento);
+		Calendar calendario = GregorianCalendar.getInstance();
+		Date fechaV = calendario.getTime();
+		//Date fechaV = new SimpleDateFormat("dd/MM/yyyy").parse(fechaVencimiento);
 		m.setFechaVencimiento(fechaV);
 		m.setId(Integer.parseInt(numRef));
-		m.setTipoMedicamento(tipoSeleccionado);
+		TipoMedicamento tm = tipoMedicamentoEJB.buscar(tipoSeleccionado);
+		m.setTipoMedicamento(tm);
 		
 		medicamentoEJB.crear(m);
 		Messages.addFlashGlobalInfo("Se registró el medicamento con exito!");
@@ -129,9 +134,11 @@ public class InventarioAjaxController implements Serializable{
 	
 	public void aniadirInventario(){
 		FarmaciaMedicamento fm = new FarmaciaMedicamento();
-		fm.setFarmacia(farmaciaSeleccionada);
-		fm.setMedicamento(medicamentoSeleccionado);
-		fm.setCantidad(Integer.parseInt(cantidad));
+		Farmacia f = farmaciaEJB.buscar(farmaciaSeleccionada);
+		fm.setFarmacia(f);
+		Medicamento m = medicamentoEJB.buscar(medicamentoSeleccionado);
+		fm.setMedicamento(m);
+		fm.setCantidad(Integer.parseInt(cantidadMed));
 		farmaciaMedicamentoEJB.crear(fm);
 		Messages.addFlashGlobalInfo("Se registró el inventario con exito!");
 	}
@@ -143,7 +150,7 @@ public class InventarioAjaxController implements Serializable{
 		farmaciaMedicamentoEJB.eliminar(fmPK);
 		Messages.addFlashGlobalInfo("Se eliminó el item del inventario con exito!");
 	}
-	
+
 	public String getNumRef() {
 		return numRef;
 	}
@@ -168,11 +175,51 @@ public class InventarioAjaxController implements Serializable{
 		this.fechaVencimiento = fechaVencimiento;
 	}
 
-	public TipoMedicamento getTipoSeleccionado() {
+	public String getCantidadMed() {
+		return cantidadMed;
+	}
+
+	public void setCantidadMed(String cantidadMed) {
+		this.cantidadMed = cantidadMed;
+	}
+
+	public TipoMedicamentoEJB getTipoMedicamentoEJB() {
+		return tipoMedicamentoEJB;
+	}
+
+	public void setTipoMedicamentoEJB(TipoMedicamentoEJB tipoMedicamentoEJB) {
+		this.tipoMedicamentoEJB = tipoMedicamentoEJB;
+	}
+
+	public MedicamentoEJB getMedicamentoEJB() {
+		return medicamentoEJB;
+	}
+
+	public void setMedicamentoEJB(MedicamentoEJB medicamentoEJB) {
+		this.medicamentoEJB = medicamentoEJB;
+	}
+
+	public FarmaciaEJB getFarmaciaEJB() {
+		return farmaciaEJB;
+	}
+
+	public void setFarmaciaEJB(FarmaciaEJB farmaciaEJB) {
+		this.farmaciaEJB = farmaciaEJB;
+	}
+
+	public FarmaciaMedicamentoEJB getFarmaciaMedicamentoEJB() {
+		return farmaciaMedicamentoEJB;
+	}
+
+	public void setFarmaciaMedicamentoEJB(FarmaciaMedicamentoEJB farmaciaMedicamentoEJB) {
+		this.farmaciaMedicamentoEJB = farmaciaMedicamentoEJB;
+	}
+
+	public int getTipoSeleccionado() {
 		return tipoSeleccionado;
 	}
 
-	public void setTipoSeleccionado(TipoMedicamento tipoSeleccionado) {
+	public void setTipoSeleccionado(int tipoSeleccionado) {
 		this.tipoSeleccionado = tipoSeleccionado;
 	}
 
@@ -184,11 +231,11 @@ public class InventarioAjaxController implements Serializable{
 		this.tipos = tipos;
 	}
 
-	public Farmacia getFarmaciaSeleccionada() {
+	public int getFarmaciaSeleccionada() {
 		return farmaciaSeleccionada;
 	}
 
-	public void setFarmaciaSeleccionada(Farmacia farmaciaSeleccionada) {
+	public void setFarmaciaSeleccionada(int farmaciaSeleccionada) {
 		this.farmaciaSeleccionada = farmaciaSeleccionada;
 	}
 
@@ -200,11 +247,11 @@ public class InventarioAjaxController implements Serializable{
 		this.farmacias = farmacias;
 	}
 
-	public Medicamento getMedicamentoSeleccionado() {
+	public int getMedicamentoSeleccionado() {
 		return medicamentoSeleccionado;
 	}
 
-	public void setMedicamentoSeleccionado(Medicamento medicamentoSeleccionado) {
+	public void setMedicamentoSeleccionado(int medicamentoSeleccionado) {
 		this.medicamentoSeleccionado = medicamentoSeleccionado;
 	}
 
@@ -223,14 +270,5 @@ public class InventarioAjaxController implements Serializable{
 	public void setInventario(List<FarmaciaMedicamentoDTO> inventario) {
 		this.inventario = inventario;
 	}
-
-	public String getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(String cantidad) {
-		this.cantidad = cantidad;
-	}
-
 	
 }

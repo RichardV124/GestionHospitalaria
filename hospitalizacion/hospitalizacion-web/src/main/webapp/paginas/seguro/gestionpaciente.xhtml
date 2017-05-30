@@ -42,7 +42,7 @@
 				<h:selectOneMenu id="tfepspasss" class="form-control" value="#{pacienteAjaxController.epsSeleccionada}">
 					<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 					<f:selectItems value="#{pacienteAjaxController.listaEps}" var="eps"
-					itemValue="#{eps.idEps}" itemLabel="#{eps.nombre}"/>
+					itemValue="#{eps.id}" itemLabel="#{eps.descripcion}"/>
 				</h:selectOneMenu>
 				<p:message for="tfepspasss" />
 				

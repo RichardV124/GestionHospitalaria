@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_FARMACIA")
+@Table(name="FARMACIA")
 @NamedQueries({ 
 	@NamedQuery(name = Farmacia.CONSULTA_LISTAR_FARMACIAS, query = "SELECT f FROM Farmacia f") 
 	})
@@ -22,7 +22,6 @@ public class Farmacia implements Serializable{
 	
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="DESCRIPCION",nullable=false,length=50)

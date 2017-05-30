@@ -23,6 +23,7 @@ import co.edu.eam.ingesoft.pa.negocio.beans.MunicipioEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.RolEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.UsuarioEJB;
+import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 
 @Named("pacienteAjaxController")
@@ -55,15 +56,15 @@ public class PacienteAjaxController implements Serializable {
 	
 	private String numeroDocumento;
 	
-	private Eps epsSeleccionada;
+	private int epsSeleccionada;
 	
 	private List<Eps> listaEps;
 	
-	private Municipio municipioSeleccionado;
+	private int municipioSeleccionado;
 	
 	private List<Municipio> listaMunicipios;
 	
-	private Departamento dptoSeleccionado;
+	private int dptoSeleccionado;
 	
 	private List<Departamento> listaDptos;
 	
@@ -83,21 +84,30 @@ public class PacienteAjaxController implements Serializable {
 	
 	@PostConstruct
 	public void inicializar(){
-		System.out.print("yoloooooooooooooooo");
-		listarCombos();
-//		pacientes = pacienteEJB.listarPacietes();
+		try {
+			listarCombos();
+			//pacientes = pacienteEJB.listarPacietes();
+			
+		} catch (ExcepcionNegocio e1) {
+			Messages.addFlashGlobalError(e1.getMessage());
+			e1.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Messages.addFlashGlobalInfo(e.getMessage());
+			e.printStackTrace();
+		}
 				
 	}
 	
 	public void listarCombos(){
 		listaEps = epsEJB.listarEps();
-		listaDptos = departamentoEJB.listarDepartamento();	
+		listaDptos = departamentoEJB.listarDepartamento();
+		listarMunicipios();
 	}
 	
 	public void listarMunicipios(){
-		if(dptoSeleccionado!=null){
-				listaMunicipios = municipioEJB.listarMunicipio(dptoSeleccionado);	
-		}
+		Departamento d = departamentoEJB.buscar(dptoSeleccionado);
+		listaMunicipios = municipioEJB.listarMunicipio(d);	
 	}
 	
 	
@@ -181,9 +191,6 @@ public class PacienteAjaxController implements Serializable {
 		fecha = "";
 		email = "";
 		generoSeleccionado = null;
-		epsSeleccionada = null;
-		dptoSeleccionado = null;
-		municipioSeleccionado = null;
 		numeroDocumento = "";
 	}
 
@@ -244,11 +251,11 @@ public class PacienteAjaxController implements Serializable {
 	}
 
 
-	public Eps getEpsSeleccionada() {
+	public int getEpsSeleccionada() {
 		return epsSeleccionada;
 	}
 
-	public void setEpsSeleccionada(Eps epsSeleccionada) {
+	public void setEpsSeleccionada(int epsSeleccionada) {
 		this.epsSeleccionada = epsSeleccionada;
 	}
 
@@ -336,11 +343,11 @@ public class PacienteAjaxController implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public Municipio getMunicipioSeleccionado() {
+	public int getMunicipioSeleccionado() {
 		return municipioSeleccionado;
 	}
 
-	public void setMunicipioSeleccionado(Municipio municipioSeleccionado) {
+	public void setMunicipioSeleccionado(int municipioSeleccionado) {
 		this.municipioSeleccionado = municipioSeleccionado;
 	}
 
@@ -352,11 +359,11 @@ public class PacienteAjaxController implements Serializable {
 		this.listaMunicipios = listaMunicipios;
 	}
 
-	public Departamento getDptoSeleccionado() {
+	public int getDptoSeleccionado() {
 		return dptoSeleccionado;
 	}
 
-	public void setDptoSeleccionado(Departamento dptoSeleccionado) {
+	public void setDptoSeleccionado(int dptoSeleccionado) {
 		this.dptoSeleccionado = dptoSeleccionado;
 	}
 

@@ -18,12 +18,12 @@ import javax.persistence.Table;
 public class FarmaciaMedicamento implements Serializable{
 	
 	@Id
-	@JoinColumn(name="FARMACIA_ID")
+	@JoinColumn(name="FARMACIA_ID" ,nullable=false)
 	@ManyToOne(cascade={})
 	private Farmacia farmacia;
 	
 	@Id
-	@JoinColumn(name="MEDICAMENTO_ID")
+	@JoinColumn(name="MEDICAMENTO_ID" ,nullable=false)
 	@ManyToOne(cascade={})
 	private Medicamento medicamento;
 	

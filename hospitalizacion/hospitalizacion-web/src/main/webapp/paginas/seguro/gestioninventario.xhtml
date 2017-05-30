@@ -37,12 +37,12 @@
 					<h:selectOneMenu id="cbtipo" class="form-control" value="#{inventarioAjaxController.tipoSeleccionado}">
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 						<f:selectItems value="#{inventarioAjaxController.tipos}" var="tipo"
-							itemValue="#{tipo}" itemLabel="#{tipo.descripcion}" />
+							itemValue="#{tipo.id}" itemLabel="#{tipo.descripcion}" />
 					</h:selectOneMenu>
 					<p:message for="cbtipo" />			
 					
 					<p:commandButton styleClass="ui-priority-primary" value="Registrar"
-					 action="#{inventarioAjaxController.registrarMedicamento}" process="@this"
+					 action="#{inventarioAjaxController.registrarMedicamento}" process="@this pmedicamento"
 					 update="pmedicamento pinventario"/>
 				</h:panelGrid>
 			</p:fieldset>	
@@ -55,7 +55,7 @@
 					<h:selectOneMenu id="cbmedicamento" class="form-control" value="#{inventarioAjaxController.medicamentoSeleccionado}">
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 						<f:selectItems value="#{inventarioAjaxController.medicamentos}" var="med"
-							itemValue="#{med}" itemLabel="#{med.nombre}" />
+							itemValue="#{med.id}" itemLabel="#{med.descripcion}" />
 					</h:selectOneMenu>
 					<p:message for="cbmedicamento" />
 
@@ -64,18 +64,17 @@
 					<h:selectOneMenu id="cbfarmacia" class="form-control" value="#{inventarioAjaxController.farmaciaSeleccionada}">
 						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 						<f:selectItems value="#{inventarioAjaxController.farmacias}" var="far"
-							itemValue="far" itemLabel="#{far.descripcion}" />
+							itemValue="#{far.id}" itemLabel="#{far.descripcion}" />
 					</h:selectOneMenu>
 					<p:message for="cbfarmacia" />	
 					
 					<p:outputLabel id="lblcantidad" for="tfcantidad"
 						value="Cantidad" /> 
-					<p:inputText id="tfcantidad" class="form-control" placeholder="Cantidad"
-						value="#{inventarioAjaxController.cantidad}" />
+					<p:inputText id="tfcantidad" value="#{inventarioAjaxController.cantidadMed}" />
 					<p:message for="tfcantidad" />		
 					
-					<p:commandButton styleClass="ui-priority-primary" value="Asignar"
-					 action="#{inventarioAjaxController.aniadirInventario}" process="@this"
+					<p:commandButton styleClass="ui-priority-primary" value="Registrar"
+					 action="#{inventarioAjaxController.aniadirInventario}" process="@this pinventario"
 					 update="pinventario tablainventario"/>
 				</h:panelGrid>
 			</p:fieldset>

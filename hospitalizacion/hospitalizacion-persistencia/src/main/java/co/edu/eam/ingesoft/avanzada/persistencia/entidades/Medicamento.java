@@ -28,7 +28,6 @@ public class Medicamento implements Serializable{
 	
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="DESCRIPCION", nullable=false, length=50)

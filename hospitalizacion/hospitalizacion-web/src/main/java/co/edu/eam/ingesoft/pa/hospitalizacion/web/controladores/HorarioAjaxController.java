@@ -74,7 +74,7 @@ public class HorarioAjaxController implements Serializable{
 		try {
 			listarMedicos();
 			listarHorarios();
-			listarHorariosAsignados();
+			//listarHorariosAsignados();
 		} catch (ExcepcionNegocio e1) {
 			Messages.addFlashGlobalError(e1.getMessage());
 			e1.printStackTrace();
@@ -242,4 +242,29 @@ public class HorarioAjaxController implements Serializable{
 		this.buscarHorario = buscarHorario;
 	}
 
+	public HorarioEJB getHorarioEJB() {
+		return horarioEJB;
+	}
+
+	public void setHorarioEJB(HorarioEJB horarioEJB) {
+		this.horarioEJB = horarioEJB;
+	}
+
+	public MedicoEJB getMedicoEJB() {
+		return medicoEJB;
+	}
+
+	public void setMedicoEJB(MedicoEJB medicoEJB) {
+		this.medicoEJB = medicoEJB;
+	}
+
+	public HorarioMedicoEJB getHorarioMedicoEJB() {
+		return horarioMedicoEJB;
+	}
+
+	public void setHorarioMedicoEJB(HorarioMedicoEJB horarioMedicoEJB) {
+		this.horarioMedicoEJB = horarioMedicoEJB;
+	}
+
+	
 }
