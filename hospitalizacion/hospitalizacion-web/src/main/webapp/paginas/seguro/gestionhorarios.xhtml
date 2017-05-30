@@ -19,9 +19,9 @@
 
 							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
 								process="@this tfbushorario " update="phorario"
-								action="#{horarioAjaxController.buscarHorario}" />
+								action="#{horarioAjaxController.buscar}" />
 							<p:inputText id="tfbushorario" placeholder="ID del horario"
-								value="#{horarioAjaxController.Buscar}" />
+								value="#{horarioAjaxController.buscarHorario}" />
 							<p:message for="tfbushorario" />
 
 						</h:panelGrid>
@@ -69,7 +69,6 @@
 					<p:outputLabel for="cbmedico" id="lblmedico"
 						value="Medico" />
 					<h:selectOneMenu id="cbmedico" class="form-control" value="#{horarioAjaxController.medicoSeleccionado}">
-						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 						<f:selectItems value="#{horarioAjaxController.medicos}" var="med"
 							itemValue="#{med}" itemLabel="#{med.nombre}" />
 					</h:selectOneMenu>
@@ -78,7 +77,6 @@
 					<p:outputLabel for="cbhorario" id="lblhorario"
 						value="Horario" />
 					<h:selectOneMenu id="cbhorario" class="form-control" value="#{horarioAjaxController.horarioSeleccionado}">
-						<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 						<f:selectItems value="#{horarioAjaxController.horarios}" var="hora"
 							itemValue="#{hora}" itemLabel="#{hora}" />
 					</h:selectOneMenu>

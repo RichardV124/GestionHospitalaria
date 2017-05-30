@@ -234,4 +234,12 @@ public class HorarioAjaxController implements Serializable{
 		this.horariosAsig = horariosAsig;
 	}
 
+	public String getBuscarHorario() {
+		return buscarHorario;
+	}
+
+	public void setBuscarHorario(String buscarHorario) {
+		this.buscarHorario = buscarHorario;
+	}
+
 }
