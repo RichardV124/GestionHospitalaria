@@ -119,9 +119,9 @@ public class InventarioAjaxController implements Serializable{
 	public void registrarMedicamento() throws ParseException{
 		Medicamento m = new Medicamento();
 		m.setDescripcion(nombre);
-		Calendar calendario = GregorianCalendar.getInstance();
-		Date fechaV = calendario.getTime();
-		//Date fechaV = new SimpleDateFormat("dd/MM/yyyy").parse(fechaVencimiento);
+//		Calendar calendario = GregorianCalendar.getInstance();
+//		Date fechaV = calendario.getTime();
+		Date fechaV = new SimpleDateFormat("dd-MM-yyyy").parse(fechaVencimiento);
 		m.setFechaVencimiento(fechaV);
 		m.setId(Integer.parseInt(numRef));
 		TipoMedicamento tm = tipoMedicamentoEJB.buscar(tipoSeleccionado);

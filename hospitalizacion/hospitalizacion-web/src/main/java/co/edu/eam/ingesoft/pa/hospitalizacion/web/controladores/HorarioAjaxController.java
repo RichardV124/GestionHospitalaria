@@ -3,7 +3,9 @@ package co.edu.eam.ingesoft.pa.hospitalizacion.web.controladores;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -58,11 +60,11 @@ public class HorarioAjaxController implements Serializable{
 	@EJB
 	private HorarioMedicoEJB horarioMedicoEJB;
 	
-	private Medico medicoSeleccionado;
+	private int medicoSeleccionado;
 	
 	private List<Medico> medicos;
 	
-	private Horario horarioSeleccionado;
+	private int horarioSeleccionado;
 	
 	private List<Horario> horarios;
 	
@@ -123,6 +125,8 @@ public class HorarioAjaxController implements Serializable{
 	public void registrar() throws ParseException{
 		Horario h = new Horario();
 		Date fechaH = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
+//		Calendar calendario = GregorianCalendar.getInstance();
+//		Date fechaH = calendario.getTime();
 		h.setFecha(fechaH);
 		h.setHoraInicial(Integer.parseInt(horaInicial));
 		h.setHoraFinal(Integer.parseInt(horaFinal));
@@ -136,8 +140,10 @@ public class HorarioAjaxController implements Serializable{
 	public void asignarHorario(){
 		HorarioMedico hm = new HorarioMedico();
 		hm.setDisponible(true);		
-		hm.setMedico(medicoSeleccionado);
-		hm.setHorario(horarioSeleccionado);
+		Medico m = medicoEJB.buscar(medicoSeleccionado);
+		hm.setMedico(m);
+		Horario h = horarioEJB.buscar(horarioSeleccionado);
+		hm.setHorario(h);
 		
 		horarioMedicoEJB.crear(hm);
 		Messages.addFlashGlobalInfo("Se le asignó el horario al medico con exito!");
@@ -194,11 +200,11 @@ public class HorarioAjaxController implements Serializable{
 		this.horaFinal = horaFinal;
 	}
 
-	public Medico getMedicoSeleccionado() {
+	public int getMedicoSeleccionado() {
 		return medicoSeleccionado;
 	}
 
-	public void setMedicoSeleccionado(Medico medicoSeleccionado) {
+	public void setMedicoSeleccionado(int medicoSeleccionado) {
 		this.medicoSeleccionado = medicoSeleccionado;
 	}
 
@@ -210,11 +216,11 @@ public class HorarioAjaxController implements Serializable{
 		this.medicos = medicos;
 	}
 
-	public Horario getHorarioSeleccionado() {
+	public int getHorarioSeleccionado() {
 		return horarioSeleccionado;
 	}
 
-	public void setHorarioSeleccionado(Horario horarioSeleccionado) {
+	public void setHorarioSeleccionado(int horarioSeleccionado) {
 		this.horarioSeleccionado = horarioSeleccionado;
 	}
 

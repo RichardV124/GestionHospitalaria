@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
@@ -17,6 +18,8 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Departamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Eps;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Municipio;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Rol;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Usuario;
 import co.edu.eam.ingesoft.pa.negocio.beans.DepartamentoEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.EpsEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MunicipioEJB;
@@ -50,11 +53,16 @@ public class PacienteAjaxController implements Serializable {
 	
 	private String generoSeleccionado;
 	
+	@NotNull(message = "Debe ingresar el nombre")
 	private String nombre;
 	
 	private String busNumeroDocumento;
 	
+	@NotNull(message = "Debe ingresar el numero de documento")
 	private String numeroDocumento;
+	
+	@NotNull(message = "Debe ingresar la direccion")
+	private String direccion;
 	
 	private int epsSeleccionada;
 	
@@ -68,10 +76,13 @@ public class PacienteAjaxController implements Serializable {
 	
 	private List<Departamento> listaDptos;
 	
+	@NotNull(message = "Debe ingresar la fecha")
 	private String fecha;
 	
+	@NotNull(message = "Debe ingresar el telefono")
 	private String telefono;
 
+	@NotNull(message = "Debe ingresar el email")
 	private String email;
 	
 	private List<Paciente> pacientes;
@@ -112,69 +123,75 @@ public class PacienteAjaxController implements Serializable {
 	
 	
 	public void registrar() throws ParseException{
+			
+		try {
+			Usuario u = new Usuario();
+			u.setUser(usuario);
+			u.setPassword(password);
+			Rol r = rolEJB.buscarRol(2);
+			u.setRol(r);
+			usuarioEJB.crear(u);
 		
-//		if(!(fecha.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty() ||
-//				generoSeleccionado.equalsIgnoreCase("Seleccione") || (epsSeleccionada == 0) || (numeroDocumento.isEmpty())) ){
-//
-//
-//			System.out.println("entro");
-//			
-//		Paciente pa = pacienteEJB.buscarPaciente(Integer.parseInt(numeroDocumento));
-//		if(pa == null){
-//			Paciente p = new Paciente();
-//			
-//			p.setNombre(nombre);
-//			p.setApellido(apellido);
-//			p.setIdentificacion(Integer.parseInt(numeroDocumento));
-//			p.setGenero(generoSeleccionado);
-//			p.setEmail(email);
-//			Eps e = epsEJB.buscarEps(epsSeleccionada);
-//			p.setEps(e);
-//			fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
-//			p.setFechaNacimiento(fechaNacimiento);
-//			p.setTelefono(telefono);
-//			if(p.getFechaNacimiento() != null){
-//				pacienteEJB.crearPaciente(p);
-//				limpiar();
-//				Messages.addFlashGlobalInfo("El paciente se ha registrado con exito");
-//			}else{
-//				System.out.println("No entro fecha");
-//				Messages.addFlashGlobalError("No entro fecha");
-//			}
-//			
-//			
-//		}else{
-//			Messages.addFlashGlobalError("El paciente con identificacion: "+numeroDocumento+" ya existe");
-//		}
-//		
-//		}else{
-//			Messages.addFlashGlobalError("Ingrese todos los datos");
-//			System.out.println("No entro");
-//		}
+			Paciente p = new Paciente();
+			p.setNombre(nombre);
+			p.setNumIdentificacion(Integer.parseInt(numeroDocumento));
+			p.setGenero(generoSeleccionado);
+			p.setEmail(email);
+			Eps e = epsEJB.buscarEps(epsSeleccionada);
+			p.setEps(e);
+			fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
+			p.setFechaNacimiento(fechaNacimiento);
+			p.setTelefono(telefono);
+			Municipio m = municipioEJB.buscar(municipioSeleccionado);
+			p.setMunicipio(m);
+			p.setUsuario(u);
+			p.setDireccion(direccion);
+			pacienteEJB.crear(p);
+			limpiar();
+			Messages.addFlashGlobalInfo("El paciente se ha registrado con exito");
+		} catch (ExcepcionNegocio e1) {
+			Messages.addFlashGlobalError(e1.getMessage());
+			e1.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Messages.addFlashGlobalInfo(e.getMessage());
+			e.printStackTrace();
+		}
+	
 	}
 	
 	public void buscar(){
-		System.out.print("QUE PEDOOOOOOOOOOOOOOOOOOOOO");
-//		if(!busNumeroDocumento.isEmpty()){
-//
-//		Paciente pa = pacienteEJB.buscarPaciente(Integer.parseInt(busNumeroDocumento));
-//		if(pa != null){
-//			nombre = pa.getNombre();
-//			apellido = pa.getApellido();
-//			numeroDocumento = String.valueOf(pa.getIdentificacion());
-//			telefono = pa.getTelefono();
-//			fecha = pa.getFechaNacimiento().toString();
-//			email = pa.getEmail();
-//			generoSeleccionado = pa.getGenero();
-//			epsSeleccionada = pa.getEps().getIdEps();
-//		}else{
-//			Messages.addFlashGlobalWarn("El paciente no existe");
-//			limpiar();
-//		
-//		}
-//		}else{
-//			Messages.addFlashGlobalWarn("Por favor ingrese documento");
-//		}
+		try {
+			if(!busNumeroDocumento.isEmpty()){
+
+				Paciente pa = pacienteEJB.buscar(Integer.parseInt(busNumeroDocumento));
+				if(pa != null){
+					nombre = pa.getNombre();
+					numeroDocumento = String.valueOf(pa.getNumIdentificacion());
+					telefono = pa.getTelefono();
+					fecha = pa.getFechaNacimiento().toString();
+					email = pa.getEmail();
+					direccion = pa.getDireccion();
+					epsSeleccionada = pa.getEps().getId();
+					usuario=pa.getUsuario().getUser();
+					password=pa.getUsuario().getPassword();
+				}else{
+					Messages.addFlashGlobalWarn("El paciente no existe");
+					limpiar();
+				
+				}
+			}else{
+				Messages.addFlashGlobalWarn("Por favor ingrese documento");
+			}
+		} catch (ExcepcionNegocio e1) {
+			Messages.addFlashGlobalError(e1.getMessage());
+			e1.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Messages.addFlashGlobalInfo(e.getMessage());
+			e.printStackTrace();
+		}
+		
 
 	}
 	
@@ -190,7 +207,11 @@ public class PacienteAjaxController implements Serializable {
 		telefono = "";
 		fecha = "";
 		email = "";
+		direccion="";
 		generoSeleccionado = null;
+		epsSeleccionada=0;
+		dptoSeleccionado=0;
+		municipioSeleccionado=0;
 		numeroDocumento = "";
 	}
 
@@ -389,6 +410,14 @@ public class PacienteAjaxController implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}	
 	
 	

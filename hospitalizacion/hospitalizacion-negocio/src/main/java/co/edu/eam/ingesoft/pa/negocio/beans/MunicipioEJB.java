@@ -37,6 +37,16 @@ public class MunicipioEJB {
 		}
 	}
 	
+	/**
+	 * metodo para buscar un departamento
+	 * @param numId, numero de identificacion del departamento a buscar
+	 * @return el departamento con el respectivo id, o null si no se encuentra el departamento
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public Municipio buscar(int numId){
+		return em.find(Municipio.class, numId);
+	}
+	
 //	/**
 //	 * metodo para listar los municipios registrados
 //	 */

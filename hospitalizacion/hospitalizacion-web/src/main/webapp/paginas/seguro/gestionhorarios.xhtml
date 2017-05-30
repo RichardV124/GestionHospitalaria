@@ -52,10 +52,10 @@
 						<p:message for="tfhoraifinal" />			
 						
 						<p:commandButton styleClass="ui-priority-primary" value="Registrar"
-						 action="#{horarioAjaxController.registrar}" process="@this"
+						 action="#{horarioAjaxController.registrar}" process="@this phorario"
 						 update="pasigh phorario"/>
 						 <p:commandButton styleClass="ui-priority-primary" value="Editar"
-						 action="#{horarioAjaxController.editar}" process="@this"
+						 action="#{horarioAjaxController.editar}" process="@this phorario"
 						 update="pasigh phorario"/>
 					</h:panelGrid>	
 
@@ -70,7 +70,7 @@
 						value="Medico" />
 					<h:selectOneMenu id="cbmedico" class="form-control" value="#{horarioAjaxController.medicoSeleccionado}">
 						<f:selectItems value="#{horarioAjaxController.medicos}" var="med"
-							itemValue="#{med}" itemLabel="#{med.nombre}" />
+							itemValue="#{med.cedula}" itemLabel="#{med.nombre}" />
 					</h:selectOneMenu>
 					<p:message for="cbmedico" />
 
@@ -78,12 +78,12 @@
 						value="Horario" />
 					<h:selectOneMenu id="cbhorario" class="form-control" value="#{horarioAjaxController.horarioSeleccionado}">
 						<f:selectItems value="#{horarioAjaxController.horarios}" var="hora"
-							itemValue="#{hora}" itemLabel="#{hora}" />
+							itemValue="#{hora.id}" itemLabel="#{hora}" />
 					</h:selectOneMenu>
 					<p:message for="cbhorario" />			
 					
 					<p:commandButton styleClass="ui-priority-primary" value="Asignar"
-					 action="#{horarioAjaxController.asignarHorario}" process="@this"
+					 action="#{horarioAjaxController.asignarHorario}" process="@this pasigh"
 					 update="pasigh tablahorariosasignados"/>
 				</h:panelGrid>
 			</p:fieldset>

@@ -73,6 +73,10 @@
 				<p:inputText type="Email" id="tfemapa" class="form-control" placeholder="Email" value="#{pacienteAjaxController.email}" />
 				<p:message for="tfemapa" />
 				
+				<p:outputLabel for="tfdir" id="dir" value="Direccion"  />
+				<p:inputText type="Email" id="tfdir" class="form-control" placeholder="Direccion" value="#{pacienteAjaxController.direccion}" />
+				<p:message for="tfdir" />
+				
 				<p:outputLabel for="tfusuario" id="lbusuario" value="Usuario"  />
 				<p:inputText id="tfusuario" class="form-control" placeholder="Usuario" value="#{pacienteAjaxController.usuario}" />
 				<p:message for="tfusuario" />
@@ -83,69 +87,11 @@
 				
 				<h:panelGrid columns="2">
 				<p:commandButton styleClass="ui-priority-primary" value="Registrar"  action="#{pacienteAjaxController.registrar}"
-					 process="@this datospa" update="datospa panellista"/>
+					 process="@this datospa" update="datospa"/>
 				
 				</h:panelGrid>
 			</h:panelGrid>
 		</p:fieldset>
-		
-		 <p:accordionPanel id="panellista">
-        <p:tab title="Pacientes" id="pes">
-			<p:dataTable id="panelTabla" value="#{pacienteAjaxController.pacientes}" var="pa"
-				border="1">
-				<p:column>
-					<f:facet name="header">
-							Nombre
-						</f:facet>
-					<p:outputLabel value="#{pa.nombre}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-							Apellido
-						</f:facet>
-					<p:outputLabel value="#{pa.apellido}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-							Documento
-						</f:facet>
-					<p:outputLabel value="#{pa.identificacion}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-							Genero
-						</f:facet>
-					<p:outputLabel value="#{pa.genero}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-							Fecha Nacimiento
-						</f:facet>
-					<p:outputLabel value="#{pa.fechaNacimiento}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-							Telefono
-						</f:facet>
-					<p:outputLabel value="#{pa.telefono}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-							Email
-						</f:facet>
-					<p:outputLabel value="#{pa.email}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">
-							Borrar
-						</f:facet>
-						<p:commandButton action="#{pacienteAjaxController.borrar(pa)}" value="Borrar"
-							process="@this" update="panellista" />
-					<p:outputLabel value="" />
-				</p:column>
-			</p:dataTable>
-			</p:tab>
-    </p:accordionPanel>
 			
 		</h:form>
 	</ui:define>

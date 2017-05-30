@@ -45,7 +45,7 @@
 					<p:tab title="Enfermedades">
 						<h:panelGrid columns="3" id="ppatologia">
 							<h:outputLabel id="lblpatologiaasignar" value="Patologia" />
-							<h:selectOneMenu id="cbpatologiaasignar"
+							<h:selectOneMenu id="cbpatologiaasignar" class="form-control"
 								value="#{patotratacontroller.patologiaSeleccionada}">
 								<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 							<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
@@ -64,7 +64,7 @@
 							<h:selectOneMenu id="cbmedicamento" class="form-control" value="#{atenderCitaAjaxController.medicamentoSeleccionado}">
 								<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 								<f:selectItems value="#{atenderCitaAjaxController.medicamentos}" var="med"
-									itemValue="#{med}" itemLabel="#{med.nombre}" />
+									itemValue="#{med.id}" itemLabel="#{med.descripcion}" />
 							</h:selectOneMenu>
 							<p:message for="cbmedicamento" />
 							
