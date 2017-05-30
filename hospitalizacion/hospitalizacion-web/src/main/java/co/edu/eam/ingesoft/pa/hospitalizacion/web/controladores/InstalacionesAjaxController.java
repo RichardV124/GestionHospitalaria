@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
@@ -28,28 +29,35 @@ public class InstalacionesAjaxController implements Serializable {
 
 	// Componentes del quirofano
 
+	@NotNull
 	private String quirofanoBuscar;
 
+	@NotNull
 	private String nombreQuirofano;
 
+	@NotNull
 	private String descripcionQuirofano;
 
+	@NotNull
 	private String pisoQuirofano;
 
 	private List<Quirofano> quirofanos;
 
 	// Componentes de la cama
 
+	@NotNull
 	private String camaBuscar;
 
 	private List<CamaDTO> camas;
 
+	@NotNull
 	private String pisoCama;
 
+	@NotNull
 	private String habitacionCama;
 
+	@NotNull
 	private String descripcionCama;
-	
 
 	@PostConstruct
 	public void inicializar() {
@@ -60,130 +68,124 @@ public class InstalacionesAjaxController implements Serializable {
 	}
 
 	// registrar
-		public void crearQuirofano(){
+	public void crearQuirofano() {
 
-			try{
-			
-			 if(!descripcionQuirofano.isEmpty()){
-			
-			
-			 System.out.println("entro");
-			
-			 Quirofano q = new Quirofano();
-			
-			 q.setDescripcion(descripcionQuirofano);
-			 q.setNombre(nombreQuirofano);
-			 q.setPiso(pisoQuirofano);
-			 
-			quirofanoEJB.crear(q);
-			
-			 limpiar();
-			 Messages.addFlashGlobalInfo("El quirofano se ha registrado con exito");
-			 }else{
-			 Messages.addFlashGlobalError("Ingrese todos los datos");
-			 System.out.println("No entro");
-			 }
-			 
-			}catch(Exception e){
-				Messages.addFlashGlobalError(e.getMessage());
-				e.printStackTrace();
+		try {
+
+			if (!descripcionQuirofano.isEmpty()) {
+
+				System.out.println("entro");
+
+				Quirofano q = new Quirofano();
+
+				q.setDescripcion(descripcionQuirofano);
+				q.setNombre(nombreQuirofano);
+				q.setPiso(pisoQuirofano);
+
+				quirofanoEJB.crear(q);
+
+				limpiar();
+				Messages.addFlashGlobalInfo("El quirofano se ha registrado con exito");
+			} else {
+				Messages.addFlashGlobalError("Ingrese todos los datos");
+				System.out.println("No entro");
 			}
-		}
-	
-	// registrar
-	public void crearCama(){
 
-		try{
-		
-		 if(!descripcionCama.isEmpty()){
-		
-		
-		 System.out.println("entro");
-		
-		 Cama c = new Cama();
-		
-		c.setDescripcion(descripcionCama);
-		c.setHabitacion(habitacionCama);
-		c.setPiso(pisoCama);
-		camaEJB.crearCama(c);
-		
-		 limpiar();
-		 Messages.addFlashGlobalInfo("La cama se ha registrado con exito");
-
-		 }else{
-		 Messages.addFlashGlobalError("Ingrese todos los datos");
-		 System.out.println("No entro");
-		 }
-		 
-		}catch(Exception e){
+		} catch (Exception e) {
 			Messages.addFlashGlobalError(e.getMessage());
 			e.printStackTrace();
 		}
 	}
 
-	
-	// editar
-			public void editarQuirofano(){
+	// registrar
+	public void crearCama() {
 
-				try{
-				
-				 if(!descripcionQuirofano.isEmpty()){
-				
-				
-				 System.out.println("entro");
-				
-				 Quirofano q = new Quirofano();
-				
-				 q.setDescripcion(descripcionQuirofano);
-				 q.setNombre(nombreQuirofano);
-				 q.setPiso(pisoQuirofano);
-				 
-				quirofanoEJB.editar(q);
-				
-				 limpiar();
-				 Messages.addFlashGlobalInfo("El quirofano se ha editado con exito");
-				 }else{
-				 Messages.addFlashGlobalError("Ingrese todos los datos");
-				 System.out.println("No entro");
-				 }
-				 
-				}catch(Exception e){
-					Messages.addFlashGlobalError(e.getMessage());
-					e.printStackTrace();
-				}
-			}
-		
-		// editar
-		public void editarCama(){
+		try {
 
-			try{
-			
-			 if(!descripcionCama.isEmpty()){
-			
-			
-			 System.out.println("entro");
-			
-			 Cama c = new Cama();
-			
-			c.setDescripcion(descripcionCama);
-			c.setHabitacion(habitacionCama);
-			c.setPiso(pisoCama);
-			camaEJB.editar(c);
-			
-			 limpiar();
-			 Messages.addFlashGlobalInfo("La cama se ha editado con exito");
-			 }else{
-			 Messages.addFlashGlobalError("Ingrese todos los datos");
-			 System.out.println("No entro");
-			 }
-			 
-			}catch(Exception e){
-				Messages.addFlashGlobalError(e.getMessage());
-				e.printStackTrace();
+			if (!descripcionCama.isEmpty()) {
+
+				System.out.println("entro");
+
+				Cama c = new Cama();
+
+				c.setDescripcion(descripcionCama);
+				c.setHabitacion(habitacionCama);
+				c.setPiso(pisoCama);
+				camaEJB.crearCama(c);
+
+				limpiar();
+				Messages.addFlashGlobalInfo("La cama se ha registrado con exito");
+
+			} else {
+				Messages.addFlashGlobalError("Ingrese todos los datos");
+				System.out.println("No entro");
 			}
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+			e.printStackTrace();
 		}
-	
-	
+	}
+
+	// editar
+	public void editarQuirofano() {
+
+		try {
+
+			if (!descripcionQuirofano.isEmpty()) {
+
+				System.out.println("entro");
+
+				Quirofano q = new Quirofano();
+
+				q.setDescripcion(descripcionQuirofano);
+				q.setNombre(nombreQuirofano);
+				q.setPiso(pisoQuirofano);
+
+				quirofanoEJB.editar(q);
+
+				limpiar();
+				Messages.addFlashGlobalInfo("El quirofano se ha editado con exito");
+			} else {
+				Messages.addFlashGlobalError("Ingrese todos los datos");
+				System.out.println("No entro");
+			}
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	// editar
+	public void editarCama() {
+
+		try {
+
+			if (!descripcionCama.isEmpty()) {
+
+				System.out.println("entro");
+
+				Cama c = new Cama();
+
+				c.setDescripcion(descripcionCama);
+				c.setHabitacion(habitacionCama);
+				c.setPiso(pisoCama);
+				camaEJB.editar(c);
+
+				limpiar();
+				Messages.addFlashGlobalInfo("La cama se ha editado con exito");
+			} else {
+				Messages.addFlashGlobalError("Ingrese todos los datos");
+				System.out.println("No entro");
+			}
+
+		} catch (Exception e) {
+			Messages.addFlashGlobalError(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
 	public void buscarQuirofano() {
 
 		if (!quirofanoBuscar.isEmpty()) {
@@ -203,52 +205,46 @@ public class InstalacionesAjaxController implements Serializable {
 		}
 
 	}
-	
+
 	public void buscarCama() {
 
-		if (!quirofanoBuscar.isEmpty()) {
-
-			Cama ca = camaEJB.buscarCama(Integer.parseInt(camaBuscar));
-			if (ca != null) {
-				descripcionCama = ca.getDescripcion();
-				pisoCama = ca.getPiso();
-				habitacionCama = ca.getHabitacion();
-			} else {
-				Messages.addFlashGlobalWarn("La cama no existe");
-				// limpiar();
-				//
-			}
+		Cama ca = camaEJB.buscarCama(Integer.parseInt(camaBuscar));
+		if (ca != null) {
+			descripcionCama = ca.getDescripcion();
+			pisoCama = ca.getPiso();
+			habitacionCama = ca.getHabitacion();
 		} else {
-			Messages.addFlashGlobalWarn("Ingrese el id de la cama a buscar");
+			Messages.addFlashGlobalWarn("La cama no existe");
+			// limpiar();
+			//
 		}
 
 	}
 
 	public void eliminarCama(CamaDTO cama) {
-		try{
-		camaEJB.eliminar(cama.getId());
-		Messages.addFlashGlobalInfo("Se ha eliminado la cuenta asociada con exito!");
-		}catch(Exception e){
+		try {
+			camaEJB.eliminar(cama.getId());
+			Messages.addFlashGlobalInfo("Se ha eliminado la cuenta asociada con exito!");
+		} catch (Exception e) {
 			Messages.addFlashGlobalInfo(e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void eliminarQuirofano(Quirofano qui) {
-		try{
-		quirofanoEJB.eliminar(qui.getId());
-		Messages.addFlashGlobalInfo("Se ha eliminado la cuenta asociada con exito!");
-		}catch(Exception e){
+		try {
+			quirofanoEJB.eliminar(qui.getId());
+			Messages.addFlashGlobalInfo("Se ha eliminado la cuenta asociada con exito!");
+		} catch (Exception e) {
 			Messages.addFlashGlobalInfo(e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
 
 	public void limpiar() {
-	nombreQuirofano = "";
-	//pisoQuirofano = "";
-	descripcionQuirofano = "";
+		nombreQuirofano = "";
+		// pisoQuirofano = "";
+		descripcionQuirofano = "";
 	}
 
 	public String getQuirofanoBuscar() {
@@ -331,7 +327,4 @@ public class InstalacionesAjaxController implements Serializable {
 		this.descripcionCama = descripcionCama;
 	}
 
-
-	
-	
 }

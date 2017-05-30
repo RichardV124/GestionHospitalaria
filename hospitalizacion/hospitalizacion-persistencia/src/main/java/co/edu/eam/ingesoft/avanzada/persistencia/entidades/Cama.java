@@ -22,7 +22,7 @@ public class Cama implements Serializable {
 	
 	@Id
 	@Column(name="ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="PISO",nullable=false,length=50)
