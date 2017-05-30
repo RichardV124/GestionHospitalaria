@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
+
+	<ui:define name="cuerpo">
+
+		<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+			closable="true" />
+
+		<h:form prependId="false">		
+			<p:fieldset legend="Citas Medicas Del Dia" style="margin-top:100px">
+				<p:dataTable id="tablacitasdia" value="#{citasDiaAjaxController.citas}" var="cita"
+					 border="1">
+
+					<p:column headerText="Estado">
+
+						<h:outputLabel value="cita.estado" />
+					</p:column>
+
+					<p:column headerText="Hora Inicial">
+
+						<h:outputLabel value="cita.horaInicial" />
+					</p:column>
+
+					<p:column headerText="Hora Final">
+
+						<h:outputLabel value="cita.horaFinal" />
+					</p:column>
+
+					<p:column headerText="Paciente">
+
+						<h:outputLabel value="cita.paciente" />
+					</p:column>
+					
+					<p:column headerText="Cedula Paciente">
+
+						<h:outputLabel value="cita.cedula" />
+					</p:column>
+
+					<p:column headerText="Opciones">
+						<p:commandButton action="#{citasDiaAjaxController.atender(cita)}"
+							process="@this" value="Atender"
+							update="tablainventario" 
+							 />
+					</p:column>
+
+				</p:dataTable>
+			</p:fieldset>	
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

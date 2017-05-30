@@ -54,14 +54,20 @@ public class Cita implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cita(int id, boolean atendido, String anotaciones, CaracterCita caracter, Cita cita) {
+
+	public Cita(int id, boolean atendido, String anotaciones, CaracterCita caracter, Cita cita, Paciente paciente,
+			HorarioMedico horarioMedico) {
 		super();
 		this.id = id;
 		this.atendido = atendido;
 		this.anotaciones = anotaciones;
 		this.caracter = caracter;
 		this.cita = cita;
+		this.paciente = paciente;
+		this.horarioMedico = horarioMedico;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -103,4 +109,21 @@ public class Cita implements Serializable{
 		this.cita = cita;
 	}
 
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+	public HorarioMedico getHorarioMedico() {
+		return horarioMedico;
+	}
+
+	public void setHorarioMedico(HorarioMedico horarioMedico) {
+		this.horarioMedico = horarioMedico;
+	}
+
+	
 }
