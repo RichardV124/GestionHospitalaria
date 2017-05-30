@@ -3,6 +3,8 @@ package co.edu.eam.ingesoft.pa.negocio.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
@@ -14,6 +16,9 @@ import co.edu.eam.ingesoft.pa.negocio.dtos.CirugiaHistorialDTO;
 import co.edu.eam.ingesoft.pa.negocio.dtos.MedicamentoEntregadoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
+
+@LocalBean
+@Stateless
 public class CirugiaEJB {
 	
 	@PersistenceContext

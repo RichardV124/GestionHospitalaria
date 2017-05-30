@@ -15,7 +15,7 @@
 					<p:inputText id="tfcedulahistorial"
 						value="#{historialController.documentoBuscar}" />
 					<p:commandButton styleClass="ui-priority-primary" value="Buscar"
-						process="@this tfcedulahistorial " update="" action="#" />
+						process="@this tfcedulahistorial " update="" action="#{historialController.buscarHistorial}" />
 
 					<p:outputLabel id="lblnombrehistorial" value="Nombre del paciente:" />
 					<br />
@@ -35,7 +35,7 @@
 
 						<h:panelGrid id="citashistorial" columns="4">
 
-							<p:dataTable id="tablaClientes"
+							<p:dataTable id="tablaCitaskk"
 								value="#{historialController.citas}" var="cit" border="1">
 								<p:column>
 									<f:facet name="header">
@@ -77,7 +77,7 @@
 							<p:panel id="panelmedicamentoscita"
 								header="Medicamentos recetados" style="margin-left:20px">
 
-								<p:dataTable id="tablaClientes"
+								<p:dataTable id="tablaMedicamentoskk"
 									value="#{historialController.medicamentos}" var="med"
 									border="1">
 									<p:column>
@@ -191,7 +191,7 @@
 
 						<h:panelGrid id="cirugiashistorial" columns="2">
 
-							<p:dataTable id="tablaClientes"
+							<p:dataTable id="tablaCirugiaskk"
 								value="#{historialController.cirugias}" var="ciru" border="1">
 								<p:column>
 									<f:facet name="header">

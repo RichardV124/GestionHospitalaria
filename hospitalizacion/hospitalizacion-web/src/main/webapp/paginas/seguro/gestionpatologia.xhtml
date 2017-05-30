@@ -5,6 +5,9 @@
 	xmlns:p="http://primefaces.org/ui" template="/templates/index.xhtml">
 
 	<ui:define name="cuerpo">
+
+		<p:messages id="facesMessage" autoUpdate="true" globalOnly="true"
+			closable="true" />
 		<h:form preprpenId="false">
 
 			<p:accordionPanel>
@@ -27,12 +30,14 @@
 
 					<p:panel id="patcrearpatopanel" header="Crear Patologia">
 
-						<h:panelGrid id="datospatologia" columns="2">
+						<h:panelGrid id="datospatologia" columns="3">
 
 							<p:outputLabel id="lbldescripcionpatologiacrear"
 								value="Descripcion:" />
 							<p:inputText id="tfdescripcionpatologiacrear"
 								value="#{patotratacontroller.descripcionPatologia}" />
+							<p:message for="tfdescripcionpatologiacrear" />
+
 							<p:outputLabel id="lbltipopatologia" value="Tipo:" />
 							<h:selectOneMenu id="cbtipopatologia"
 								value="#{patotratacontroller.tipoPatologia}">
@@ -42,9 +47,12 @@
 								<f:selectItem itemValue="Respiratoria" itemLabel="Respiratoria" />
 								<f:selectItem itemValue="Renal" itemLabel="Renal" />
 							</h:selectOneMenu>
+							<p:message for="cbtipopatologia" />
+
 							<p:outputLabel id="lblsintomaspatologia" value="Sintomas:" />
 							<p:inputTextarea id="tfsintomaspatologia"
-								value="#{customerController.sintomasPatologia}" />
+								value="#{patotratacontroller.sintomasPatologia}" />
+							<p:message for="tfsintomaspatologia" />
 
 						</h:panelGrid>
 
@@ -76,7 +84,8 @@
 							<p:commandButton styleClass="ui-priority-primary" value="Buscar"
 								process="@this tfbustratamiento " update="datostratamiento"
 								action="#{patotratacontroller.buscarTratamiento}" />
-							<p:inputText id="tfbustratamiento" value="" />
+							<p:inputText id="tfbustratamiento"
+								value="#{patotratacontroller.tratamientoBuscar}" />
 							<p:message for="tfbustratamiento" />
 
 						</h:panelGrid>
@@ -87,16 +96,18 @@
 
 						<p:panel id="tratamientocrearpanel" header="Crear tratamiento">
 
-							<h:panelGrid id="datostratamiento" columns="2">
+							<h:panelGrid id="datostratamiento" columns="3">
 
 								<p:outputLabel id="lblnombretratamiento" value="Nombre:" />
 								<p:inputText id="tfnombretratamiento"
 									value="#{patotratacontroller.nombreTratamiento}" />
+								<p:message for="tfnombretratamiento" />
 
 								<p:outputLabel id="lbldescripciontratamiento"
 									value="Descripcion:" />
 								<p:inputText id="tfdescripciontratamiento"
 									value="#{patotratacontroller.descripcionTratamiento}" />
+								<p:message for="tfdescripciontratamiento" />
 
 							</h:panelGrid>
 
@@ -111,10 +122,9 @@
 						</p:panel>
 
 						<p:panel id="asignartratamiento"
-							header="Asignar tratamiento a patologia" 
-							style="margin-left:20px">
+							header="Asignar tratamiento a patologia" style="margin-left:20px">
 
-							<h:panelGrid id="datosasignacion" columns="2">
+							<h:panelGrid id="datosasignacion" columns="3">
 
 								<h:outputLabel id="lblpatologiaasignar" value="Patologia" />
 								<h:selectOneMenu id="cbpatologiaasignar"
@@ -124,6 +134,8 @@
 										var="patologia" itemValue="#{patologia.id}"
 										itemLabel="#{patologia.descripcion}" />
 								</h:selectOneMenu>
+								<p:message for="cbpatologiaasignar" />
+
 								<h:outputLabel id="lbltratamientoasignar" value="Tratamiento" />
 								<h:selectOneMenu id="cbtratamientoasignar"
 									value="#{patotratacontroller.tratamientoSeleccionada}">
@@ -132,14 +144,16 @@
 										var="tratamiento" itemValue="#{tratamiento.id}"
 										itemLabel="#{tratamiento.nombre}" />
 								</h:selectOneMenu>
+								<p:message for="cbtratamientoasignar" />
 
 								<br />
 
 							</h:panelGrid>
 
 							<h:panelGrid columns="2">
-								<p:commandButton styleClass="ui-priority-primary" value="Asignar tratamiento"
-									ajax="false" action="#{patotratacontroller.asignarTratamiento}" />
+								<p:commandButton styleClass="ui-priority-primary"
+									value="Asignar tratamiento" ajax="false"
+									action="#{patotratacontroller.asignarTratamiento}" />
 							</h:panelGrid>
 						</p:panel>
 
@@ -151,8 +165,9 @@
 
 			<!-- value="customers" la lista con que se va a lleanr tabla y su get -->
 			<p:dataTable id="tablaTratamientosPatologia"
-				value="#{patotratacontroller.patologiasTratamientos}" var="trapat" border="1">
-				
+				value="#{patotratacontroller.patologiasTratamientos}" var="trapat"
+				border="1">
+
 				<p:column headerText="Patologia">
 					<h:outputLabel value="#{trapat.patologia}" />
 				</p:column>
@@ -164,8 +179,7 @@
 				<p:column headerText="Eliminar">
 					<p:commandButton
 						action="#{patotratacontroller.eliminartratamientopatologia(trapat)}"
-						process="@this" value="Quitar"
-						update="tablaTratamientosPatologia" />
+						process="@this" value="Quitar" update="tablaTratamientosPatologia" />
 				</p:column>
 
 			</p:dataTable>

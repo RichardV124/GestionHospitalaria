@@ -78,7 +78,7 @@
 						value="#{instalacontroller.quirofanos}" var="qui" border="1">
 						<p:column headerText="Id">
 							<!-- El label es el valor del atributo -->
-							<h:outputLabel value="#{qui.idType}" />
+							<h:outputLabel value="#{qui.id}" />
 						</p:column>
 
 						<p:column headerText="Nombre">
@@ -98,11 +98,11 @@
 							<h:outputLabel value="#{qui.disponible}" />
 						</p:column>
 
-						<p:column headerText="Eliminar">
+						<p:column headerText="Opciones">
 							<p:commandButton
 								action="#{instalacontroller.eliminarQuirofano(qui)}"
-								process="@this" value="#{msj['asociacioncuenta.verificar']}"
-								update="tablaCamas" />
+								process="@this" value="Eliminar"
+								update="tablaQuirofanos" />
 						</p:column>
 
 					</p:dataTable>
@@ -208,9 +208,9 @@
 						</p:column>
 
 
-						<p:column headerText="Eliminar">
+						<p:column headerText="Opciones">
 							<p:commandButton action="#{instalacontroller.eliminarCama(cam)}"
-								process="@this" value="#{msj['asociacioncuenta.verificar']}"
+								process="@this" value="Eliminar"
 								update="tablaCamas" />
 						</p:column>
 

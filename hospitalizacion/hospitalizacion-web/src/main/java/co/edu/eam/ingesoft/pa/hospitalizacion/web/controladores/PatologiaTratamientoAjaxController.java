@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
@@ -42,28 +43,38 @@ public class PatologiaTratamientoAjaxController implements Serializable {
 
 	// Componentes de la patologia
 
+	@NotNull
 	private String patologiaBuscar;
 
+	@NotNull
 	private String descripcionPatologia;
 
+	@NotNull
 	private String tipoPatologia;
 
+	@NotNull
 	private String sintomasPatologia;
 
+	
 	private List<Patologia> patologias;
 
+	@NotNull
 	private String patologiaSeleccionada;
 
 	// Componentes del tratamiento
 
+	@NotNull
 	private String tratamientoBuscar;
 
 	private List<Tratamiento> tratamientos;
 
+	@NotNull
 	private String nombreTratamiento;
 
+	@NotNull
 	private String descripcionTratamiento;
 
+	@NotNull
 	private String tratamientoSeleccionada;
 
 	private List<PatologiaTratamientoDTO> patologiasTratamientos;
@@ -72,9 +83,12 @@ public class PatologiaTratamientoAjaxController implements Serializable {
 	public void inicializar() {
 
 		try {
-
+			
 			listarTratamientos();
 			listarPatologias();
+			listarPatologiaTratamiento();
+			
+			
 		} catch (
 
 		ExcepcionNegocio e1) {
@@ -99,14 +113,14 @@ public class PatologiaTratamientoAjaxController implements Serializable {
 
 				Patologia p = new Patologia();
 
-				p.setDescripcion(descripcionPatologia);
+				p.setNombre(descripcionPatologia);
 				p.setSintomas(sintomasPatologia);
 				p.setTipo(tipoPatologia);
 
 				patologiaEJB.crearPatologia(p);
-
 				limpiar();
 				Messages.addFlashGlobalInfo("La patologia se ha registrado con exito");
+				listarPatologias();
 			} else {
 				Messages.addFlashGlobalError("Ingrese todos los datos");
 				System.out.println("No entro");
@@ -135,7 +149,7 @@ public class PatologiaTratamientoAjaxController implements Serializable {
 
 				limpiar();
 				Messages.addFlashGlobalInfo("El tratamiento se ha registrado con exito");
-
+				listarTratamientos();
 			} else {
 				Messages.addFlashGlobalError("Ingrese todos los datos");
 				System.out.println("No entro");
@@ -168,7 +182,8 @@ public class PatologiaTratamientoAjaxController implements Serializable {
 
 				limpiar();
 				Messages.addFlashGlobalInfo(
-						"Se ha asignado el tratamiento " + tra.getNombre() + " a la patologia " + pat.getDescripcion());
+						"Se ha asignado el tratamiento " + tra.getNombre() + " a la patologia " + pat.getNombre());
+				listarPatologiaTratamiento();
 
 			} else {
 				Messages.addFlashGlobalError("Ingrese todos los datos");
@@ -192,7 +207,7 @@ public class PatologiaTratamientoAjaxController implements Serializable {
 
 				Patologia p = new Patologia();
 
-				p.setDescripcion(descripcionPatologia);
+				p.setNombre(descripcionPatologia);
 				p.setSintomas(sintomasPatologia);
 				p.setTipo(tipoPatologia);
 
@@ -267,7 +282,7 @@ public class PatologiaTratamientoAjaxController implements Serializable {
 			Patologia pa = patologiaEJB.buscarPatologia(Integer.parseInt(patologiaBuscar));
 			if (pa != null) {
 
-				descripcionPatologia = pa.getDescripcion();
+				descripcionPatologia = pa.getNombre();
 				tipoPatologia = pa.getTipo();
 				sintomasPatologia = pa.getSintomas();
 
@@ -317,7 +332,7 @@ public class PatologiaTratamientoAjaxController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * metodo para llenar el combo con los tratamientos
 	 */

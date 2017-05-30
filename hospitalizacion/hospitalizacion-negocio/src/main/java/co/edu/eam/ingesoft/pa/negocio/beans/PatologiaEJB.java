@@ -12,10 +12,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.PatologiaTratamiento;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Tratamiento;
-import co.edu.eam.ingesoft.pa.negocio.dtos.CamaDTO;
-import co.edu.eam.ingesoft.pa.negocio.dtos.MedicamentoEntregadoDTO;
 import co.edu.eam.ingesoft.pa.negocio.dtos.PatologiaHistorialDTO;
 import co.edu.eam.ingesoft.pa.negocio.dtos.PatologiaTratamientoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
@@ -92,25 +88,31 @@ public class PatologiaEJB {
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<PatologiaTratamientoDTO> listarTratamientosPatologia() {
 
-		Query q = em.createNativeQuery("SELECT p.ID,p.NOMBRE,t.ID,t.DESCRIPCION FROM PATOLOGIA_TRATAMIENTO pt "
-				+ "JOIN PATOLOGIA p ON pt.PATOLOGIA_ID=p.ID JOIN TRATAMIENTO t ON pt.TRATAMIENTO_ID=t.ID;");
+		Query q = em.createNativeQuery("SELECT p.ID,p.NOMBRE,t.ID,t.DESCRIPCION FROM PATOLOGIA_TRATAMIENTO pt JOIN PATOLOGIA p ON pt.PATOLOGIA_ID=p.ID "
+				+ "JOIN TRATAMIENTO t ON pt.TRATAMIENTO_ID=t.ID;");
 
 		List<PatologiaTratamientoDTO> lista = new ArrayList<PatologiaTratamientoDTO>();
-		List<Object[]> camas = q.getResultList();
+		List<Object[]> tratamientos = q.getResultList();
+		if (!tratamientos.isEmpty()) {
 
-		for (Object[] a : camas) {
+			for (Object[] a : tratamientos) {
 
-			PatologiaTratamientoDTO dto = new PatologiaTratamientoDTO();
-			dto.setIdPatologia(Integer.parseInt(a[0].toString()));
-			dto.setPatologia(a[1].toString());
-			dto.setIdTratamiento(Integer.parseInt(a[2].toString()));
-			dto.setTratamiento(a[3].toString());
-			lista.add(dto);
+				PatologiaTratamientoDTO dto = new PatologiaTratamientoDTO();
+				dto.setIdPatologia(Integer.parseInt(a[0].toString()));
+				dto.setPatologia(a[1].toString());
+				dto.setIdTratamiento(Integer.parseInt(a[2].toString()));
+				dto.setTratamiento(a[3].toString());
+				lista.add(dto);
+			}
+
+			return lista;
+		}else{
+			throw new ExcepcionNegocio("No hay Patologias con tratamientos en nuestra base de datos");
 		}
-
-		return lista;
+		
+		
 	}
-	
+
 	/**
 	 * metodo para listar las patologias presentadas en la cita
 	 */

@@ -38,7 +38,7 @@
 				</h:selectOneMenu>
 				<p:message for="tfgenmed" />
 				
-				<p:outputLabel for="tftipomedico" id="tipomed" value="Eps"  />
+				<p:outputLabel for="tftipomedico" id="tipomed" value="Tipo de medico"  />
 				<h:selectOneMenu id="tftipomedico" class="form-control" value="#{medicoajaxcontroller.tipoMedicoSeleccionado}">
 					<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 					<f:selectItems value="#{medicoajaxcontroller.listaTipoMedico}" var="tipo"
@@ -50,7 +50,7 @@
 				<h:selectOneMenu id="cbdptomed" class="form-control" value="#{medicoajaxcontroller.dptoSeleccionado}">
 					<f:selectItems value="#{medicoajaxcontroller.listaDptos}" var="dpto"
 					itemValue="#{dpto}" itemLabel="#{dpto.descripcion}"/>
-					<f:ajax event="change" execute="@this" render="cbmunicipio" listener="#{medicoajaxcontroller.listarMunicipios}"/>
+					<f:ajax event="change" execute="@this" render="datosmed" listener="#{medicoajaxcontroller.listarMunicipios}"/>
 				</h:selectOneMenu>
 				<p:message for="lbdptomed" />
 				

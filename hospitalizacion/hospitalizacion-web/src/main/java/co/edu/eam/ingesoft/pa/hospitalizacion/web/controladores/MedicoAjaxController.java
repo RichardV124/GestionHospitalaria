@@ -98,6 +98,7 @@ public class MedicoAjaxController implements Serializable {
 	public void listarCombos(){
 		listaTipoMedico = tipoMedicoEJB.listarTipoMedicos();
 		listaDptos = departamentoEJB.listarDepartamento();	
+		medicos = medicoEJB.listarMedicos();
 	}
 	
 	public void listarMunicipios(){
@@ -109,68 +110,68 @@ public class MedicoAjaxController implements Serializable {
 	
 	public void registrar() throws ParseException{
 		
-//		if(!(fecha.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty() ||
-//				generoSeleccionado.equalsIgnoreCase("Seleccione") || (epsSeleccionada == 0) || (numeroDocumento.isEmpty())) ){
-//
-//
-//			System.out.println("entro");
-//			
-//		Paciente pa = pacienteEJB.buscarPaciente(Integer.parseInt(numeroDocumento));
-//		if(pa == null){
-//			Paciente p = new Paciente();
-//			
-//			p.setNombre(nombre);
-//			p.setApellido(apellido);
-//			p.setIdentificacion(Integer.parseInt(numeroDocumento));
-//			p.setGenero(generoSeleccionado);
-//			p.setEmail(email);
-//			Eps e = epsEJB.buscarEps(epsSeleccionada);
-//			p.setEps(e);
-//			fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
-//			p.setFechaNacimiento(fechaNacimiento);
-//			p.setTelefono(telefono);
-//			if(p.getFechaNacimiento() != null){
-//				pacienteEJB.crearPaciente(p);
-//				limpiar();
-//				Messages.addFlashGlobalInfo("El paciente se ha registrado con exito");
-//			}else{
-//				System.out.println("No entro fecha");
-//				Messages.addFlashGlobalError("No entro fecha");
-//			}
-//			
-//			
-//		}else{
-//			Messages.addFlashGlobalError("El paciente con identificacion: "+numeroDocumento+" ya existe");
-//		}
-//		
-//		}else{
-//			Messages.addFlashGlobalError("Ingrese todos los datos");
-//			System.out.println("No entro");
-//		}
+		if(!(fecha.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || email.isEmpty() ||
+				generoSeleccionado.equalsIgnoreCase("Seleccione") || (tipoMedicoSeleccionado == null) || (numeroDocumento.isEmpty())) ){
+
+
+			System.out.println("entro");
+			
+		Medico pa = medicoEJB.buscar(Integer.parseInt(numeroDocumento));
+		if(pa == null){
+			Medico p = new Medico();
+			
+			p.setNombre(nombre);
+			p.setCedula(Integer.parseInt(numeroDocumento));
+			p.setGenero(generoSeleccionado);
+			p.setEmail(email);
+			p.setMunicipio(municipioSeleccionado);
+			p.setTipoMedico(tipoMedicoSeleccionado);
+			fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
+			p.setFechaNacimiento(fechaNacimiento);
+			p.setTelefono(telefono);
+			if(p.getFechaNacimiento() != null){
+				medicoEJB.crear(p);
+				limpiar();
+				Messages.addFlashGlobalInfo("El paciente se ha registrado con exito");
+			}else{
+				System.out.println("No entro fecha");
+				Messages.addFlashGlobalError("No entro fecha");
+			}
+			
+			
+		}else{
+			Messages.addFlashGlobalError("El paciente con identificacion: "+numeroDocumento+" ya existe");
+		}
+		
+		}else{
+			Messages.addFlashGlobalError("Ingrese todos los datos");
+			System.out.println("No entro");
+		}
 	}
 	
 	public void buscar(){
 		System.out.print("QUE PEDOOOOOOOOOOOOOOOOOOOOO");
-//		if(!busNumeroDocumento.isEmpty()){
-//
-//		Paciente pa = pacienteEJB.buscarPaciente(Integer.parseInt(busNumeroDocumento));
-//		if(pa != null){
-//			nombre = pa.getNombre();
-//			apellido = pa.getApellido();
-//			numeroDocumento = String.valueOf(pa.getIdentificacion());
-//			telefono = pa.getTelefono();
-//			fecha = pa.getFechaNacimiento().toString();
-//			email = pa.getEmail();
-//			generoSeleccionado = pa.getGenero();
-//			epsSeleccionada = pa.getEps().getIdEps();
-//		}else{
-//			Messages.addFlashGlobalWarn("El paciente no existe");
-//			limpiar();
-//		
-//		}
-//		}else{
-//			Messages.addFlashGlobalWarn("Por favor ingrese documento");
-//		}
+		if(!busNumeroDocumento.isEmpty()){
+
+		Medico pa = medicoEJB.buscar(Integer.parseInt(busNumeroDocumento));
+		if(pa != null){
+			nombre = pa.getNombre();
+			tipoMedicoSeleccionado = pa.getTipoMedico();
+			numeroDocumento = String.valueOf(pa.getCedula());
+			telefono = pa.getTelefono();
+			fecha = pa.getFechaNacimiento().toString();
+			email = pa.getEmail();
+			generoSeleccionado = pa.getGenero();
+			dptoSeleccionado = pa.getMunicipio().getDepartamento();
+			municipioSeleccionado = pa.getMunicipio();
+		}else{
+			Messages.addFlashGlobalWarn("El paciente no existe");
+			limpiar();
+		
+		}
+		}else{
+			Messages.addFlashGlobalWarn("Por favor ingrese documento");
+		}
 
 	}
 	

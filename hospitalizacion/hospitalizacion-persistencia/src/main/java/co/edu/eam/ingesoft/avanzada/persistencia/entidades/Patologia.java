@@ -27,8 +27,8 @@ public class Patologia implements Serializable{
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="DESCRIPCION", nullable=false, length=50)
-	private String descripcion;
+	@Column(name="NOMBRE", nullable=false, length=50)
+	private String nombre;
 	
 	@Column(name="TIPO", nullable=false, length=50)
 	private String tipo;
@@ -49,12 +49,12 @@ public class Patologia implements Serializable{
 		this.id = id;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getTipo() {

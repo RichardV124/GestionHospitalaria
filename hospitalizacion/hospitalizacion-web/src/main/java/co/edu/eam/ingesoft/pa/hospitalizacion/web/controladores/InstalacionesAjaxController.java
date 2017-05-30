@@ -62,9 +62,13 @@ public class InstalacionesAjaxController implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 
-		// listarCombos();
-		// pacientes = pacienteEJB.listarPacietes();
+		actualizarTabla();
 
+	}
+
+	public void actualizarTabla() {
+		quirofanos = quirofanoEJB.listaQuirofano();
+		camas = camaEJB.listarCamas();
 	}
 
 	// registrar
@@ -116,6 +120,7 @@ public class InstalacionesAjaxController implements Serializable {
 				limpiar();
 				Messages.addFlashGlobalInfo("La cama se ha registrado con exito");
 
+				actualizarTabla();
 			} else {
 				Messages.addFlashGlobalError("Ingrese todos los datos");
 				System.out.println("No entro");
@@ -132,18 +137,22 @@ public class InstalacionesAjaxController implements Serializable {
 
 		try {
 
-			if (!descripcionQuirofano.isEmpty()) {
+			if (quirofanoBuscar.isEmpty()) {
+
+				Messages.addFlashGlobalError("Debe buscar primero el quirofano a editar");
+
+			} else if (!descripcionQuirofano.isEmpty()) {
 
 				System.out.println("entro");
 
-				Quirofano q = new Quirofano();
+				Quirofano q = quirofanoEJB.buscar(Integer.parseInt(quirofanoBuscar));
 
 				q.setDescripcion(descripcionQuirofano);
 				q.setNombre(nombreQuirofano);
 				q.setPiso(pisoQuirofano);
 
 				quirofanoEJB.editar(q);
-
+				actualizarTabla();
 				limpiar();
 				Messages.addFlashGlobalInfo("El quirofano se ha editado con exito");
 			} else {
@@ -162,17 +171,21 @@ public class InstalacionesAjaxController implements Serializable {
 
 		try {
 
-			if (!descripcionCama.isEmpty()) {
+			if (camaBuscar.isEmpty()) {
+
+				Messages.addFlashGlobalError("Debe buscar primero la cama a editar");
+
+			} else if (!descripcionCama.isEmpty()) {
 
 				System.out.println("entro");
 
-				Cama c = new Cama();
+				Cama c = camaEJB.buscarCama(Integer.parseInt(camaBuscar));
 
 				c.setDescripcion(descripcionCama);
 				c.setHabitacion(habitacionCama);
 				c.setPiso(pisoCama);
 				camaEJB.editar(c);
-
+				actualizarTabla();
 				limpiar();
 				Messages.addFlashGlobalInfo("La cama se ha editado con exito");
 			} else {
@@ -208,15 +221,20 @@ public class InstalacionesAjaxController implements Serializable {
 
 	public void buscarCama() {
 
-		Cama ca = camaEJB.buscarCama(Integer.parseInt(camaBuscar));
-		if (ca != null) {
-			descripcionCama = ca.getDescripcion();
-			pisoCama = ca.getPiso();
-			habitacionCama = ca.getHabitacion();
+		if (!camaBuscar.isEmpty()) {
+
+			Cama ca = camaEJB.buscarCama(Integer.parseInt(camaBuscar));
+			if (ca != null) {
+				descripcionCama = ca.getDescripcion();
+				pisoCama = ca.getPiso();
+				habitacionCama = ca.getHabitacion();
+			} else {
+				Messages.addFlashGlobalWarn("La cama no existe");
+				// limpiar();
+				//
+			}
 		} else {
-			Messages.addFlashGlobalWarn("La cama no existe");
-			// limpiar();
-			//
+			Messages.addFlashGlobalWarn("Ingrese el id de la cama a buscar");
 		}
 
 	}
@@ -224,7 +242,7 @@ public class InstalacionesAjaxController implements Serializable {
 	public void eliminarCama(CamaDTO cama) {
 		try {
 			camaEJB.eliminar(cama.getId());
-			Messages.addFlashGlobalInfo("Se ha eliminado la cuenta asociada con exito!");
+			Messages.addFlashGlobalInfo("Se ha eliminado la cama con exito!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalInfo(e.getMessage());
 			e.printStackTrace();
@@ -234,7 +252,7 @@ public class InstalacionesAjaxController implements Serializable {
 	public void eliminarQuirofano(Quirofano qui) {
 		try {
 			quirofanoEJB.eliminar(qui.getId());
-			Messages.addFlashGlobalInfo("Se ha eliminado la cuenta asociada con exito!");
+			Messages.addFlashGlobalInfo("Se ha eliminado el quirofano con exito!");
 		} catch (Exception e) {
 			Messages.addFlashGlobalInfo(e.getMessage());
 			e.printStackTrace();
@@ -245,6 +263,10 @@ public class InstalacionesAjaxController implements Serializable {
 		nombreQuirofano = "";
 		// pisoQuirofano = "";
 		descripcionQuirofano = "";
+		pisoQuirofano = "";
+		pisoCama = "";
+		descripcionCama = "";
+		habitacionCama = "";
 	}
 
 	public String getQuirofanoBuscar() {
