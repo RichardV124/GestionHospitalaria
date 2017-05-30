@@ -15,9 +15,11 @@ import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medicamento;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.MedicamentoRecetado;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.MedicamentosRecetadosPK;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Patologia;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicamentoEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicamentoRecetadoEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.PatologiaEJB;
 import co.edu.eam.ingesoft.pa.negocio.dtos.MedicamentoRecetadoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
@@ -51,17 +53,25 @@ public class AtenderCitaAjaxController implements Serializable{
 	@EJB
 	private CitaEJB citaEJB;
 	
+	@EJB
+	private PatologiaEJB patologiaEJB;
+	
 	private Medicamento medicamentoSeleccionado;
 	
 	private List<Medicamento> medicamentos;
 	
 	private List<MedicamentoRecetadoDTO> medicamentosRecetados;
 	
+	private List<Patologia> patologias;
+
+	private Patologia patologiaSeleccionada;
+	
 	
 	@PostConstruct
 	public void inicializar() {
 		try {
 			listarMedicamentos();
+			listarPatologias();
 		} catch (ExcepcionNegocio e1) {
 			Messages.addFlashGlobalError(e1.getMessage());
 			e1.printStackTrace();
@@ -75,6 +85,10 @@ public class AtenderCitaAjaxController implements Serializable{
 	
 	public void listarMedicamentos(){
 		medicamentos = medicamentoEJB.listarMedicamentos();
+	}
+	
+	public void listarPatologias(){
+		patologias = patologiaEJB.listarPatologias();
 	}
 	
 	public void listarMedicamentosRecetados(){

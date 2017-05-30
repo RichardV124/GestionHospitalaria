@@ -15,14 +15,46 @@
 			
 				<p:accordionPanel>
 					<p:tab title="Cita Medica">
+						<h:panelGrid columns="3" id="pacita">
+							<p:outputLabel id="lblpaciente" for="tfpaciente"
+								value="Paciente" /> 
+						<p:inputText id="tfpaciente" class="form-control" 
+								value="#{atenderCitaAjaxController.paciente}" />
+						<p:message for="tfpaciente" />
 						
-	
+						<p:outputLabel id="lblhorainicial" for="tfhorainicial"
+								value="Hora Inicial" /> 
+						<p:inputText id="tfhorainicial" class="form-control"
+								value="#{atenderCitaAjaxController.horaInicial}" />
+						<p:message for="tfhorainicial" />
+						
+						<p:outputLabel id="lblhorafinal" for="tfhorafinal"
+								value="Hora Final" /> 
+						<p:inputText id="tfhorafinal" class="form-control"
+								value="#{atenderCitaAjaxController.horaFinal}" />
+						<p:message for="tfhorafinal" />
+						
+						<p:outputLabel id="lblanotaciones" for="tfanotaciones"
+								value="Anotaciones" /> 
+						<p:inputTextarea id="tfanotaciones" class="form-control"
+								value="#{atenderCitaAjaxController.anotaciones}" />
+						<p:message for="tfanotaciones" />
+						</h:panelGrid>						
 					</p:tab>
 					
 					<p:tab title="Enfermedades">
+						<h:panelGrid columns="3" id="ppatologia">
+							<h:outputLabel id="lblpatologiaasignar" value="Patologia" />
+							<h:selectOneMenu id="cbpatologiaasignar"
+								value="#{patotratacontroller.patologiaSeleccionada}">
+								<f:selectItem itemValue="0" itemLabel="Seleccione..." />
+							<!-- x<f:selectItems value="#" itemLabel="#" itemValue="#" />-->
+							<f:selectItems value="#{atenderCitaAjaxController.patologias}"
+								var="patologia" itemValue="#{patologia.id}"
+								itemLabel="#{patologia.descripcion}" />
+							</h:selectOneMenu>
+						</h:panelGrid>	
 						
-						
-	
 					</p:tab>
 					
 					<p:tab title="Receta Medica">

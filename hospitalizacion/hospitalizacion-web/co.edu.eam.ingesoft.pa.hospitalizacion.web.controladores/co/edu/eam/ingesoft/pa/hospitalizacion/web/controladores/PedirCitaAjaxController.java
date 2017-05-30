@@ -13,10 +13,14 @@ import org.omnifaces.util.Messages;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.CaracterCita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cita;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Horario;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.HorarioMedico;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.pa.negocio.beans.CaracterCitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.CitaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.HorarioEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.MedicoEJB;
+import co.edu.eam.ingesoft.pa.negocio.beans.PacienteEJB;
 import co.edu.eam.ingesoft.pa.negocio.dtos.CitaPendienteDTO;
 import co.edu.eam.ingesoft.pa.negocio.dtos.MedicoDisponibleDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
@@ -49,6 +53,9 @@ public class PedirCitaAjaxController implements Serializable{
 	private CitaEJB citaEJB;
 	
 	@EJB
+	private PacienteEJB pacienteEJB;
+	
+	@EJB
 	private CaracterCitaEJB caracterCitaEJB;
 	
 	@PostConstruct
@@ -65,6 +72,22 @@ public class PedirCitaAjaxController implements Serializable{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void registrar(){
+		Cita c = new Cita();
+		Paciente p = pacienteEJB.buscar(1);
+		c.setPaciente(p);
+		c.setAtendido(false);
+		HorarioMedico hm = new HorarioMedico();
+		hm.setHorario(horarioSeleccionado);
+		Medico m = medicoEJB.buscar(medicoSeleccionado);
+		hm.setMedico(m);
+		c.setHorarioMedico(hm);
+		c.setCaracter(caracterSeleccionado);
+		
+		citaEJB.crear(c);
+		Messages.addFlashGlobalInfo("Se registró la cita con exito!");
 	}
 	
 	public void listarCitasPEndientes(){
