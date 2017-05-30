@@ -4,17 +4,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="ACCESO")
+@NamedQueries({
+	@NamedQuery(name=Acceso.LISTA_ACCESOS_ROL,query="SELECT ar FROM AccesoRol ar WHERE ar.rol=?1 ")
+})
 public class Acceso implements Serializable{
 
-	/*
-	 * Atributos
-	 */
-	
-	public static final String LISTAR_ACCESOS_ROL = "Acceso.listarAccesosRol";
+	public static final String LISTA_ACCESOS_ROL ="AccesosXRol";
 	
 	@Id
 	@Column(name="ID", nullable=false)
