@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.pa.negocio.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -12,57 +13,66 @@ import javax.persistence.Query;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Horario;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medicamento;
+import co.edu.eam.ingesoft.pa.negocio.dtos.CitaHistorialDTO;
+import co.edu.eam.ingesoft.pa.negocio.dtos.MedicamentoEntregadoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @LocalBean
 @Stateless
 public class MedicamentoEJB {
 
-	
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	/**
 	 * metodo para buscar un medicamento
-	 * @param id, identificador del medicamento a buscar
+	 * 
+	 * @param id,
+	 *            identificador del medicamento a buscar
 	 * @return el medicamento con el respectivo id, o null de no encontrarlo
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public Medicamento buscar(int id){
+	public Medicamento buscar(int id) {
 		return em.find(Medicamento.class, id);
 	}
-	
+
 	/**
 	 * metodo para persistir un medicamento
-	 * @param h, medicamento a persistir
+	 * 
+	 * @param h,
+	 *            medicamento a persistir
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void crear(Medicamento h){
+	public void crear(Medicamento h) {
 		Medicamento ho = buscar(h.getId());
-		if(ho==null){
+		if (ho == null) {
 			em.persist(h);
-		} else{
+		} else {
 			throw new ExcepcionNegocio("El medicamento ya está registrado");
-		}	
+		}
 	}
-	
+
 	/**
 	 * metodo para eliminar un medicamento registrado
-	 * @param id, identificador del medicamento a eliminar
+	 * 
+	 * @param id,
+	 *            identificador del medicamento a eliminar
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminar(int id) {
 		Medicamento h = buscar(id);
-		if(h!=null){
+		if (h != null) {
 			em.remove(h);
-		} else{
+		} else {
 			throw new ExcepcionNegocio("El medicamento no está registrado");
-		}	
+		}
 	}
-	
+
 	/**
 	 * metodo para editar un horario
-	 * @param h, horario a editar
+	 * 
+	 * @param h,
+	 *            horario a editar
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editar(Medicamento h) {
@@ -74,7 +84,7 @@ public class MedicamentoEJB {
 			throw new ExcepcionNegocio("No existe el horario a editar");
 		}
 	}
-	
+
 	/**
 	 * metodo para listar los horarios registrados
 	 */
@@ -88,4 +98,29 @@ public class MedicamentoEJB {
 			return med;
 		}
 	}
+
+	/**
+	 * metodo para listar los medicamentos del historial
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<MedicamentoEntregadoDTO> listarMedicamentoHistorial(int cita) {
+
+		Query q = em.createNativeQuery("SELECT m.DESCRIPCION,mr.CANTIDAD_RECETADA FROM MEDICAMENTO_RECETADOS mr "
+				+ "JOIN MEDICAMENTO m ON m.ID=mr.MEDICAMENTO_ID WHERE mr.CITA_ID=?1");
+		q.setParameter(1, cita);
+
+		List<MedicamentoEntregadoDTO> lista = new ArrayList<MedicamentoEntregadoDTO>();
+		List<Object[]> medicamentos = q.getResultList();
+
+		for (Object[] a : medicamentos) {
+
+			MedicamentoEntregadoDTO dto = new MedicamentoEntregadoDTO();
+			dto.setMedicamentoDescripcion(a[0].toString());
+			dto.setCantidad(a[1].toString());
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+
 }

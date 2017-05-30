@@ -36,6 +36,9 @@ public class CitaCirugia implements Serializable {
 	@JoinColumn(name = "QUIROFANO_ID")
 	@ManyToOne
 	private Quirofano quirofano;
+	
+	@Column(name = "REALIZADA")
+	private boolean realizada;
 
 	@ManyToOne
 	@JoinColumns({ @JoinColumn(name = "HORARIO_MEDICO_HORARIO_ID", referencedColumnName = "MEDICO_CEDULA"),
@@ -44,6 +47,7 @@ public class CitaCirugia implements Serializable {
 
 	public CitaCirugia() {
 		super();
+		realizada = false;
 	}
 
 	public Cita getCita() {
@@ -84,6 +88,20 @@ public class CitaCirugia implements Serializable {
 
 	public void setHorarioMedico(HorarioMedico horarioMedico) {
 		this.horarioMedico = horarioMedico;
+	}
+
+	/**
+	 * @return the realizada
+	 */
+	public boolean isRealizada() {
+		return realizada;
+	}
+
+	/**
+	 * @param realizada the realizada to set
+	 */
+	public void setRealizada(boolean realizada) {
+		this.realizada = realizada;
 	}
 
 	

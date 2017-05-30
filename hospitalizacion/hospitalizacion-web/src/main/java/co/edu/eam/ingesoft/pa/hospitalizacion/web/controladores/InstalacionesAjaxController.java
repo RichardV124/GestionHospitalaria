@@ -1,7 +1,6 @@
 package co.edu.eam.ingesoft.pa.hospitalizacion.web.controladores;
 
 import java.io.Serializable;
-import java.text.ParseException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,13 +11,10 @@ import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cama;
-import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Paciente;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
-import co.edu.eam.ingesoft.avanzada.persistencia.enumeraciones.GeneroEnum;
 import co.edu.eam.ingesoft.pa.negocio.beans.CamaEJB;
 import co.edu.eam.ingesoft.pa.negocio.beans.QuirofanoEJB;
 import co.edu.eam.ingesoft.pa.negocio.dtos.CamaDTO;
-import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @ViewScoped
 @Named("instalacontroller")

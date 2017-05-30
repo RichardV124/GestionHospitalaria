@@ -13,11 +13,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="USUARIO")
-@NamedQueries({
-@NamedQuery(name="Usuario.buscarXUser",query="SELECT u FROM Usuario u WHERE u.user=?1")
+@NamedQueries({	
+	@NamedQuery(name=Usuario.PACIENTE_POR_USUARIO,query="SELECT p FROM Paciente p WHERE p.usuario.user=?1"),
+	@NamedQuery(name=Usuario.MEDICO_POR_USUARIO,query="SELECT m FROM Medico m WHERE m.usuario.user=?1"),
+	@NamedQuery(name=Usuario.BUSCAR_POR_USUARIO,query="SELECT u FROM Usuario u WHERE u.user=?1")
 })
-public class Usuario implements Serializable {
+public class Usuario implements Serializable{
 
+	
+	public static final String PACIENTE_POR_USUARIO = "Usuario.buscarXPaciente";
+	
+	public static final String MEDICO_POR_USUARIO = "Usuario.buscarXMedico";
+	
 	public static final String BUSCAR_POR_USUARIO = "Usuario.buscarXUser";
 	
 	@Id

@@ -7,12 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="EXAMEN")
+@NamedQueries({ 
+	@NamedQuery(name = Examen.CONSULTA_LISTAR_EXAMENES, query = "SELECT e FROM Examen e") 
+	})
 public class Examen implements Serializable{
 
+
+	public static final String CONSULTA_LISTAR_EXAMENES = "Examen.ListarExamenes";
+	
 	@Id
 	@Column(name="NOMBRE",nullable=false,length=50)
 	private String nombre;

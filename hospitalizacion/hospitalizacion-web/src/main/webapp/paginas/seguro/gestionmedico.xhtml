@@ -42,14 +42,14 @@
 				<h:selectOneMenu id="tftipomedico" class="form-control" value="#{medicoajaxcontroller.tipoMedicoSeleccionado}">
 					<f:selectItem itemValue="0" itemLabel="Seleccione..." />
 					<f:selectItems value="#{medicoajaxcontroller.listaTipoMedico}" var="tipo"
-					itemValue="#{tipo.id}" itemLabel="#{tipo.descripcion}"/>
+					itemValue="#{tipo}" itemLabel="#{tipo.descripcion}"/>
 				</h:selectOneMenu>
 				<p:message for="tftipomedico" />
 				
 				<p:outputLabel for="cbdptomed" id="lbdptomed" value="Departamento"  />
 				<h:selectOneMenu id="cbdptomed" class="form-control" value="#{medicoajaxcontroller.dptoSeleccionado}">
 					<f:selectItems value="#{medicoajaxcontroller.listaDptos}" var="dpto"
-					itemValue="#{dpto.id}" itemLabel="#{dpto.descripcion}"/>
+					itemValue="#{dpto}" itemLabel="#{dpto.descripcion}"/>
 					<f:ajax event="change" execute="@this" render="cbmunicipio" listener="#{medicoajaxcontroller.listarMunicipios}"/>
 				</h:selectOneMenu>
 				<p:message for="lbdptomed" />
@@ -57,7 +57,7 @@
 				<p:outputLabel for="cbmunicipiomed" id="lbmunicipiomed" value="Municipio"  />
 				<h:selectOneMenu id="cbmunicipiomed" class="form-control" value="#{medicoajaxcontroller.municipioSeleccionado}">
 					<f:selectItems value="#{medicoajaxcontroller.listaMunicipios}" var="mun"
-					itemValue="#{mun.id}" itemLabel="#{mun.descripcion}"/>
+					itemValue="#{mun}" itemLabel="#{mun.descripcion}"/>
 				</h:selectOneMenu>
 				<p:message for="lbmunicipiomed" />
 				

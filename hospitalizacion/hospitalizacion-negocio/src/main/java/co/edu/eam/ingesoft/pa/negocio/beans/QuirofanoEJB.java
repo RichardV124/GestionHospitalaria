@@ -1,14 +1,20 @@
 package co.edu.eam.ingesoft.pa.negocio.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Cirugia;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Medico;
 import co.edu.eam.ingesoft.avanzada.persistencia.entidades.Quirofano;
+import co.edu.eam.ingesoft.pa.negocio.dtos.MedicamentoEntregadoDTO;
 import co.edu.eam.ingesoft.pa.negocio.excepciones.ExcepcionNegocio;
 
 @LocalBean
@@ -77,5 +83,15 @@ public class QuirofanoEJB {
 			throw new ExcepcionNegocio("No existe el Quirofano a editar");
 		}
 	}
+	
+	/**
+	 * metodo para listar los quirofanos
+	 */
+	public List<Quirofano> listaQuirofano(){	
+		Query query = em.createNamedQuery(Quirofano.CONSULTA_LISTAR_QUIROFANOS);
+		List<Quirofano> lista = query.getResultList();
+		return lista;
+	}
+	
 
 }
